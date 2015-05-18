@@ -10,7 +10,7 @@ import de.learny.domain.Account;
 import de.learny.security.service.LoggedInAccountService;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController {
 
 	@Autowired
@@ -28,6 +28,11 @@ public class AccountController {
 	Account getOwnAccounts() {
 		Account account = userToAccountService.getLoggedInAccount();
 		return account;
+	}
+	
+	@RequestMapping(value = "/loggedin", method = RequestMethod.GET)
+	boolean checkLogin() {
+		return true;
 	}
 
 }

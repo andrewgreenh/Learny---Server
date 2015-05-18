@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Learny</title>
+  <meta name="description" content="Learny Webapp">
+  <meta name="author" content="Andreas Roth">
+
+</head>
+<body>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="script/Learny.js"></script>
+<script src="script/Learny-header.js"></script>
+<script src="script/ServerCommunicatorService.js"></script>
+<script src="script/mainController.js"></script>
+<script src="pages/profile/profile.js"></script>
+<script src="pages/login/login.js"></script>
+  <div ng-app="learny" id="app" ng-controller="mainController">
+    <learnyheader></learnyheader>
+    <div id="main">
+	  <div ng-view></div>
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+
+    </div>
+  </div>
+</body>
+</html>
