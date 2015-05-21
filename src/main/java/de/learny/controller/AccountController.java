@@ -10,7 +10,7 @@ import de.learny.domain.Account;
 import de.learny.security.service.LoggedInAccountService;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
 
 	@Autowired
@@ -19,7 +19,7 @@ public class AccountController {
 	@Autowired
 	private AccountRepository accountRepository;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
 		return accountRepository.findAll();
 	}
