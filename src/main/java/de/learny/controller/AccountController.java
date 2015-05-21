@@ -29,7 +29,7 @@ public class AccountController {
 		Account account = userToAccountService.getLoggedInAccount();
 		return account;
 	}
-	
+
 	@RequestMapping(value = "/loggedin", method = RequestMethod.GET)
 	boolean checkLogin() {
 		return true;
