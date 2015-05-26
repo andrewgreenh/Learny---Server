@@ -1,3 +1,3 @@
-# Learny---Server
+# Learny - Server
 
-# Alex da
+Anwendung für das Projektseminar Agiles Softwaredevelopment
