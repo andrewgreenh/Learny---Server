@@ -1,9 +1,12 @@
 package de.learny.domain;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,6 +19,9 @@ public class Account {
 
 	private String accountName;
 	private String password;
+	
+	@OneToMany
+	private Set<TestScore> testScores;
 
 	public Account(String accountName, String password) {
 		this.accountName = accountName;
