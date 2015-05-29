@@ -29,11 +29,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                     return {
                                         value : data
                                     };
-                                }, function(data, status, headers, config) {
-                                    $state.go('login');
-                                    return {
-                                        value : false
-                                    }
                                 });
                     }
                 },
