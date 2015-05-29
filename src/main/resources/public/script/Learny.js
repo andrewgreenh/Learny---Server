@@ -23,13 +23,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
                                 });
                     },
-                    currentUser : function(serverCommunicator, $state) {
+                    currentUser : function(serverCommunicator) {
                         return serverCommunicator.getCurrentUserAsync().then(
                                 function(data, status, headers, config) {
                                     return {
                                         value : data
                                     };
-                                }, function(data, status, headers, config) {
                                 });
                     }
                 },
