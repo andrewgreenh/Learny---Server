@@ -5,7 +5,7 @@ angular.module('learny').directive(
                 restrict : 'E',
                 templateUrl : 'partials/header/header.tpl.html',
                 scope : {
-                    login : '='
+                    loggedin : '='
                 },
                 controller : [
                         '$scope',
