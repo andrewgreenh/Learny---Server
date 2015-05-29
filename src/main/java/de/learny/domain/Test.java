@@ -1,9 +1,12 @@
 package de.learny.domain;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -17,6 +20,9 @@ public class Test {
 	
 	@ManyToOne
 	private Subject subject;
+	
+	@OneToMany
+	private Set<Question> questions;
 
 
 	public Test(String testName, Subject subject) {
@@ -47,6 +53,14 @@ public class Test {
 
 	public void setSubject(Subject subject) {
 		this.subject = subject;
+	}
+
+	public Set<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 	
 }

@@ -18,4 +18,12 @@ public class Answer {
 	public long getId() {
 		return id;
 	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
 }
