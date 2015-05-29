@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Subject;
 
@@ -24,6 +25,8 @@ public class SubjectController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Subject getSubject(@PathVariable("id") long id){
 		Subject subject = subjectRep.findById(id);	  
+		if(subject == null)
+			throw new ResourceNotFoundException();
 		return subject;
 	}
 }

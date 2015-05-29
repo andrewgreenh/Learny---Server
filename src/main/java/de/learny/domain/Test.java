@@ -18,8 +18,10 @@ public class Test {
 	@ManyToOne
 	private Subject subject;
 
-	public Test(String testName) {
+
+	public Test(String testName, Subject subject) {
 		this.setTestName(testName);
+		this.subject = subject;
 	}
 	
 	public Test() {
@@ -39,6 +41,12 @@ public class Test {
 		this.testName = testName;
 	}
 	
-	
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
 	
 }

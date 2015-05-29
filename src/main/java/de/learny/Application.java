@@ -11,8 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.SubjectRepository;
 import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.PasswordGeneratorService;
 
@@ -35,6 +37,9 @@ public class Application extends SpringBootServletInitializer implements Command
 	TestRepository testRepo;
 	
 	@Autowired
+	SubjectRepository subRepo;
+	
+	@Autowired
 	PasswordGeneratorService passwordGenerator;
 	
     public static void main(String[] args) {
@@ -43,8 +48,12 @@ public class Application extends SpringBootServletInitializer implements Command
 
     @Override
     public void run(String... strings) throws Exception {
-    	testRepo.save(new Test("test1"));
-    	testRepo.save(new Test("test2"));
+    	Subject sub1 = new Subject("Fach1");
+    	Subject sub2 = new Subject("Fach2");
+    	subRepo.save(sub1);
+    	subRepo.save(sub2);
+    	testRepo.save(new Test("test1", sub1));
+    	testRepo.save(new Test("test2", sub2));
     	
         // save a couple of customers
 		repository.save(new Account("admin", passwordGenerator.hashPassword("admin")));
