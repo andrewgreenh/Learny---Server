@@ -10,7 +10,7 @@ import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Subject;
 
 @RestController
-@RequestMapping("/api/subject")
+@RequestMapping("/api/subjects")
 public class SubjectController {
 	
 	@Autowired
