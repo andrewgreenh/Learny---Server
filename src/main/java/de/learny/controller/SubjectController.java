@@ -23,13 +23,7 @@ public class SubjectController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Subject getSubject(@PathVariable("id") long id){
-		Subject subject = null;
-		try {  
-			subject = subjectRep.findById(id);  
-			  
-			  } catch (Exception e) {  
-			   e.printStackTrace();  
-			  }  
+		Subject subject = subjectRep.findById(id);	  
 		return subject;
 	}
 }
