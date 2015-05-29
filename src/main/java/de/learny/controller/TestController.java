@@ -29,4 +29,12 @@ public class TestController {
 			throw new ResourceNotFoundException();
 		return test;
 	}
+
+	public TestRepository getTestRepository() {
+		return testRepository;
+	}
+
+	public void setTestRepository(TestRepository testRepository) {
+		this.testRepository = testRepository;
+	}
 }

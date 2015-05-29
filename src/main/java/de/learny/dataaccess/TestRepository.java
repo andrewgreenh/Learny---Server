@@ -2,6 +2,7 @@ package de.learny.dataaccess;
 
 import org.springframework.data.repository.CrudRepository;
 
+import de.learny.domain.Subject;
 import de.learny.domain.Test;
 
 public interface TestRepository extends CrudRepository<Test, Long> {
@@ -11,4 +12,6 @@ public interface TestRepository extends CrudRepository<Test, Long> {
 	Iterable<Test> findAll();
 	
 	Test findById(long id);
+	
+	Iterable<Test> findBySubject(Subject subject);
 }
