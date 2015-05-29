@@ -5,13 +5,14 @@ angular.module('learny').directive(
                 restrict : 'E',
                 templateUrl : 'partials/header/header.tpl.html',
                 scope : {
-                    login : '='
+                    loggedin : '='
                 },
                 controller : [
                         '$scope',
                         '$state',
                         'serverCommunicator',
                         function($scope, $state, serverCommunicator) {
+                            console.log($scope.loggedin);
                             $scope.logout = function() {
                                 serverCommunicator.logoutAsync().success(
                                         function(data, status, headers, config) {

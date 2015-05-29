@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
                                 });
                     },
-                    currentUser : function(serverCommunicator) {
+                    currentUser : function(serverCommunicator, $state) {
                         return serverCommunicator.getCurrentUserAsync().then(
                                 function(data, status, headers, config) {
                                     return {
