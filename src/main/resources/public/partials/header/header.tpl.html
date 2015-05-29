@@ -1,8 +1,8 @@
 <div id="header">
 	<ul>
 		<li><a ui-sref="app.home">Home</a></li>
-		<li><a ui-sref="app.profile">Profile</a></li>
-		<li><a href="#logout" ng-click="logout()">Logout</a></li>
+		<li ng-show={{loggedin}}><a ui-sref="app.profile">Profile</a></li>
+		<li ng-show={{loggedin}}><a href="#logout" ng-click="logout()">Logout</a></li>
 
 	</ul>
 

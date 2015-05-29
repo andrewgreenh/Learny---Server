@@ -30,10 +30,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                         value : data
                                     };
                                 }, function(data, status, headers, config) {
-                                    $state.go('login');
-                                    return {
-                                        value : false
-                                    }
                                 });
                     }
                 },
