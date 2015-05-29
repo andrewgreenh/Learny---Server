@@ -46,8 +46,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('login', {
         url : '/login',
         resolve : {},
-        controller : 'loginController',
         templateUrl : 'partials/login/login.html'
+    })
+    
+    .state('welcome', {
+        url : '/welcome',
+        resolve : {},
+        templateUrl : 'partials/welcome/welcome.html'
     })
 
     .state('app.home', {
@@ -57,15 +62,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl : 'partials/home/home.html'
     });
 
-    $urlRouterProvider.otherwise("/app");
+    $urlRouterProvider.otherwise("/welcome");
 
 });
 
 app.run(function($rootScope, $state, serverCommunicator) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (toState.name !== 'login') {
+        if (toState.name !== 'login' && toState.name !== 'welcome') {
             serverCommunicator.isLoggedInAsync().error(function() {
                 $state.go('login');
+            });
+        } else if(toState.name == 'login'){
+            serverCommunicator.isLoggedInAsync().success(function() {
+                $state.go('app.home');
             });
         }
     })

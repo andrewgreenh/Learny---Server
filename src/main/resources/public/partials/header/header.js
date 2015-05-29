@@ -5,7 +5,8 @@ angular.module('learny').directive(
                 restrict : 'E',
                 templateUrl : 'partials/header/header.tpl.html',
                 scope : {
-                    loggedin : '='
+                    loggedin : '=',
+                    welcomepage : '='
                 },
                 controller : [
                         '$scope',
@@ -16,13 +17,18 @@ angular.module('learny').directive(
                                 serverCommunicator.logoutAsync().success(
                                         function(data, status, headers, config) {
                                             console.log('Successfully logged out');
-                                            $state.go('login', {}, {
+                                            $state.go('welcome', {}, {
                                                 reload : true
                                             });
                                         }).error(function(data, status, headers, config) {
                                     console.log('Logout failed');
                                 });
 
+                            }
+
+                            $scope.showlogin = false;
+                            $scope.toggleLogin = function() {
+                                $scope.showlogin = !$scope.showlogin;
                             }
 
                         } ],
