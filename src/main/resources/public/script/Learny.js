@@ -50,19 +50,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     
     .state('welcome', {
-        url : '/welcome',
+        url : '/',
         resolve : {},
         templateUrl : 'partials/welcome/welcome.html'
     })
 
     .state('app.home', {
-        url : '/home',
+        url : '/',
         resolve : {},
         controller : 'homeController',
         templateUrl : 'partials/home/home.html'
     });
 
-    $urlRouterProvider.otherwise("/welcome");
+    $urlRouterProvider.otherwise("/");
 
 });
 

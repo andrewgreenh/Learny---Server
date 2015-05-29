@@ -17,9 +17,7 @@ angular.module('learny').directive(
                                 serverCommunicator.logoutAsync().success(
                                         function(data, status, headers, config) {
                                             console.log('Successfully logged out');
-                                            $state.go('welcome', {}, {
-                                                reload : true
-                                            });
+                                            $state.go('welcome');
                                         }).error(function(data, status, headers, config) {
                                     console.log('Logout failed');
                                 });
@@ -28,7 +26,12 @@ angular.module('learny').directive(
 
                             $scope.showlogin = false;
                             $scope.toggleLogin = function() {
-                                $scope.showlogin = !$scope.showlogin;
+                                serverCommunicator.isLoggedInAsync().success(function() {
+                                    $state.go('app.home');
+                                })
+                                .error(function(){
+                                    $scope.showlogin = !$scope.showlogin;                                    
+                                });
                             }
 
                         } ],
