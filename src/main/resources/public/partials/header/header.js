@@ -12,6 +12,7 @@ angular.module('learny').directive(
                         '$state',
                         'serverCommunicator',
                         function($scope, $state, serverCommunicator) {
+                            console.log($scope.loggedin);
                             $scope.logout = function() {
                                 serverCommunicator.logoutAsync().success(
                                         function(data, status, headers, config) {
