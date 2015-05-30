@@ -1,2 +1,5 @@
 <h1>Fächer</h1>
-<li ng-repeat="subject in subjects"><a ui-sref="app.subject({id : subject.id})">{{subject.subjectName}}</a></li>
+<ul>
+	<li ng-repeat="subject in subjects"><a
+		ui-sref="app.subject({id : subject.id})">{{subject.subjectName}}</a></li>
+</ul>
