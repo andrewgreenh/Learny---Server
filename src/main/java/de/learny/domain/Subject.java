@@ -24,7 +24,7 @@ public class Subject {
 	@ManyToMany(mappedBy = "subjects")
 	private Set<Account> accounts = new HashSet<Account>();
 
-	@OneToMany(mappedBy = "id")
+	@OneToMany(mappedBy = "subject")
 	private Set<Test> tests;
 
 	public Subject(String subjectName) {
