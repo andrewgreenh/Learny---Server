@@ -15,7 +15,7 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@OneToMany
+	@OneToMany(mappedBy="question")
 	private Set<Answer> answers;
 	
 	@ManyToOne

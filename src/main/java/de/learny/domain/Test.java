@@ -21,7 +21,7 @@ public class Test {
 	@ManyToOne
 	private Subject subject;
 	
-	@OneToMany
+	@OneToMany(mappedBy="test")
 	private Set<Question> questions;
 
 
