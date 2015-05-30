@@ -1,7 +1,9 @@
 package de.learny.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +20,7 @@ public class SubjectController {
 	@Autowired
 	private SubjectRepository subjectRep;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	Iterable<Subject> getAllSubject() {
 		return subjectRep.findAll();
 	}
@@ -35,5 +37,10 @@ public class SubjectController {
 	Iterable<Test> getAllTestsForSubject(@PathVariable("id") long id) {
 		Subject subject = subjectRep.findById(id);
 		return subject.getTests();
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
+	void create(@RequestBody Subject subject){
+		subjectRep.save(subject);
 	}
 }
