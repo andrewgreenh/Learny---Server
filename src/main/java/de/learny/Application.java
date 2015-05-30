@@ -53,6 +53,7 @@ public class Application extends SpringBootServletInitializer implements Command
     	subRepo.save(sub1);
     	subRepo.save(sub2);
     	testRepo.save(new Test("test1", sub1));
+    	testRepo.save(new Test("test3", sub1));
     	testRepo.save(new Test("test2", sub2));
     	
         // save a couple of customers

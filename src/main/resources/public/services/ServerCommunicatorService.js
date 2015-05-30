@@ -17,6 +17,18 @@ angular.module('learny').factory(
                     service.getCurrentUserAsync = function() {
                         return $http.get('/api/accounts/me');
                     };
+                    
+                    service.getSubjectsAsync = function() {
+                        return $http.get('/api/subjects');
+                    };
+                    
+                    service.getTestsOfSubjectAsync = function(subjectId) {
+                        return $http.get('/api/subjects/' + subjectId + '/tests');
+                    };
+                    
+                    service.getSubjectAsync = function(subjectId) {
+                        return $http.get('/api/subjects/' + subjectId);
+                    };
 
                     service.isLoggedInAsync = function() {
                         return $http.get('/api/accounts/loggedin');
