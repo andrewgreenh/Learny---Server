@@ -22,7 +22,7 @@ public class Account {
 	private String accountName;
 	private String password;
 	
-	@OneToMany
+	@OneToMany(mappedBy="account")
 	private Set<TestScore> testScores;
 	
 	@ManyToMany
