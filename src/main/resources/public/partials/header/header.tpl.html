@@ -1,9 +1,12 @@
 <div id="header">
 	<ul>
-		<li><a ui-sref="app.home">Home</a></li>
-		<li ng-show={{loggedin}}><a ui-sref="app.profile">Profile</a></li>
-		<li ng-show={{loggedin}}><a href="#logout" ng-click="logout()">Logout</a></li>
-
+		<p>Hier könnte ein Bild sein</p>
+		<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
+		<li ng-show="loggedin"><a ui-sref="app.profile">Profile</a></li>
+		<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
+		<li ng-show="welcomepage"><a ng-click="toggleLogin(); $event.preventDefault();" href="#">Login</a></li>	
 	</ul>
+
+	<learnyloginform ng-show="showlogin"></learnyloginform>
 
 </div>
