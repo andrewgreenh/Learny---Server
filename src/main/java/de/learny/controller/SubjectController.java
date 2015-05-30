@@ -1,5 +1,6 @@
 package de.learny.controller;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,19 @@ public class SubjectController {
 	
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void create(@RequestBody Subject subject){
-		subjectRep.save(subject);
+		this.subjectRep.save(subject);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	void delete(@PathVariable("id") long id){
+		this.subjectRep.delete(id);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
+	void update(@PathVariable("id") long id, @RequestBody Subject updateSubject){
+		//TODO: Update funkt noch nicht
+		Subject subject = this.subjectRep.findById(id);
+		BeanUtils.copyProperties(subject, updateSubject);
+		this.subjectRep.save(subject);
 	}
 }
