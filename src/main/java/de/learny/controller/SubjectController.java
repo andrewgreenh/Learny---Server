@@ -1,6 +1,5 @@
 package de.learny.controller;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,10 +50,10 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void update(@PathVariable("id") long id, @RequestBody Subject updateSubject){
-		//TODO: Update funkt noch nicht
-		Subject subject = this.subjectRep.findById(id);
-		BeanUtils.copyProperties(subject, updateSubject);
-		this.subjectRep.save(subject);
+	Subject update(@PathVariable("id") long id, @RequestBody Subject updateSubject){
+		//TODO: Funktioniert nur wenn in der JSON-Datei die ID steht. Außerdem ist es kein update mehr sondern ein überschreiben
+		//Subject subject = this.subjectRep.findById(id);
+		//BeanUtils.copyProperties(subject, updateSubject);
+		return this.subjectRep.save(updateSubject);
 	}
 }
