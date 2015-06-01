@@ -2,4 +2,4 @@
 
 Anwendung für das Projektseminar Agiles Softwaredevelopment
 
-Entwickler: Alex und Andi und David in seinem Branch!
+Entwickler: Alex und Andi und David und Cheng?
