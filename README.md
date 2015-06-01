@@ -2,4 +2,4 @@
 
 Anwendung für das Projektseminar Agiles Softwaredevelopment
 
-Entwickler: Alex und Andi und David?
+Entwickler: Alex und Andi und David!
