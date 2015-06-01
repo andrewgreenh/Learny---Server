@@ -37,4 +37,9 @@ public class TestController {
 	public void setTestRepository(TestRepository testRepository) {
 		this.testRepository = testRepository;
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	void delete(@PathVariable("id") long id){
+		this.testRepository.delete(id);
+	}
 }
