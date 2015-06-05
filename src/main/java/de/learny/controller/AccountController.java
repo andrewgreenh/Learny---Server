@@ -29,6 +29,11 @@ public class AccountController {
 	Iterable<Account> getAllAccounts() {
 		return accountRepository.findAll();
 	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
+	void create(@RequestBody Account account) {
+		//TODO: Noch keine Funktionalität implementiert
+	}
 
 	@RequestMapping(value = "/me", method = RequestMethod.GET)
 	Account getOwnAccounts() {
@@ -63,12 +68,12 @@ public class AccountController {
 	
 	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getEnroledSubjects() {
-		//TODO: Noch keine Funktionalität implementiert
+		//TODO: Noch keine richtige Funktionalität implementiert
 		return null;
 	}
 	
 	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST)
-	boolean registerToSubjects() {
+	boolean registerToSubjects(@RequestBody Subject subject) {
 		//TODO: Noch keine Funktionalität implementiert
 		return true;
 	}
@@ -85,7 +90,7 @@ public class AccountController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/me/achievements", method = RequestMethod.GET)
+	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
 	void getOwnStatistics() {
 		//TODO: Noch keine Funktionalität implementiert
 		//return null;
