@@ -55,5 +55,14 @@ public class Subject {
 	public void setTests(Set<Test> tests) {
 		this.tests = tests;
 	}
+	
+	@JsonIgnore
+	public Set<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(Set<Account> accounts) {
+		this.accounts = accounts;
+	}
 
 }
