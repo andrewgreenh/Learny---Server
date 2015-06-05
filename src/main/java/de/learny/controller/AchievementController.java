@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AchievementRepository;
 import de.learny.domain.Achievement;
-import de.learny.domain.Subject;
 
 @RestController
 @RequestMapping("/api/achievements")
