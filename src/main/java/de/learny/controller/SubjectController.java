@@ -39,8 +39,14 @@ public class SubjectController {
 		return subject.getTests();
 	}
 	
+	@RequestMapping(value = "/{id}/tests", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
+	void getAllTestsForSubject(@PathVariable("id") long id, @RequestBody Subject subject) {
+		//TODO: Muss noch implementiert werden
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void create(@RequestBody Subject subject){
+		//TODO: Nur Admin darf ein Subject erstellen
 		this.subjectRep.save(subject);
 	}
 	
@@ -55,5 +61,20 @@ public class SubjectController {
 		//Subject subject = this.subjectRep.findById(id);
 		//BeanUtils.copyProperties(subject, updateSubject);
 		return this.subjectRep.save(updateSubject);
+	}
+	
+	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
+	void getResponsibles(@PathVariable("id") long id) {
+		//TODO: Muss noch implementiert werden
+	}
+	
+	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
+	void addResponsible(@PathVariable("id") long id) {
+		//TODO: Muss noch implementiert werden
+	}
+	
+	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
+	void removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
+		//TODO: Muss noch implementiert werden
 	}
 }
