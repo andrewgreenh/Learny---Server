@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.SubjectRepository;
+import de.learny.domain.Account;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 
@@ -40,7 +41,7 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void getAllTestsForSubject(@PathVariable("id") long id, @RequestBody Subject subject) {
+	void addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
 		//TODO: Muss noch implementiert werden
 	}
 	
@@ -69,7 +70,7 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void addResponsible(@PathVariable("id") long id) {
+	void addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
 		//TODO: Muss noch implementiert werden
 	}
 	
