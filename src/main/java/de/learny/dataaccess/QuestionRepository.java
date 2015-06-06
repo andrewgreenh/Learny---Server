@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import de.learny.domain.Question;
 
-public interface QuestionsRepository extends CrudRepository<Question, Long> {
+public interface QuestionRepository extends CrudRepository<Question, Long> {
 	
 	Iterable<Question> findAll();
 	

@@ -6,7 +6,7 @@ import de.learny.domain.Subject;
 
 public interface SubjectRepository extends CrudRepository<Subject, Long> {
 	
-	Subject findFirstBySubjectName(String subjectName);
+	Subject findFirstByName(String subjectName);
 	
 	Iterable<Subject> findAll();
 	

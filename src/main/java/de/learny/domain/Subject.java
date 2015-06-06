@@ -3,6 +3,7 @@ package de.learny.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,50 +20,57 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String subjectName;
+	private String name, description;
 
-	@ManyToMany(mappedBy = "subjects")
-	private Set<Account> accounts = new HashSet<Account>();
+	@ManyToMany(mappedBy = "administratedSubjects")
+	private Set<Account> accountsInCharge = new HashSet<Account>();
+
+	@ManyToMany(mappedBy = "joinedSubjects")
+	private Set<Account> participants = new HashSet<Account>();
 
 	@OneToMany(mappedBy = "subject")
-	private Set<Test> tests;
+	private Set<Test> tests = new HashSet<Test>();
 
-	public Subject(String subjectName) {
-		this.setSubjectName(subjectName);
+	public Subject(String name) {
+		this.name = name;
 	}
 
 	public Subject() {
 
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public long getId() {
 		return id;
 	}
 
-	public String getSubjectName() {
-		return subjectName;
+	public Set<Account> getAccountsInCharge() {
+		return accountsInCharge;
 	}
 
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
+	@JsonIgnore
+	public Set<Account> getParticipants() {
+		return participants;
 	}
 
 	@JsonIgnore
 	public Set<Test> getTests() {
 		return tests;
-	}
-
-	public void setTests(Set<Test> tests) {
-		this.tests = tests;
-	}
-	
-	@JsonIgnore
-	public Set<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(Set<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 }

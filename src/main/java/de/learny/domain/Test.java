@@ -1,13 +1,17 @@
 package de.learny.domain;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Test {
@@ -16,37 +20,40 @@ public class Test {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String testName;
-	
+	private String name;
+
 	@ManyToOne
 	private Subject subject;
-	
-	@OneToMany(mappedBy="test")
-	private Set<Question> questions;
 
+	@ManyToMany(mappedBy = "requiredForTests")
+	private Set<Test> requiredTests = new HashSet<Test>();
 
-	public Test(String testName, Subject subject) {
-		this.setTestName(testName);
+	@ManyToMany
+	private Set<Test> requiredForTests = new HashSet<Test>();
+
+	@OneToMany(mappedBy = "test")
+	private Set<Question> questions = new HashSet<Question>();
+
+	@OneToMany(mappedBy = "test")
+	private Set<TestScore> testScores = new HashSet<TestScore>();
+
+	public Test(String name, Subject subject) {
+		this.name = name;
 		this.subject = subject;
 	}
-	
+
 	public Test() {
-		
-	}
-	
-	public long getId() {
-		return id;
+
 	}
 
-
-	public String getTestName() {
-		return testName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTestName(String testName) {
-		this.testName = testName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -55,12 +62,26 @@ public class Test {
 		this.subject = subject;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public Set<Test> getRequiredTests() {
+		return requiredTests;
+	}
+	@JsonIgnore
+	public Set<Test> getRequiredForTests() {
+		return requiredForTests;
+	}
+
+	@JsonIgnore
 	public Set<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(Set<Question> questions) {
-		this.questions = questions;
+	@JsonIgnore
+	public Set<TestScore> getTestScores() {
+		return testScores;
 	}
-	
+
 }
