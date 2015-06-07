@@ -68,9 +68,9 @@ public class Application extends SpringBootServletInitializer implements Command
     	accountRepo.save(student);
     	accountRepo.save(dozent);
     	
-    	sub1.getAccountsInCharge().add(dozent);
+    	sub1.addAccountInCharge(dozent);
     	subjectRepo.save(sub1);
-    	student.getJoinedSubjects().add(sub1);
+    	student.addJoinedSubject(sub1);
     	accountRepo.save(student);
     	
     	
