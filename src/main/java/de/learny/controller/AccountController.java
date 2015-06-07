@@ -96,13 +96,15 @@ public class AccountController {
 
 	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getEnroledSubjects() {
-		// TODO: Noch keine richtige Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getJoinedSubjects();
 	}
 
 	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST)
 	boolean registerToSubjects(@RequestBody Subject subject) {
-		// TODO: Noch keine Funktionalität implementiert
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		//FIXME: Funktioniert noch nicht
+		loggedInAccount.addJoinedSubject(subject);
 		return true;
 	}
 
