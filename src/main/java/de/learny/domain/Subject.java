@@ -1,8 +1,10 @@
 package de.learny.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,50 +21,105 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String subjectName;
+	private String name, description;
 
-	@ManyToMany(mappedBy = "subjects")
-	private Set<Account> accounts = new HashSet<Account>();
+	@ManyToMany(mappedBy = "administratedSubjects", cascade = CascadeType.ALL)
+	private Set<Account> accountsInCharge = new HashSet<Account>();
 
-	@OneToMany(mappedBy = "subject")
-	private Set<Test> tests;
+	@ManyToMany(mappedBy = "joinedSubjects", cascade = CascadeType.ALL)
+	private Set<Account> participants = new HashSet<Account>();
 
-	public Subject(String subjectName) {
-		this.setSubjectName(subjectName);
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Test> tests = new HashSet<Test>();
+
+	public Subject(String name) {
+		this.name = name;
 	}
 
 	public Subject() {
 
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public long getId() {
 		return id;
 	}
 
-	public String getSubjectName() {
-		return subjectName;
+	public Set<Account> getAccountsInCharge() {
+		return Collections.unmodifiableSet(accountsInCharge);
+	}
+	
+	public boolean addAccountInCharge(Account account) {
+		this.accountsInCharge.add(account);
+		if(!account.getAdministratedSubjects().contains(this)) {
+			account.addAdministratedSubject(this);
+		}
+		return true;
+	}
+	
+	public boolean removeAccountInCharge(Account account) {
+		this.accountsInCharge.remove(account);
+		if(account.getAdministratedSubjects().contains(account)) {
+			account.removeAdministratedSubject(this);
+		}
+		return true;
 	}
 
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
+	@JsonIgnore
+	public Set<Account> getParticipants() {
+		return Collections.unmodifiableSet(participants);
+	}
+	
+	public boolean addParticipant(Account account) {
+		this.participants.add(account);
+		if(!account.getJoinedSubjects().contains(this)) {
+			account.addJoinedSubject(this);
+		}
+		return true;
+	}
+	
+	public boolean removeParticipant(Account account) {
+		this.participants.remove(account);
+		if(account.getJoinedSubjects().contains(this)) {
+			account.removeJoinedSubject(this);
+		}
+		return true;
 	}
 
 	@JsonIgnore
 	public Set<Test> getTests() {
-		return tests;
-	}
-
-	public void setTests(Set<Test> tests) {
-		this.tests = tests;
+		return Collections.unmodifiableSet(tests);
 	}
 	
-	@JsonIgnore
-	public Set<Account> getAccounts() {
-		return accounts;
+	public boolean addTest(Test test) {
+		this.tests.add(test);
+		if(test.getSubject() != this) {
+			test.setSubject(this);
+		}
+		return true;
 	}
-
-	public void setAccounts(Set<Account> accounts) {
-		this.accounts = accounts;
+	
+	public boolean removeTest(Test test) {
+		this.tests.remove(test);
+		if(test.getSubject() == this) {
+			test.setSubject(null);
+		}
+		return true;
 	}
 
 }

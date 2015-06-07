@@ -7,7 +7,7 @@ import de.learny.domain.Test;
 
 public interface TestRepository extends CrudRepository<Test, Long> {
 	
-	Test findFirstByTestName(String testName);
+	Test findFirstByName(String testName);
 	
 	Iterable<Test> findAll();
 	
