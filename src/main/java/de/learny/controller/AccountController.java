@@ -14,6 +14,7 @@ import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.controller.exception.ResourceWithSameNameException;
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Achievement;
 import de.learny.domain.Role;
@@ -33,6 +34,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private SubjectRepository subjectRepo;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -100,12 +104,15 @@ public class AccountController {
 		return loggedInAccount.getJoinedSubjects();
 	}
 
-	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST)
+	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	boolean registerToSubjects(@RequestBody Subject subject) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		//FIXME: Funktioniert noch nicht
-		loggedInAccount.addJoinedSubject(subject);
-		return true;
+		Subject subjectToReg = subjectRepo.findById(subject.getId());
+		if (subjectToReg == null)
+			throw new ResourceNotFoundException();
+		//FIXME: Funktioniert nicht speichert Subject nicht als Joined ab
+		accountRepository.save(loggedInAccount);
+		return loggedInAccount.addJoinedSubject(subjectToReg);
 	}
 
 	@RequestMapping(value = "/me/administrated-subjects", method = RequestMethod.GET)
