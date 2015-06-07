@@ -1,28 +1,32 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Learny</title>
-  <meta name="description" content="Learny Webapp">
-  <meta name="author" content="Andreas Roth">
+<meta charset="utf-8">
+<title>Learny</title>
+<meta name="description" content="Learny Webapp">
+<meta name="author" content="Andreas Roth">
 
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="script/Learny.js"></script>
-<script src="partials/app/app.js"></script>
-<script src="partials/profile/profile.js"></script>
-<script src="partials/subjects/subjects.js"></script>
-<script src="partials/subject/subject.js"></script>
-<script src="partials/home/home.js"></script>
-<script src="partials/header/header.js"></script>
-<script src="partials/login/loginForm.js"></script>
-<script src="services/ServerCommunicatorService.js"></script>
-  <div ng-app="learny" id="app" ng-cloak>
-    <div ui-view>
-    
-    </div>
-  </div>
+
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script
+		src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="script/Learny.js"></script>
+	<script src="partials/app/app.js"></script>
+	<script src="partials/profile/profile.js"></script>
+	<script src="partials/subjects/subjects.js"></script>
+	<script src="partials/subject/subject.js"></script>
+	<script src="partials/home/home.js"></script>
+	<script src="partials/header/header.js"></script>
+	<script src="partials/login/loginForm.js"></script>
+	<script src="services/ServerCommunicatorService.js"></script>
+	<div ng-app="learny" id="app" ng-cloak>
+		<div ui-view></div>
+	</div>
 </body>
 </html>
