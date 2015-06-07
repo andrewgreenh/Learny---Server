@@ -108,8 +108,8 @@ public class AccountController {
 
 	@RequestMapping(value = "/me/administrated-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getAdministratedSubjects() {
-		// TODO: Noch keine Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getAdministratedSubjects();
 	}
 
 	@RequestMapping(value = "/me/achievements", method = RequestMethod.GET)
