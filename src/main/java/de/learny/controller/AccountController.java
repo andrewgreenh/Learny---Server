@@ -87,7 +87,10 @@ public class AccountController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id) {
-		// TODO: Noch keine richtige Funktionalität implementiert
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.getAccountName().equals("admin")) {
+			throw new NotEnoughPermissionsException();
+		}
 		accountRepository.delete(id);
 	}
 
