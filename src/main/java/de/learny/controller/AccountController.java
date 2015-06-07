@@ -114,8 +114,8 @@ public class AccountController {
 
 	@RequestMapping(value = "/me/achievements", method = RequestMethod.GET)
 	Iterable<Achievement> getOwnAchievments() {
-		// TODO: Noch keine Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getAchievements();
 	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
