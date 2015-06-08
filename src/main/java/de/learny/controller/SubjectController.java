@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
+import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Subject;
@@ -25,6 +26,9 @@ public class SubjectController {
 	
 	@Autowired
 	private LoggedInAccountService userToAccountService;
+	
+	@Autowired
+	private AccountRepository accountRep;
 
 	@RequestMapping(method = RequestMethod.GET)
 	Iterable<Subject> getAllSubject() {
@@ -133,7 +137,23 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
-	void removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
-		//TODO: Muss noch implementiert werden
+	boolean removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.getAccountName().equals("admin")) {
+			throw new NotEnoughPermissionsException();
+		}
+		
+		Account toRemoveAccount = accountRep.findById(userId);
+		if (toRemoveAccount == null)
+			throw new ResourceNotFoundException();
+		
+		Subject subject = subjectRep.findById(subjectId);
+		if (subject == null)
+			throw new ResourceNotFoundException();
+		
+		//FIXME: Löschen wird nicht vorgenohmen
+		boolean var = subject.removeAccountInCharge(toRemoveAccount);
+		subjectRep.save(subject);
+		return var;
 	}
 }
