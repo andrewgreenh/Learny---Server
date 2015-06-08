@@ -48,10 +48,14 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
+	Boolean addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
 		Subject subject = subjectRep.findById(id);
+		if (subject == null)
+			throw new ResourceNotFoundException();
 		//TODO: Soll hier auch ein neuer Test erstellt werden?
-		subject.addTest(test);
+		boolean var = subject.addTest(test);
+		subjectRep.save(subject);
+		return var;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
