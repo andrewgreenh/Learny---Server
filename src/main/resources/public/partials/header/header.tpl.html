@@ -2,8 +2,8 @@
 	<ul>
 		<p>Hier könnte ein Bild sein</p>
 		<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
-		<li ng-show="loggedin"><a ui-sref="app.profile">Profil</a></li>
 		<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
+		<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
 		<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
 		<li ng-show="welcomepage"><a ng-click="toggleLogin(); $event.preventDefault();" href="#">Login</a></li>	
 	</ul>

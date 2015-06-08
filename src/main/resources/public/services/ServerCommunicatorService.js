@@ -33,6 +33,10 @@ angular.module('learny').factory(
                     service.isLoggedInAsync = function() {
                         return $http.get('/api/accounts/loggedin');
                     };
+                    
+                    service.updateProfileAsync = function(userId, data) {
+                        return $http.put('/api/accounts/' + userId, data);
+                    }
 
                     return service;
                 } ]);

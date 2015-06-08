@@ -42,6 +42,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resolve : {},
         templateUrl : 'partials/profile/profile.html'
     })
+    
+    .state('app.editProfile', {
+        url : '/profile/edit',
+        controller : 'editProfileController',
+        resolve : {},
+        templateUrl : 'partials/profile/editProfile.html'
+    })
 
     .state(
             'app.subjects',
