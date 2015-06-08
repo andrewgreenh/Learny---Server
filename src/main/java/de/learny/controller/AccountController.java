@@ -110,7 +110,6 @@ public class AccountController {
 		Subject subjectToReg = subjectRepo.findById(subject.getId());
 		if (subjectToReg == null)
 			throw new ResourceNotFoundException();
-		//FIXME: Funktioniert nicht speichert Subject nicht als Joined ab
 		boolean var = loggedInAccount.addJoinedSubject(subjectToReg);
 		accountRepository.save(loggedInAccount);
 		return var;
