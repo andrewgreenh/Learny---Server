@@ -74,15 +74,21 @@ public class SubjectController {
 		if (subject == null)
 			throw new ResourceNotFoundException();
 		
-		//Überprüft ob Account Admin oder verantwortlich für Subject
+		if (permitted(id)) {
+			this.subjectRep.delete(id);
+		}
+	}
+	
+	private boolean permitted(long id){
+		// Übeprüft ob Subject vorhaden
+		Subject subject = subjectRep.findById(id);
+		// Überprüft ob Account Admin oder verantwortlich für Subject
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
 		inCharge = subject.getAccountsInCharge().contains(loggedInAccount);
-		System.out.println("InCharge = " + inCharge);
 		if (inCharge || loggedInAccount.getAccountName().equals("admin")) {
-			this.subjectRep.delete(id);
-		}
-		else{
+			return true;
+		} else {
 			throw new NotEnoughPermissionsException();
 		}
 	}
