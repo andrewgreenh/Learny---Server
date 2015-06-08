@@ -110,8 +110,11 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
-	void getResponsibles(@PathVariable("id") long id) {
-		//TODO: Muss noch implementiert werden
+	Iterable<Account> getResponsibles(@PathVariable("id") long id) {
+		Subject subject = subjectRep.findById(id);
+		if (subject == null)
+			throw new ResourceNotFoundException();
+		return subject.getAccountsInCharge();
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
