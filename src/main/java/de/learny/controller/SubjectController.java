@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
+import de.learny.security.service.LoggedInAccountService;
 
 @RestController
 @RequestMapping("/api/subjects")
@@ -20,6 +22,9 @@ public class SubjectController {
 
 	@Autowired
 	private SubjectRepository subjectRep;
+	
+	@Autowired
+	private LoggedInAccountService userToAccountService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	Iterable<Subject> getAllSubject() {
@@ -37,17 +42,24 @@ public class SubjectController {
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.GET)
 	Iterable<Test> getAllTestsForSubject(@PathVariable("id") long id) {
 		Subject subject = subjectRep.findById(id);
+		if (subject == null)
+			throw new ResourceNotFoundException();
 		return subject.getTests();
 	}
 	
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
-		//TODO: Muss noch implementiert werden
+		Subject subject = subjectRep.findById(id);
+		//TODO: Soll hier auch ein neuer Test erstellt werden?
+		subject.addTest(test);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void create(@RequestBody Subject subject){
-		//TODO: Nur Admin darf ein Subject erstellen
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.getAccountName().equals("admin")) {
+			throw new NotEnoughPermissionsException();
+		}
 		this.subjectRep.save(subject);
 	}
 	
