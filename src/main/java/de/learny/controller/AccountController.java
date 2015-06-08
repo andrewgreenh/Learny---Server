@@ -14,6 +14,7 @@ import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.controller.exception.ResourceWithSameNameException;
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Achievement;
 import de.learny.domain.Role;
@@ -33,6 +34,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private SubjectRepository subjectRepo;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -87,32 +91,40 @@ public class AccountController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id) {
-		// TODO: Noch keine richtige Funktionalität implementiert
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.getAccountName().equals("admin")) {
+			throw new NotEnoughPermissionsException();
+		}
 		accountRepository.delete(id);
 	}
 
 	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getEnroledSubjects() {
-		// TODO: Noch keine richtige Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getJoinedSubjects();
 	}
 
-	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST)
+	@RequestMapping(value = "/me/enroled-subjects", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	boolean registerToSubjects(@RequestBody Subject subject) {
-		// TODO: Noch keine Funktionalität implementiert
-		return true;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		Subject subjectToReg = subjectRepo.findById(subject.getId());
+		if (subjectToReg == null)
+			throw new ResourceNotFoundException();
+		boolean var = loggedInAccount.addJoinedSubject(subjectToReg);
+		accountRepository.save(loggedInAccount);
+		return var;
 	}
 
 	@RequestMapping(value = "/me/administrated-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getAdministratedSubjects() {
-		// TODO: Noch keine Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getAdministratedSubjects();
 	}
 
 	@RequestMapping(value = "/me/achievements", method = RequestMethod.GET)
 	Iterable<Achievement> getOwnAchievments() {
-		// TODO: Noch keine Funktionalität implementiert
-		return null;
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.getAchievements();
 	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
