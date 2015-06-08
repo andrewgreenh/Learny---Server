@@ -53,8 +53,11 @@ public class SubjectController {
 		if (subject == null)
 			throw new ResourceNotFoundException();
 		//TODO: Soll hier auch ein neuer Test erstellt werden?
-		boolean var = subject.addTest(test);
-		subjectRep.save(subject);
+		boolean var = false;
+		if(permitted(id)){
+			var = subject.addTest(test);
+			subjectRep.save(subject);
+		}
 		return var;
 	}
 	
