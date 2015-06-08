@@ -69,7 +69,22 @@ public class SubjectController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id){
-		this.subjectRep.delete(id);
+		//Übeprüft ob Subject vorhaden
+		Subject subject = subjectRep.findById(id);
+		if (subject == null)
+			throw new ResourceNotFoundException();
+		
+		//Überprüft ob Account Admin oder verantwortlich für Subject
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		boolean inCharge = false;
+		inCharge = subject.getAccountsInCharge().contains(loggedInAccount);
+		System.out.println("InCharge = " + inCharge);
+		if (inCharge || loggedInAccount.getAccountName().equals("admin")) {
+			this.subjectRep.delete(id);
+		}
+		else{
+			throw new NotEnoughPermissionsException();
+		}
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
