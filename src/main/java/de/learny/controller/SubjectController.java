@@ -94,11 +94,16 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
-	Subject update(@PathVariable("id") long id, @RequestBody Subject updateSubject){
-		//TODO: Funktioniert nur wenn in der JSON-Datei die ID steht. Außerdem ist es kein update mehr sondern ein überschreiben
-		//Subject subject = this.subjectRep.findById(id);
-		//BeanUtils.copyProperties(subject, updateSubject);
-		return this.subjectRep.save(updateSubject);
+	Subject update(@PathVariable("id") long id, @RequestBody Subject postedSubject){
+		// Übeprüft ob Subject vorhaden
+		Subject oldSubjcet = subjectRep.findById(id);
+		if (oldSubjcet == null)
+			throw new ResourceNotFoundException();
+		if (permitted(id)) {
+			oldSubjcet.setName(postedSubject.getName());
+			oldSubjcet.setDescription(oldSubjcet.getDescription());
+		}
+		return this.subjectRep.save(oldSubjcet);
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
