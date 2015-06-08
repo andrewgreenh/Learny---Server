@@ -118,8 +118,18 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
-		//TODO: Muss noch implementiert werden
+	boolean addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.getAccountName().equals("admin")) {
+			throw new NotEnoughPermissionsException();
+		}
+		
+		Subject subject = subjectRep.findById(id);
+		if (subject == null)
+			throw new ResourceNotFoundException();
+		boolean var = subject.addAccountInCharge(loggedInAccount);
+		subjectRep.save(subject);
+		return var;
 	}
 	
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
