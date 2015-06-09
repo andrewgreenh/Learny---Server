@@ -5,6 +5,10 @@ angular.module('learny').factory(
                 function($http) {
                     var service = {};
 
+                    service.createAccountAsync = function(data) {
+                        return $http.post('/api/accounts', data);
+                    }
+                    
                     service.loginAsync = function(username, password) {
                         return $http.post('/login?username=' + encodeURI(username) + '&password='
                                 + encodeURI(password));

@@ -1,0 +1,13 @@
+<learnyheader loggedin="false"></learnyheader>
+<h1>Lege einen neuen Account an:</h1>
+<div ng-show="created" class="alert alert-success fade in">
+    <strong>Geschafft!</strong><a ui-sref="login"> Logge dich jetzt ein um fortzufahren.</a>
+</div>
+<div ng-show="error" class="alert alert-danger fade in">
+    <strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
+</div>
+<form ng-submit="create()">
+	<input type="text" name="username" ng-model="user.accountName" required></input>
+	<input type="password" name="password" ng-model="user.password" required></input>
+	<input type="submit" value="Senden"></input>
+</form>

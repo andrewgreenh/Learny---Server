@@ -5,7 +5,7 @@
 		<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
 		<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
 		<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
-		<li ng-show="welcomepage"><a ng-click="toggleLogin(); $event.preventDefault();" href="#">Login</a></li>	
+		<li ng-show="welcomepage"><a ng-click="toggleLogin(); $event.preventDefault();" href="#">Login</a> oder <a ui-sref="createAccount">Registriere dich</a></li>	
 	</ul>
 
 	<learnyloginform ng-show="showlogin"></learnyloginform>
