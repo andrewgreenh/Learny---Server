@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import de.learny.controller.exception.ResourceNotFoundException;
 
+/* Diese Klasse wird bei jedem Controller reingeladen von Spring und kümmert sich um die 
+   Statuscodes, wenn exceptions geworfen werden.
+   */
 @ControllerAdvice
 public class ExceptionHandlingControllerAdvice {
 
