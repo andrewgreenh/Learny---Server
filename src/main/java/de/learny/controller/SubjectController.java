@@ -47,7 +47,7 @@ public class SubjectController {
 	Iterable<Test> getAllTestsForSubject(@PathVariable("id") long id) {
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject.getTests();
 	}
 	
@@ -55,7 +55,7 @@ public class SubjectController {
 	Boolean addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		//TODO: Soll hier auch ein neuer Test erstellt werden?
 		boolean var = false;
 		if(permitted(id)){
@@ -69,7 +69,7 @@ public class SubjectController {
 	void create(@RequestBody Subject subject){
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.getAccountName().equals("admin")) {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		this.subjectRep.save(subject);
 	}
@@ -79,7 +79,7 @@ public class SubjectController {
 		//Übeprüft ob Subject vorhaden
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		
 		if (permitted(id)) {
 			this.subjectRep.delete(id);
@@ -96,7 +96,7 @@ public class SubjectController {
 		if (inCharge || loggedInAccount.getAccountName().equals("admin")) {
 			return true;
 		} else {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 	}
 	
@@ -105,7 +105,7 @@ public class SubjectController {
 		// Übeprüft ob Subject vorhaden
 		Subject oldSubjcet = subjectRep.findById(id);
 		if (oldSubjcet == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		if (permitted(id)) {
 			oldSubjcet.setName(postedSubject.getName());
 			oldSubjcet.setDescription(oldSubjcet.getDescription());
@@ -117,7 +117,7 @@ public class SubjectController {
 	Iterable<Account> getResponsibles(@PathVariable("id") long id) {
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject.getAccountsInCharge();
 	}
 	
@@ -125,12 +125,12 @@ public class SubjectController {
 	boolean addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.getAccountName().equals("admin")) {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		boolean var = subject.addAccountInCharge(loggedInAccount);
 		subjectRep.save(subject);
 		return var;
@@ -140,16 +140,16 @@ public class SubjectController {
 	boolean removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.getAccountName().equals("admin")) {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
 		Account toRemoveAccount = accountRep.findById(userId);
 		if (toRemoveAccount == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Account mit dieser id existiert nicht");
 		
 		Subject subject = subjectRep.findById(subjectId);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		
 		//FIXME: Löschen wird nicht vorgenohmen
 		boolean var = subject.removeAccountInCharge(toRemoveAccount);
