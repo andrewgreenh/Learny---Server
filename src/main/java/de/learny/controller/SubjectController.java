@@ -39,7 +39,7 @@ public class SubjectController {
 	Subject getSubject(@PathVariable("id") long id) {
 		Subject subject = subjectRep.findById(id);
 		if (subject == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject;
 	}
 
