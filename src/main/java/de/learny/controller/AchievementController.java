@@ -28,7 +28,7 @@ public class AchievementController {
 	Achievement getSubject(@PathVariable("id") long id) {
 		Achievement achievement = achievmentRepo.findById(id);
 		if (achievement == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Achievement mit dieser id existiert nicht");
 		return achievement;
 	}
 	

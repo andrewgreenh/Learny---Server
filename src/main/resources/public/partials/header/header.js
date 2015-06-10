@@ -6,7 +6,8 @@ angular.module('learny').directive(
                 templateUrl : 'partials/header/header.tpl.html',
                 scope : {
                     loggedin : '=',
-                    welcomepage : '='
+                    welcomepage : '=',
+                    user : '='
                 },
                 controller : [
                         '$scope',

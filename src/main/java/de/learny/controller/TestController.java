@@ -28,7 +28,7 @@ public class TestController {
 	Test getTest(@PathVariable("id") long id){
 		Test test = testRepository.findById(id);
 		if(test == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Test mit diese id existiert nicht");
 		return test;
 	}
 
