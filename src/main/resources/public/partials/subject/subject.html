@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>{{subject.name}}</h1>
+	<h1>{{subject.name}}</h1>
 </div>
 <h2 ng-show="userIsNew">
 	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
@@ -7,10 +7,18 @@
 </h2>
 <div>
 	<h2>Verantwortliche:</h2>
-	<ul ng-repeat="responsible in subject.accountsInCharge">
-		<li><a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.surname}}</a></li>
+	<ul>
+		<li ng-repeat="responsible in subject.accountsInCharge"><a
+			href="mailto:{{responsible.email}}">{{responsible.lastname}},
+				{{responsible.surname}}</a></li>
+		<li ng-show="userIsAdmin"><form ng-submit="addResponsible()">
+<input type="text" name="accountname" placeholder="Accountname" ng-model="accountName">
+<button class="btn btn-default" type="button">Hinzufügen</button></form>
+		</li>
 	</ul>
 </div>
+
+
 <h2 ng-show="userIsAdmin">Sieh Dir Statistiken an oder bearbeite
 	Tests</h2>
 <h2 ng-show="userIsEnroled">Löse doch einen der folgenden Tests</h2>

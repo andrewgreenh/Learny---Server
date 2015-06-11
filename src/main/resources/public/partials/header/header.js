@@ -26,12 +26,12 @@ angular.module('learny').directive(
                             }
 
                             $scope.showlogin = false;
-                            $scope.toggleLogin = function() {
+                            $scope.toggleLogin = function(event) {
                                 serverCommunicator.isLoggedInAsync().success(function() {
-                                    $state.go('app.home');
+                                    $state.go('app.home'); 
                                 })
                                 .error(function(){
-                                    $scope.showlogin = !$scope.showlogin;                                    
+                                    $("#loginModal").modal("show");                                  
                                 });
                             }
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.learny.controller.exception.ResourceNotFoundException;
+import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Subject;
@@ -19,16 +20,19 @@ import de.learny.domain.Test;
 public class SubjectController {
 
 	@Autowired
-	private SubjectRepository subjectRep;
+	private SubjectRepository subjectRepo;
+	
+	@Autowired
+	private AccountRepository accountRepo;
 
 	@RequestMapping(method = RequestMethod.GET)
 	Iterable<Subject> getAllSubject() {
-		return subjectRep.findAll();
+		return subjectRepo.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Subject getSubject(@PathVariable("id") long id) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject;
@@ -36,7 +40,7 @@ public class SubjectController {
 
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.GET)
 	Iterable<Test> getAllTestsForSubject(@PathVariable("id") long id) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		return subject.getTests();
 	}
 	
@@ -48,12 +52,12 @@ public class SubjectController {
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void create(@RequestBody Subject subject){
 		//TODO: Nur Admin darf ein Subject erstellen
-		this.subjectRep.save(subject);
+		this.subjectRepo.save(subject);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id){
-		this.subjectRep.delete(id);
+		this.subjectRepo.delete(id);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
@@ -61,7 +65,7 @@ public class SubjectController {
 		//TODO: Funktioniert nur wenn in der JSON-Datei die ID steht. Außerdem ist es kein update mehr sondern ein überschreiben
 		//Subject subject = this.subjectRep.findById(id);
 		//BeanUtils.copyProperties(subject, updateSubject);
-		return this.subjectRep.save(updateSubject);
+		return this.subjectRepo.save(updateSubject);
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
@@ -71,7 +75,9 @@ public class SubjectController {
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
-		//TODO: Muss noch implementiert werden
+		Subject subject = subjectRepo.findById(id);
+		subject.addAccountInCharge(accountRepo.findById(account.getId()));
+		subjectRepo.save(subject);
 	}
 	
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)

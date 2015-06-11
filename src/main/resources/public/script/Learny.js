@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                         value : true
                                     };
                                 }, function(data, status, headers, config) {
-                                    $state.go('login');
+                                    $state.go('welcome');
                                     return {
                                         value : false
                                     };
