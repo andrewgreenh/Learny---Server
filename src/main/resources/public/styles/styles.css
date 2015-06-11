@@ -6,9 +6,10 @@ ul {
 	list-style: none;
 }
 
-.login {
+.login li{
 	align-items: flex-end;
-	float: inline-block;
+	float: right;
+	margin-right: 2%;
 }
 
 .navbar {
