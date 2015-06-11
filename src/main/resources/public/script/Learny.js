@@ -105,12 +105,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl : 'partials/subject/subject.html'
             })
 
-    .state('login', {
-        url : '/login',
-        resolve : {},
-        templateUrl : 'partials/login/login.html'
-    })
-
     .state('createAccount', {
         url : '/register',
         resolve : {},
@@ -139,18 +133,14 @@ app.run(function($rootScope, $state, serverCommunicator) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (stateShouldBeBehindLogin(toState.name)) {
             serverCommunicator.isLoggedInAsync().error(function() {
-                $state.go('login');
-            });
-        } else if (toState.name == 'login') {
-            serverCommunicator.isLoggedInAsync().success(function() {
-                $state.go('app.home');
+                $state.go('welcome');
             });
         }
     })
 });
 
 function stateShouldBeBehindLogin(state) {
-    if ([ 'login', 'welcome', 'createAccount' ].indexOf(state) > -1) {
+    if (['welcome', 'createAccount' ].indexOf(state) > -1) {
         return false
     }
     return true;

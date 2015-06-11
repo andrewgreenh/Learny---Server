@@ -1,12 +1,14 @@
-<h1>{{subject.name}}</h1>
+<div class="page-header">
+  <h1>{{subject.name}}</h1>
+</div>
 <h2 ng-show="userIsNew">
 	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
 		dich ein</a>, um Tests zulösen!
 </h2>
 <div>
 	<h2>Verantwortliche:</h2>
-	<ul>
-		<li>Roth, Andreas</li>
+	<ul ng-repeat="responsible in subject.accountsInCharge">
+		<li><a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.surname}}</a></li>
 	</ul>
 </div>
 <h2 ng-show="userIsAdmin">Sieh Dir Statistiken an oder bearbeite
