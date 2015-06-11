@@ -1,4 +1,31 @@
-<h1>{{subject.name}}</h1>
+<div class="page-header">
+	<h1>{{subject.name}}</h1>
+</div>
+<h2 ng-show="userIsNew">
+	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
+		dich ein</a>, um Tests zulösen!
+</h2>
+<div>
+	<h2>Verantwortliche:</h2>
+	<ul>
+		<li ng-repeat="responsible in subject.accountsInCharge"><a
+			href="mailto:{{responsible.email}}">{{responsible.lastname}},
+				{{responsible.surname}}</a></li>
+		<li ng-show="userIsAdmin"><form ng-submit="addResponsible()">
+<input type="text" name="accountname" placeholder="Accountname" ng-model="accountName">
+<button class="btn btn-default" type="button">Hinzufügen</button></form>
+		</li>
+	</ul>
+</div>
+
+
+<h2 ng-show="userIsAdmin">Sieh Dir Statistiken an oder bearbeite
+	Tests</h2>
+<h2 ng-show="userIsEnroled">Löse doch einen der folgenden Tests</h2>
+<h2 ng-hide="userIsEnroled">Tests:</h2>
 <ul>
-	<li ng-repeat="test in tests"><a href="#{{test.id}}">{{test.name}}</a></li>
+	<li ng-repeat="test in tests"><a ng-hide="userIsNew"
+		href="#{{test.id}}">{{test.name}}</a>
+		<p ng-show="userIsNew">{{test.name}}</p> <a ng-show="userIsAdmin"
+		href="#{{test.id}}">bearbeiten</a></li>
 </ul>

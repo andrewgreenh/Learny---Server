@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Role {
 
@@ -14,6 +16,8 @@ public class Role {
 
 	private String name;
 
+	
+	@JsonIgnore
 	public long getId() {
 		return id;
 	}
@@ -28,6 +32,10 @@ public class Role {
 
 	public Role(String name) {
 		this.name = name;
+	}
+	
+	public Role() {
+		
 	}
 
 }
