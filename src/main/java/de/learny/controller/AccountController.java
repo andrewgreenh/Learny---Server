@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.RoleRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Achievement;
@@ -36,6 +37,9 @@ public class AccountController {
 
 	@Autowired
 	private SubjectRepository subjectRepo;
+	
+	@Autowired
+	private RoleRepository roleRepo;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -45,6 +49,7 @@ public class AccountController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseStatus(HttpStatus.CREATED)
 	void create(@RequestBody Account account) {
+		System.out.print(account.toString());
 		if (account.getPassword() == null) {
 			throw new IllegalArgumentException("Passwort darf nicht leer sein.");
 		}
@@ -53,6 +58,11 @@ public class AccountController {
 		if (newAcc.getAccountName() == null) {
 			throw new IllegalArgumentException("Accountname darf nicht leer sein");
 		}
+		
+		newAcc.setSurname(account.getSurname());
+		newAcc.setLastname(account.getLastname());
+		newAcc.setEmail(account.getEmail());
+		newAcc.addRole(roleRepo.findFirstByName("user"));
 		
 		boolean accountNameAlreadyExists = accountRepository.findFirstByAccountName(newAcc
 		        .getAccountName()) != null;

@@ -1,25 +1,38 @@
-<div id="header" class="navbar navbar-default">
-	<ul>
-		<p>Hier könnte ein Bild sein</p>
-		<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
-		<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
-		<li ng-show="loggedin"><a ui-sref="app.profile">{{user.accountName}}</a></li>
-		<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
-		<li ng-show="welcomepage"><a data-toggle="modal" href="#loginModal">Login</a>
-			oder <a ui-sref="createAccount">Registriere dich</a></li>
-	</ul>
-
-	<div id="loginModal" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Modal Header</h4>
-				</div>
-				<learnyloginform class="modal-body"></learnyloginform>
-			</div>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a ui-sref="app.home" ng-show="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
+			<a ui-sref="welcome" ng-hide="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
 		</div>
+		 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav pull-right">
+			<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
+			<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
+			<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
+			<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
+			<li ng-show="welcomepage"><a ng-click="toggleLogin($event)" href="#">Login</a></li>
+			<li ng-show="welcomepage"><a ui-sref="createAccount">Registriere
+					dich</a></li>
+		</ul>
+		</div>
+		<div id="loginModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Logge Dich ein</h4>
+					</div>
+					<learnyloginform class="modal-body"></learnyloginform>
+				</div>
+			</div>
 
+		</div>
 	</div>
-
-</div>
+</nav>

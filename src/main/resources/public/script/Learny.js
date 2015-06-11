@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                         value : true
                                     };
                                 }, function(data, status, headers, config) {
-                                    $state.go('login');
+                                    $state.go('welcome');
                                     return {
                                         value : false
                                     };
@@ -24,11 +24,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                 });
                     },
                     currentUser : function(serverCommunicator) {
+                        var user = {};
                         return serverCommunicator.getCurrentUserAsync().then(
+                            function(data, status, headers, config) {
+                                return data.data;
+                            });
+                    },
+                    subjectsAdministratedByUser : function(serverCommunicator) {
+                        return serverCommunicator.getAdministratedSubjectsAsync().then(
                                 function(data, status, headers, config) {
-                                    return {
-                                        value : data
-                                    };
+                                    return data.data.map(function(item) {return item.id;});
+                                });
+                    },
+                    subjectsUserIsEnroledIn : function(serverCommunicator) {
+                        return serverCommunicator.getEnroledSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    return data.data.map(function(item) {return item.id;});
                                 });
                     }
                 },
@@ -42,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resolve : {},
         templateUrl : 'partials/profile/profile.html'
     })
-    
+
     .state('app.editProfile', {
         url : '/profile/edit',
         controller : 'editProfileController',
@@ -94,16 +105,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl : 'partials/subject/subject.html'
             })
 
-    .state('login', {
-        url : '/login',
-        resolve : {},
-        templateUrl : 'partials/login/login.html'
-    })
-    
     .state('createAccount', {
         url : '/register',
         resolve : {},
-        controller: 'createAccountController',
+        controller : 'createAccountController',
         templateUrl : 'partials/createAccount/createAccount.html'
     })
 
@@ -128,18 +133,14 @@ app.run(function($rootScope, $state, serverCommunicator) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (stateShouldBeBehindLogin(toState.name)) {
             serverCommunicator.isLoggedInAsync().error(function() {
-                $state.go('login');
-            });
-        } else if (toState.name == 'login') {
-            serverCommunicator.isLoggedInAsync().success(function() {
-                $state.go('app.home');
+                $state.go('welcome');
             });
         }
     })
 });
 
 function stateShouldBeBehindLogin(state) {
-    if(['login', 'welcome', 'createAccount'].indexOf(state) > -1) {
+    if (['welcome', 'createAccount' ].indexOf(state) > -1) {
         return false
     }
     return true;
