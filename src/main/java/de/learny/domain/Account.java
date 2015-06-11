@@ -25,7 +25,7 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(unique=true)
+	@Column(unique=true, nullable=false)
 	private String accountName;
 	
 	private String password, surname, lastname, email, avatarUri;

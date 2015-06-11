@@ -42,6 +42,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resolve : {},
         templateUrl : 'partials/profile/profile.html'
     })
+    
+    .state('app.editProfile', {
+        url : '/profile/edit',
+        controller : 'editProfileController',
+        resolve : {},
+        templateUrl : 'partials/profile/editProfile.html'
+    })
 
     .state(
             'app.subjects',
@@ -92,6 +99,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resolve : {},
         templateUrl : 'partials/login/login.html'
     })
+    
+    .state('createAccount', {
+        url : '/register',
+        resolve : {},
+        controller: 'createAccountController',
+        templateUrl : 'partials/createAccount/createAccount.html'
+    })
 
     .state('welcome', {
         url : '/',
@@ -112,7 +126,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 app.run(function($rootScope, $state, serverCommunicator) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (toState.name !== 'login' && toState.name !== 'welcome') {
+        if (stateShouldBeBehindLogin(toState.name)) {
             serverCommunicator.isLoggedInAsync().error(function() {
                 $state.go('login');
             });
@@ -123,3 +137,10 @@ app.run(function($rootScope, $state, serverCommunicator) {
         }
     })
 });
+
+function stateShouldBeBehindLogin(state) {
+    if(['login', 'welcome', 'createAccount'].indexOf(state) > -1) {
+        return false
+    }
+    return true;
+}

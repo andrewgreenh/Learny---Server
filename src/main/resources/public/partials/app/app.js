@@ -3,4 +3,8 @@ angular.module('learny').controller('app',
             $scope.loggedIn = loggedIn.value;
             $scope.currentUser = currentUser.value.data;
 
+            $scope.setUser = function(user) {
+                $scope.currentUser = user;
+            }
+            
         } ]);

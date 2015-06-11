@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
-import de.learny.controller.exception.ResourceWithSameNameException;
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.domain.Account;
@@ -34,7 +33,7 @@ public class AccountController {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	@Autowired
 	private SubjectRepository subjectRepo;
 
@@ -46,13 +45,22 @@ public class AccountController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseStatus(HttpStatus.CREATED)
 	void create(@RequestBody Account account) {
+		if (account.getPassword() == null) {
+			throw new IllegalArgumentException("Passwort darf nicht leer sein.");
+		}
 		Account newAcc = new Account(account.getAccountName(),
 		        passwordGenerator.hashPassword(account.getPassword()));
-		try {
-			accountRepository.save(newAcc);
-		} catch (Exception e) {
-			throw new ResourceWithSameNameException();
+		if (newAcc.getAccountName() == null) {
+			throw new IllegalArgumentException("Accountname darf nicht leer sein");
 		}
+		
+		boolean accountNameAlreadyExists = accountRepository.findFirstByAccountName(newAcc
+		        .getAccountName()) != null;
+		if (accountNameAlreadyExists) {
+			throw new IllegalArgumentException("Accountname schon vorhanden");
+		}
+		accountRepository.save(newAcc);
+
 	}
 
 	@RequestMapping(value = "/me", method = RequestMethod.GET)
@@ -76,11 +84,11 @@ public class AccountController {
 	Account update(@PathVariable("id") long id, @RequestBody Account postedAccount) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.getAccountName().equals("admin") && loggedInAccount.getId() != id) {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das durchzuführen.");
 		}
 		Account oldAccount = accountRepository.findById(id);
 		if (oldAccount == null) {
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Account mit dieser id existiert nicht");
 		}
 		oldAccount.setSurname(postedAccount.getSurname());
 		oldAccount.setLastname(postedAccount.getLastname());
@@ -93,7 +101,7 @@ public class AccountController {
 	void delete(@PathVariable("id") long id) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.getAccountName().equals("admin")) {
-			throw new NotEnoughPermissionsException();
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		accountRepository.delete(id);
 	}
@@ -109,7 +117,7 @@ public class AccountController {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		Subject subjectToReg = subjectRepo.findById(subject.getId());
 		if (subjectToReg == null)
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		boolean var = loggedInAccount.addJoinedSubject(subjectToReg);
 		accountRepository.save(loggedInAccount);
 		return var;
