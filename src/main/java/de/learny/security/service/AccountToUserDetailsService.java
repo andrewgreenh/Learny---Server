@@ -35,11 +35,8 @@ public class AccountToUserDetailsService implements UserDetailsService {
 
 	private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
 		Collection<? extends GrantedAuthority> authorities;
-		if (username.equals("John")) {
-			authorities = asList(() -> "ROLE_ADMIN", () -> "ROLE_BASIC");
-			} else {
-			authorities = asList(() -> "ROLE_BASIC");
-			}
+		authorities = asList(() -> "ROLE_BASIC");
+
 
 		return authorities;
 	}

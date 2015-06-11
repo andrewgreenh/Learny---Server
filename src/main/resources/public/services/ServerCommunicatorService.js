@@ -41,6 +41,18 @@ angular.module('learny').factory(
                     service.updateProfileAsync = function(userId, data) {
                         return $http.put('/api/accounts/' + userId, data);
                     }
+                    
+                    service.getAdministratedSubjectsAsync = function() {
+                        return $http.get('/api/accounts/me/administrated-subjects');
+                    }
+                    
+                    service.getEnroledSubjectsAsync = function() {
+                        return $http.get('/api/accounts/me/enroled-subjects');
+                    }
+                    
+                    service.joinSubjectAsync = function(subject) {
+                        return $http.post('/api/accounts/me/enroled-subjects', subject);
+                    }
 
                     return service;
                 } ]);

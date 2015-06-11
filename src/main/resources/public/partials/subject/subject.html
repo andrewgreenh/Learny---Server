@@ -1,4 +1,21 @@
 <h1>{{subject.name}}</h1>
+<h2 ng-show="userIsNew">
+	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
+		dich ein</a>, um Tests zulösen!
+</h2>
+<div>
+	<h2>Verantwortliche:</h2>
+	<ul>
+		<li>Roth, Andreas</li>
+	</ul>
+</div>
+<h2 ng-show="userIsAdmin">Sieh Dir Statistiken an oder bearbeite
+	Tests</h2>
+<h2 ng-show="userIsEnroled">Löse doch einen der folgenden Tests</h2>
+<h2 ng-hide="userIsEnroled">Tests:</h2>
 <ul>
-	<li ng-repeat="test in tests"><a href="#{{test.id}}">{{test.name}}</a></li>
+	<li ng-repeat="test in tests"><a ng-hide="userIsNew"
+		href="#{{test.id}}">{{test.name}}</a>
+		<p ng-show="userIsNew">{{test.name}}</p> <a ng-show="userIsAdmin"
+		href="#{{test.id}}">bearbeiten</a></li>
 </ul>

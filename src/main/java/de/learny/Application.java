@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Configuration;
 
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.QuestionRepository;
+import de.learny.dataaccess.RoleRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Role;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.PasswordGeneratorService;
@@ -36,6 +38,9 @@ public class Application extends SpringBootServletInitializer implements Command
 	AccountRepository accountRepo;
 	
 	@Autowired
+	RoleRepository roleRepo;
+	
+	@Autowired
 	TestRepository testRepo;
 	
 	@Autowired
@@ -53,6 +58,14 @@ public class Application extends SpringBootServletInitializer implements Command
 
     @Override
     public void run(String... strings) throws Exception {
+    	Role adminRole = new Role("admin");
+    	Role dozentRole = new Role("dozent");
+    	Role userRole = new Role("user");    	
+    	
+    	roleRepo.save(adminRole);
+    	roleRepo.save(dozentRole);
+    	roleRepo.save(userRole);
+    	
     	Subject sub1 = new Subject("Fach1");
     	Subject sub2 = new Subject("Fach2");
     	subjectRepo.save(sub1);
@@ -64,6 +77,11 @@ public class Application extends SpringBootServletInitializer implements Command
     	Account student = new Account("student", passwordGenerator.hashPassword("student"));
     	Account admin = new Account("admin", passwordGenerator.hashPassword("admin"));
     	Account dozent = new Account("dozent", passwordGenerator.hashPassword("dozent"));
+    	
+    	student.addRole(userRole);
+    	admin.addRole(adminRole);
+    	dozent.addRole(dozentRole);
+    	
     	accountRepo.save(admin);
     	accountRepo.save(student);
     	accountRepo.save(dozent);
@@ -72,8 +90,6 @@ public class Application extends SpringBootServletInitializer implements Command
     	subjectRepo.save(sub1);
     	student.addJoinedSubject(sub1);
     	accountRepo.save(student);
-    	
-    	
     }
     
     @Override
