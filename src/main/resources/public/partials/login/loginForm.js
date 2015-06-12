@@ -15,7 +15,10 @@ angular.module('learny').directive(
                                 serverCommunicator.loginAsync($scope.username, $scope.password)
                                         .success(function(data, status, headers, config) {
                                             console.log('Successfully logged in');
-                                            $state.go('app.home');
+                                            $("#loginModal").one('hidden.bs.modal', function(e) {
+                                                $state.go('app.home');
+                                            }).modal("hide");
+                                           
                                         }).error(function(data, status, headers, config) {
                                             console.log('Login failed');
                                         });

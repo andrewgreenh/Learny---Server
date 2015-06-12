@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,8 +29,8 @@ public class Account {
 	
 	private String password, surname, lastname, email, avatarUri;
 	
-	@ManyToOne
-	private Role role;
+	@ManyToMany
+	private Set<Role> roles = new HashSet<Role>();;
 
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<TestScore> testScores = new HashSet<TestScore>();
@@ -97,14 +96,14 @@ public class Account {
 		this.avatarUri = avatarUri;
 	}
 
-	public Role getRole() {
-		return role;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void addRole(Role role) {
+		roles.add(role);
 	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -172,6 +171,15 @@ public class Account {
 		return true;
 	}
 	
-	
+	@Override
+	public String toString() {
+		String result = "";
+		result += "\nAccountName: " + accountName;
+		result += "\nVorname: " + surname;
+		result += "\nNachname: " + lastname;
+		result += "\nE-Mail: " + email;
+		result += "\nPasswort: " + password;
+		return result;
+	}
 
 }
