@@ -131,7 +131,7 @@ public class SubjectController {
 		
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		boolean var = subject.addAccountInCharge(accountRepo.findById(account.getId()));
+		boolean var = subject.addAccountInCharge(newResponsible);
 		subjectRepo.save(subject);
 		return var;
 	}
