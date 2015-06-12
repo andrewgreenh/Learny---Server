@@ -86,10 +86,9 @@ public class SubjectController {
 		}
 	}
 	
+	// Überprüft ob Account Admin oder verantwortlich für Subject
 	private boolean permitted(long id){
-		// Übeprüft ob Subject vorhaden
 		Subject subject = subjectRepo.findById(id);
-		// Überprüft ob Account Admin oder verantwortlich für Subject
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
 		inCharge = subject.getAccountsInCharge().contains(loggedInAccount);
@@ -122,17 +121,15 @@ public class SubjectController {
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	boolean addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
-		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		Account newResponsible = accountRepo.findFirstByAccountName(account.getAccountName());
 		Subject subject = subjectRepo.findById(id);
-		if (!loggedInAccount.getAccountName().equals("admin") && !subject.getAccountsInCharge().contains(loggedInAccount)) {
-			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
-		}
-		
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		boolean var = subject.addAccountInCharge(newResponsible);
-		subjectRepo.save(subject);
+		boolean var = false;
+		if(permitted(id)){
+			var = subject.addAccountInCharge(newResponsible);
+			subjectRepo.save(subject);
+		}
 		return var;
 	}
 	
