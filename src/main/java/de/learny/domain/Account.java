@@ -181,5 +181,14 @@ public class Account {
 		result += "\nPasswort: " + password;
 		return result;
 	}
+	
+	public boolean hasRole(String role){
+		for(Role x : roles){
+			if(x.getName().equals(role)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
