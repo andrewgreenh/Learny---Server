@@ -46,5 +46,15 @@ input {
 	align: center;
 }
 
+.modal-header, h4 {
+      background-color: #ffffff;
+      color:#4a4a4a!important;
+      text-align: center;
+      font-size: 3rem;
+  }
+  .modal-footer {
+      background-color: #f0f0f0;
+  }
+
 
 
