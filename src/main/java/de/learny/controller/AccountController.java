@@ -132,6 +132,17 @@ public class AccountController {
 		accountRepository.save(loggedInAccount);
 		return var;
 	}
+	
+	@RequestMapping(value = "/me/enroled-subjects/{subjectId}", method = RequestMethod.DELETE)
+	boolean dischargeFromSubject(@PathVariable("subjectId") long subjectId) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		Subject subjectToRemove = subjectRepo.findById(subjectId);
+		if (subjectToRemove == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		boolean var = loggedInAccount.removeJoinedSubject(subjectToRemove);
+		accountRepository.save(loggedInAccount);
+		return var;
+	}
 
 	@RequestMapping(value = "/me/administrated-subjects", method = RequestMethod.GET)
 	Iterable<Subject> getAdministratedSubjects() {
