@@ -1,3 +1,8 @@
+/*******************************
+GLOBAL
+*******************************/
+
+
 .app-ui, .app {
 	height:100%;
 }
@@ -6,15 +11,27 @@ ul {
 	list-style: none;
 }
 
+
+
+/*******************************
+NAVIGATION
+*******************************/
+
+.navbar {
+	margin-bottom: 0px;
+}
+
 .login li{
 	align-items: flex-end;
 	float: right;
 	margin-right: 2%;
 }
 
-.navbar {
-	margin-bottom: 0px;
-}
+
+
+/*******************************
+COVER
+*******************************/
 
 .cover {
   color: inherit;
@@ -41,6 +58,11 @@ ul {
   background-position: center;
   background-attachment: scroll;
 }
+
+
+/*******************************
+MODAL
+*******************************/
 
 .modal-content {
 	align: center;
@@ -69,4 +91,6 @@ ul {
 }
 
 
-
+/*******************************
+EXAMPLE
+*******************************/
