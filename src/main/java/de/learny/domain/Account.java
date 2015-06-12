@@ -123,7 +123,7 @@ public class Account {
 	}
 	
 	public boolean addAdministratedSubject(Subject subject) {
-		this.administratedSubjects.add(subject);
+		this.administratedSubjects.remove(subject);
 		if (!subject.getAccountsInCharge().contains(this)) {
 			subject.addAccountInCharge(this);
 		}

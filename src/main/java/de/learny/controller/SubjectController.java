@@ -149,8 +149,6 @@ public class SubjectController {
 		Subject subject = subjectRepo.findById(subjectId);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		
-		//FIXME: Löschen wird nicht vorgenohmen
 		boolean var = subject.removeAccountInCharge(toRemoveAccount);
 		subjectRepo.save(subject);
 		return var;
