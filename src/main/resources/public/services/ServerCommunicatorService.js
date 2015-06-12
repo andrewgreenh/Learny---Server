@@ -46,9 +46,9 @@ angular.module('learny').factory(
                         return $http.get('/api/accounts/me/administrated-subjects');
                     }
 
-                    service.addUserAsAdministratorToSubjectAsync = function(userId, subjectId) {
+                    service.addUserAsAdministratorToSubjectAsync = function(accountName, subjectId) {
                         return $http.post('/api/subjects/' + subjectId + '/responsibles', {
-                            id : userId
+                            accountName : accountName
                         });
                     }
 
