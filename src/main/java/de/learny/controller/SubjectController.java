@@ -22,22 +22,22 @@ import de.learny.security.service.LoggedInAccountService;
 public class SubjectController {
 
 	@Autowired
-	private SubjectRepository subjectRep;
+	private SubjectRepository subjectRepo;
 	
 	@Autowired
 	private LoggedInAccountService userToAccountService;
 	
 	@Autowired
-	private AccountRepository accountRep;
+	private AccountRepository accountRepo;
 
 	@RequestMapping(method = RequestMethod.GET)
 	Iterable<Subject> getAllSubject() {
-		return subjectRep.findAll();
+		return subjectRepo.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	Subject getSubject(@PathVariable("id") long id) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject;
@@ -45,7 +45,7 @@ public class SubjectController {
 
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.GET)
 	Iterable<Test> getAllTestsForSubject(@PathVariable("id") long id) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject.getTests();
@@ -53,14 +53,14 @@ public class SubjectController {
 	
 	@RequestMapping(value = "/{id}/tests", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	Boolean addTestForSubject(@PathVariable("id") long id, @RequestBody Test test) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		//TODO: Soll hier auch ein neuer Test erstellt werden?
 		boolean var = false;
 		if(permitted(id)){
 			var = subject.addTest(test);
-			subjectRep.save(subject);
+			subjectRepo.save(subject);
 		}
 		return var;
 	}
@@ -71,24 +71,24 @@ public class SubjectController {
 		if (!loggedInAccount.getAccountName().equals("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
-		this.subjectRep.save(subject);
+		this.subjectRepo.save(subject);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id){
 		//Übeprüft ob Subject vorhaden
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		
 		if (permitted(id)) {
-			this.subjectRep.delete(id);
+			this.subjectRepo.delete(id);
 		}
 	}
 	
 	private boolean permitted(long id){
 		// Übeprüft ob Subject vorhaden
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		// Überprüft ob Account Admin oder verantwortlich für Subject
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
@@ -103,19 +103,19 @@ public class SubjectController {
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
 	Subject update(@PathVariable("id") long id, @RequestBody Subject postedSubject){
 		// Übeprüft ob Subject vorhaden
-		Subject oldSubjcet = subjectRep.findById(id);
+		Subject oldSubjcet = subjectRepo.findById(id);
 		if (oldSubjcet == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		if (permitted(id)) {
 			oldSubjcet.setName(postedSubject.getName());
 			oldSubjcet.setDescription(oldSubjcet.getDescription());
 		}
-		return this.subjectRep.save(oldSubjcet);
+		return this.subjectRepo.save(oldSubjcet);
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
 	Iterable<Account> getResponsibles(@PathVariable("id") long id) {
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return subject.getAccountsInCharge();
@@ -128,11 +128,11 @@ public class SubjectController {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
-		Subject subject = subjectRep.findById(id);
+		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		boolean var = subject.addAccountInCharge(loggedInAccount);
-		subjectRep.save(subject);
+		subjectRepo.save(subject);
 		return var;
 	}
 	
@@ -143,17 +143,17 @@ public class SubjectController {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
-		Account toRemoveAccount = accountRep.findById(userId);
+		Account toRemoveAccount = accountRepo.findById(userId);
 		if (toRemoveAccount == null)
 			throw new ResourceNotFoundException("Ein Account mit dieser id existiert nicht");
 		
-		Subject subject = subjectRep.findById(subjectId);
+		Subject subject = subjectRepo.findById(subjectId);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		
 		//FIXME: Löschen wird nicht vorgenohmen
 		boolean var = subject.removeAccountInCharge(toRemoveAccount);
-		subjectRep.save(subject);
+		subjectRepo.save(subject);
 		return var;
 	}
 }
