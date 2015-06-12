@@ -123,14 +123,15 @@ public class SubjectController {
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	boolean addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin")) {
+		Account newResponsible = accountRepo.findFirstByAccountName(account.getAccountName());
+		Subject subject = subjectRepo.findById(id);
+		if (!loggedInAccount.getAccountName().equals("admin") && !subject.getAccountsInCharge().contains(loggedInAccount)) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
-		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		boolean var = subject.addAccountInCharge(accountRepo.findById(account.getId()));
+		boolean var = subject.addAccountInCharge(newResponsible);
 		subjectRepo.save(subject);
 		return var;
 	}

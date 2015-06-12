@@ -42,7 +42,7 @@ angular.module('learny').controller(
 
                     $scope.addResponsible = function() {
                         serverCommunicator.addUserAsAdministratorToSubjectAsync(
-                                $scope.currentUser.id, $scope.subject.id).then(function(data) {
+                                $scope.accountName, $scope.subject.id).then(function(data) {
                             $state.go($state.current, {}, {
                                 reload : true
                             });
