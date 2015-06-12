@@ -183,7 +183,7 @@ public class Account {
 	}
 	
 	public boolean hasRole(String role){
-		for(Role x : roles){
+		for(Role x : this.getRoles()){
 			if(x.getName().equals(role)){
 				return true;
 			}
