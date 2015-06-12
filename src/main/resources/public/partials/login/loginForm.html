@@ -1,7 +1,10 @@
 <form ng-submit="login()">
-	<input class="form-control" placeholder="Username" type="text" name="username" ng-model="username" required></input>
-	<input class="form-control" placeholder="Password" type="password" name="password" ng-model="password" required></input>
+	<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+	<input class="form-control" placeholder="Enter username" type="text" name="username" ng-model="username" required></input>
+	<label for="password"><span class="glyphicon glyphicon-lock"></span> Password</label>
+	<input class="form-control" placeholder="Enter password" type="password" name="password" ng-model="password" required></input>
 	<input type="submit" value="Login" class="btn btn-default btn-success btn-block" data-toggle="modal"></input>
 	<div class="modal-footer">
+		<p>Not a member, yet?<a ui-sref="createAccount">Sign up!</a></p>
 	</div>
 </form>
