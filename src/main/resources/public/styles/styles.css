@@ -45,7 +45,16 @@ ul {
 input {
 	align: center;
 }
-
+.modal-header, .modal-body {
+	padding: 2% 5%;
+	margin: 1%;
+}
+.modal-body input {
+	margin: 1%;
+}
+.modal-body label {
+	padding: 2% 0% 0% 0%;
+}
 .modal-header, h4 {
       background-color: #ffffff;
       color:#4a4a4a!important;
