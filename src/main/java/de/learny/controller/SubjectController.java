@@ -68,7 +68,7 @@ public class SubjectController {
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	void create(@RequestBody Subject subject){
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin")) {
+		if (!loggedInAccount.hasRole("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		this.subjectRepo.save(subject);
@@ -93,7 +93,7 @@ public class SubjectController {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
 		inCharge = subject.getAccountsInCharge().contains(loggedInAccount);
-		if (inCharge || loggedInAccount.getAccountName().equals("admin")) {
+		if (inCharge || loggedInAccount.hasRole("admin")) {
 			return true;
 		} else {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
@@ -123,7 +123,7 @@ public class SubjectController {
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
 	boolean addResponsible(@PathVariable("id") long id, @RequestBody Account account) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin")) {
+		if (!loggedInAccount.hasRole("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
@@ -138,7 +138,7 @@ public class SubjectController {
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
 	boolean removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin")) {
+		if (!loggedInAccount.hasRole("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
