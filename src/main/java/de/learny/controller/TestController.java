@@ -58,8 +58,15 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void update(@PathVariable("id") long id, @RequestBody Test test){
-		//TODO: Muss noch implemntiert werden
+	Test update(@PathVariable("id") long id, @RequestBody Test updateTest){
+		//TODO: Was muss noch geupdatet werden?
+		Test oldTest = testRepository.findById(id);
+		if (oldTest == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		if (permitted(id)) {
+			oldTest.setName(updateTest.getName());
+		}
+		return this.testRepository.save(oldTest);
 	}
 	
 	@RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
