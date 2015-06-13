@@ -1,23 +1,32 @@
 <learnyheader loggedin="false"></learnyheader>
-<div class="page-header">
-  <h1><span class="glyphicon glyphicon-plus"></span> Register now:</h1>
+<div class="registry well well-lg">
+	<div class="page-header">
+		 <h1><span class="glyphicon glyphicon-plus"></span> Register now:</h1>
+	</div>
+	<div ng-show="created" class="alert alert-success fade in">
+	    <strong>Geschafft!</strong><a ui-sref="welcome"> Logge dich jetzt ein um fortzufahren.</a>
+	</div>
+	<div ng-show="error" class="alert alert-danger fade in">
+	    <strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
+	</div>
+	<form role="form" ng-submit="create()">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="username">Accountname:</label>
+		<input class="form-control" type="text" name="username" ng-model="user.accountName" required></input>
+		
+		<label class="control-label col-sm-2" for="vorname">Vorname:</label>
+		<input class="form-control" type="text" name="vorname" ng-model="user.surname" required></input>
+		
+		<label class="control-label col-sm-2" for="nachname">Nachname:</label>
+		<input class="form-control" type="text" name="nachname" ng-model="user.lastname" required></input>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="email">E-Mail:</label>
+		<input class="form-control" type="email" name="email" ng-model="user.email" required></input>
+		
+		<label class="control-label col-sm-2" for="password">Passwort:</label>
+		<input class="form-control" type="password" name="password" ng-model="user.password" required></input>
+	</div>
+		<button class="form-control" type="submit" value="Senden">Registrieren.</button>
+	</form>
 </div>
-<div ng-show="created" class="alert alert-success fade in">
-    <strong>Geschafft!</strong><a ui-sref="welcome"> Logge dich jetzt ein um fortzufahren.</a>
-</div>
-<div ng-show="error" class="alert alert-danger fade in">
-    <strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
-</div>
-<form ng-submit="create()">
-	<p>Accountname:</p>
-	<input type="text" name="username" ng-model="user.accountName" required></input>
-	<p>Vorname:</p>
-	<input type="text" name="vorname" ng-model="user.surname" required></input>
-	<p>Nachname:</p>
-	<input type="text" name="nachname" ng-model="user.lastname" required></input>
-	<p>E-Mail:</p>
-	<input type="email" name="nachname" ng-model="user.email" required></input>
-	<p>Passwort:</p>
-	<input type="password" name="password" ng-model="user.password" required></input>
-	<input type="submit" value="Senden"></input>
-</form>

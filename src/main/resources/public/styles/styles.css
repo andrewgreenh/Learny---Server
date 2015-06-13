@@ -2,10 +2,10 @@
 GLOBAL
 *******************************/
 
-
 .app-ui, .app {
 	height:100%;
 }
+
 
 ul {
 	list-style: none;
@@ -96,5 +96,24 @@ MODAL
 
 
 /*******************************
-EXAMPLE
+MEDIA QUERIES
 *******************************/
+
+@media (min-width: 1030px) {
+  .registry {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  
+@media (max-width: 1029px) {
+ 	.registry {
+ 		max-width: 70%;
+ 	}
+}
+ 	
+@media (max-width: 468px) {
+ 	.registry {
+ 		max-width: 100%;
+ 	}
+}
+
