@@ -83,5 +83,21 @@ public class Test {
 	public Set<TestScore> getTestScores() {
 		return testScores;
 	}
+	
+	public boolean addQuestion(Question quest) {
+		this.getQuestions().add(quest);
+		if(quest.getTest() != this) {
+			quest.setTest(this);
+		}
+		return true;
+	}
+	
+	public boolean removeQuestion(Question quest) {
+		this.getQuestions().remove(quest);
+		if(quest.getTest() == this) {
+			quest.setTest(null);
+		}
+		return true;
+	}
 
 }
