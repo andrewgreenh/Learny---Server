@@ -11,7 +11,10 @@ ul {
 	list-style: none;
 }
 
-
+.registry {
+	margin: 0 auto;
+	max-width: 35%;
+}
 
 /*******************************
 NAVIGATION
@@ -99,19 +102,18 @@ MODAL
 MEDIA QUERIES
 *******************************/
 
-@media (min-width: 1030px) {
+@media (max-width: 1030px) {
   .registry {
-    max-width: 50%;
-    margin: 0 auto;
+    	max-width: 50%;
   }
   
-@media (max-width: 1029px) {
+@media (max-width: 790px) {
  	.registry {
  		max-width: 70%;
  	}
 }
- 	
-@media (max-width: 468px) {
+
+@media (max-width: 460px) {
  	.registry {
  		max-width: 100%;
  	}
