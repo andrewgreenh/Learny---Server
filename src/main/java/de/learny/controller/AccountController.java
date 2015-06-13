@@ -93,7 +93,7 @@ public class AccountController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	Account update(@PathVariable("id") long id, @RequestBody Account postedAccount) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin") && loggedInAccount.getId() != id) {
+		if (!loggedInAccount.hasRole("admin") && loggedInAccount.getId() != id) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das durchzuführen.");
 		}
 		Account oldAccount = accountRepository.findById(id);
@@ -110,7 +110,7 @@ public class AccountController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	void delete(@PathVariable("id") long id) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.getAccountName().equals("admin")) {
+		if (!loggedInAccount.hasRole("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		accountRepository.delete(id);

@@ -74,7 +74,7 @@ public class Subject {
 	
 	public boolean removeAccountInCharge(Account account) {
 		this.accountsInCharge.remove(account);
-		if(account.getAdministratedSubjects().contains(account)) {
+		if(account.getAdministratedSubjects().contains(this)) {
 			account.removeAdministratedSubject(this);
 		}
 		return true;
