@@ -18,7 +18,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>       
+    	<start-class>de.learny.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -76,6 +77,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>learny</finalName>
 	</build>
 
 	<repositories>
