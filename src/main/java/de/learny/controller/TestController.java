@@ -12,6 +12,7 @@ import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Question;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.LoggedInAccountService;
@@ -70,8 +71,11 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
-	void getAllQuestionsToTest(){
-		//TODO: Muss noch implemtiert werden
+	Iterable<Question> getAllQuestionsToTest(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		return test.getQuestions();
 	}
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.GET)
