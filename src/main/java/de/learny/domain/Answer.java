@@ -19,6 +19,15 @@ public class Answer {
 	
 	@ManyToOne
 	private Question question;
+	
+	public Answer(String answer, Question question){
+		this.answer = answer;
+		this.question = question;
+	}
+	
+	public Answer(){
+		
+	}
 
 	public String getAnswer() {
 		return answer;
