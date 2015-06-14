@@ -195,11 +195,10 @@ html, body {
   }
 }
 .cover .navbar {
-  position: absolute;
+  position: fixed;
   top: 0px;
   width: 100%;
   border: none;
-  background-color: transparent !important;
 }
 .cover .navbar .navbar-nav li.active a {
   background-color: transparent !important;
