@@ -4,8 +4,14 @@
 }
 
 #arrow {
-	position: absolute;
-	bottom: 2%;
+	position: fixed;
+	bottom: 0px;
+	left: 15%;
+	margin: 5% auto 0% auto; 	
+}
+
+.glyphicon-chevron-down {
+	border-bottom: medium solid #ffffff;
 }
 
 .registry {
