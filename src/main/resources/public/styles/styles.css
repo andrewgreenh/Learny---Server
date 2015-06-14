@@ -3,6 +3,33 @@
 	bottom: 0px;
 }
 
+.registry {
+	max-width: 30%;
+	margin: 0 auto;
+}
+/*******************************
+MEDIA QUERIES
+*******************************/
+
+@media (max-width: 1030px) {
+  .registry {
+    	max-width: 50%;
+  }
+}
+  
+@media (max-width: 790px) {
+ 	.registry {
+ 		max-width: 70%;
+ 	}
+}
+
+@media (max-width: 460px) {
+ 	.registry {
+ 		max-width: 100%;
+ 	}
+}
+
+
 
 
 /*******************************
