@@ -1,9 +1,27 @@
+/*******************************
+GLOBAL
+*******************************/
+
 .app-ui, .app {
 	height:100%;
 }
 
+
 ul {
 	list-style: none;
+}
+
+.registry {
+	margin: 0 auto;
+	max-width: 35%;
+}
+
+/*******************************
+NAVIGATION
+*******************************/
+
+.navbar {
+	margin-bottom: 0px;
 }
 
 .login li{
@@ -12,9 +30,11 @@ ul {
 	margin-right: 2%;
 }
 
-.navbar {
-	margin-bottom: 0px;
-}
+
+
+/*******************************
+COVER
+*******************************/
 
 .cover {
   color: inherit;
@@ -42,19 +62,23 @@ ul {
   background-attachment: scroll;
 }
 
-input {
+
+/*******************************
+MODAL
+*******************************/
+
+.modal-content {
 	align: center;
 }
-.modal-header, .modal-body {
+.modal-header, .modal-body, .modal-footer {
 	padding: 2% 5%;
 	margin: 1%;
 }
-.modal-body input {
+
+.modal-body input, .modal-body label, .modal-footer button, .modal-footer p {
 	margin: 1%;
 }
-.modal-body label {
-	padding: 2% 0% 0% 0%;
-}
+
 .modal-header, h4 {
       background-color: #ffffff;
       color:#4a4a4a!important;
@@ -63,7 +87,35 @@ input {
   }
   .modal-footer {
       background-color: #f0f0f0;
+}
+
+.modal-footer p {
+	text-align: left;
+}
+
+#loginButton {
+	margin-top: 3%;
+}
+
+
+/*******************************
+MEDIA QUERIES
+*******************************/
+
+@media (max-width: 1030px) {
+  .registry {
+    	max-width: 50%;
   }
+  
+@media (max-width: 790px) {
+ 	.registry {
+ 		max-width: 70%;
+ 	}
+}
 
-
+@media (max-width: 460px) {
+ 	.registry {
+ 		max-width: 100%;
+ 	}
+}
 
