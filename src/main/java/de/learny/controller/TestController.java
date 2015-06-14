@@ -12,6 +12,7 @@ import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Question;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.LoggedInAccountService;
@@ -58,13 +59,23 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void update(@PathVariable("id") long id, @RequestBody Test test){
-		//TODO: Muss noch implemntiert werden
+	Test update(@PathVariable("id") long id, @RequestBody Test updateTest){
+		//TODO: Was muss noch geupdatet werden?
+		Test oldTest = testRepository.findById(id);
+		if (oldTest == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		if (permitted(id)) {
+			oldTest.setName(updateTest.getName());
+		}
+		return this.testRepository.save(oldTest);
 	}
 	
 	@RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
-	void getAllQuestionsToTest(){
-		//TODO: Muss noch implemtiert werden
+	Iterable<Question> getAllQuestionsToTest(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		return test.getQuestions();
 	}
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.GET)

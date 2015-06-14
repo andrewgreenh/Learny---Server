@@ -3,6 +3,7 @@ package de.learny.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Test {
 	@ManyToMany
 	private Set<Test> requiredForTests = new HashSet<Test>();
 
-	@OneToMany(mappedBy = "test")
+	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Question> questions = new HashSet<Question>();
 
 	@OneToMany(mappedBy = "test")
@@ -82,6 +83,22 @@ public class Test {
 	@JsonIgnore
 	public Set<TestScore> getTestScores() {
 		return testScores;
+	}
+	
+	public boolean addQuestion(Question quest) {
+		this.getQuestions().add(quest);
+		if(quest.getTest() != this) {
+			quest.setTest(this);
+		}
+		return true;
+	}
+	
+	public boolean removeQuestion(Question quest) {
+		this.getQuestions().remove(quest);
+		if(quest.getTest() == this) {
+			quest.setTest(null);
+		}
+		return true;
 	}
 
 }
