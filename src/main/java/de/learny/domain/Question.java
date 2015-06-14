@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Question {
 
@@ -22,9 +24,15 @@ public class Question {
 	private Set<Answer> answers;
 
 	@ManyToOne
+	@JsonBackReference
 	private Test test;
 
-	public Question() {
+	public Question(String question, Test test) {
+		this.setQuestion(question);
+		this.setTest(test);
+	}
+	
+	public Question(){
 		
 	}
 
@@ -46,6 +54,10 @@ public class Question {
 
 	public Test getTest() {
 		return test;
+	}
+
+	public void setTest(Test test) {
+		this.test = test;
 	}
 	
 	

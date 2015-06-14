@@ -12,11 +12,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.AnswerRepository;
 import de.learny.dataaccess.QuestionRepository;
 import de.learny.dataaccess.RoleRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Answer;
+import de.learny.domain.Question;
 import de.learny.domain.Role;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
@@ -52,6 +55,9 @@ public class Application extends SpringBootServletInitializer implements Command
 	@Autowired
 	PasswordGeneratorService passwordGenerator;
 	
+	@Autowired
+	AnswerRepository answerRepo;
+	
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -70,9 +76,19 @@ public class Application extends SpringBootServletInitializer implements Command
     	Subject sub2 = new Subject("Fach2");
     	subjectRepo.save(sub1);
     	subjectRepo.save(sub2);
-    	testRepo.save(new Test("test1", sub1));
-    	testRepo.save(new Test("test3", sub1));
-    	testRepo.save(new Test("test2", sub2));
+    	Test test1 = new Test("test1", sub1);
+    	Test test3 = new Test("test3", sub1);
+    	Test test2 = new Test("test2", sub2);
+    	testRepo.save(test1);
+    	testRepo.save(test3);
+    	testRepo.save(test2);
+    	
+    	Question quest1 = new Question("frage1", test1);
+    	questionRepo.save(quest1);
+    	Answer answer1 = new Answer("antwort1", quest1);
+    	Answer answer2 = new Answer("antwort2", quest1);
+    	answerRepo.save(answer1);
+    	answerRepo.save(answer2);
     	
     	Account student = new Account("student", passwordGenerator.hashPassword("student"));
     	student.setSurname("Conrad");

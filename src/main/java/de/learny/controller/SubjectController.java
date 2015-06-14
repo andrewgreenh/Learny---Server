@@ -108,7 +108,7 @@ public class SubjectController {
 			oldSubjcet.setName(updateSubject.getName());
 			oldSubjcet.setDescription(oldSubjcet.getDescription());
 		}
-		return this.subjectRepo.save(updateSubject);
+		return this.subjectRepo.save(oldSubjcet);
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)
