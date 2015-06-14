@@ -20,7 +20,11 @@ public class MainController {
 
 	@RequestMapping("/profile")
 	String getProfile() {
-		return environment.getActiveProfiles()[0];
+		if(environment.getActiveProfiles().length > 0) {
+			return environment.getActiveProfiles()[0];
+		} else {
+			return "";
+		}
 	}
 
 }
