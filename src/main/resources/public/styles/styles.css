@@ -1,6 +1,11 @@
+.cover .section {
+	margin: 0 auto;
+	display: block;
+}
+
 #arrow {
-	position: sticky;
-	bottom: 0px;
+	position: absolute;
+	bottom: 2%;
 }
 
 .registry {
