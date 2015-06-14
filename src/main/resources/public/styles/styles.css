@@ -1,121 +1,209 @@
+#arrow {
+	position: sticky;
+	bottom: 0px;
+}
+
+
+
 /*******************************
-GLOBAL
+PINGENDO BOOTSTRAP
 *******************************/
+
+html, body {
+  height: 100%;
+}
 
 .app-ui, .app {
 	height:100%;
 }
 
-
-ul {
-	list-style: none;
+.text-inverse {
+  color: #ffffff;
 }
 
-.registry {
-	margin: 0 auto;
-	max-width: 35%;
+/* TODO: verify if we can touch only section */
+.jumbotron {
+  margin-bottom: 0px !important;
 }
-
-/*******************************
-NAVIGATION
-*******************************/
-
-.navbar {
-	margin-bottom: 0px;
+.jumbotron h1.text-primary {
+  color: #337cbb !important;
 }
-
-.login li{
-	align-items: flex-end;
-	float: right;
-	margin-right: 2%;
+.jumbotron h1.text-inverse {
+  color: #ffffff !important;
 }
-
-
-
-/*******************************
-COVER
-*******************************/
-
-.cover {
-  color: inherit;
-  background-color: #eeeeee;
-  padding: 0px 0px;
-  background-color: transparent;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: block;
-  -webkit-align-items: center;
-  align-items: center;
-  overflow: hidden;
-  height: 100%;
+.jumbotron h1.text-info {
+  color: #5bc0de !important;
 }
-
-.cover .cover-image {
-  z-index: -1;
+.jumbotron h1.text-success {
+  color: #5cb85c !important;
+}
+.jumbotron h1.text-warning {
+  color: #f0ad4e !important;
+}
+.jumbotron h1.text-danger {
+  color: #d9534f !important;
+}
+.carousel .item img {
+  min-width: 100%;
+}
+.section {
   position: relative;
+}
+.section > .container > .row {
+  margin: 35px 0px;
+}
+.section .background-image {
+  z-index: -1;
+  position: absolute;
   top: 0px;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-attachment: scroll;
 }
-
-
-/*******************************
-MODAL
-*******************************/
-
-.modal-content {
-	align: center;
+.section .background-image.background-image-fixed {
+  background-attachment: fixed;
 }
-.modal-header, .modal-body, .modal-footer {
-	padding: 2% 5%;
-	margin: 1%;
+.section-primary {
+  background-color: #337cbb !important;
+  color: #ffffff;
 }
-
-.modal-body input, .modal-body label, .modal-footer button, .modal-footer p {
-	margin: 1%;
+.section-primary .text-inverse {
+  color: #000000;
 }
-
-.modal-header, h4 {
-      background-color: #ffffff;
-      color:#4a4a4a!important;
-      text-align: center;
-      font-size: 3rem;
+.section-info {
+  background-color: #5bc0de !important;
+}
+.section-success {
+  background-color: #5cb85c !important;
+}
+.section-warning {
+  background-color: #f0ad4e !important;
+}
+.section-danger {
+  background-color: #d9534f !important;
+}
+.cover {
+  padding: 30px 15px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  margin-bottom: 0px !important;
+  padding: 0px 0px;
+  background-color: transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  min-height: 100%;
+}
+.cover h1,
+.cover .h1 {
+  color: inherit;
+}
+.cover p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+.cover > hr {
+  border-top-color: #d5d5d5;
+}
+.container .cover,
+.container-fluid .cover {
+  border-radius: 5px;
+}
+.cover .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .cover {
+    padding: 48px 0;
   }
-  .modal-footer {
-      background-color: #f0f0f0;
-}
-
-.modal-footer p {
-	text-align: left;
-}
-
-#loginButton {
-	margin-top: 3%;
-}
-
-
-/*******************************
-MEDIA QUERIES
-*******************************/
-
-@media (max-width: 1030px) {
-  .registry {
-    	max-width: 50%;
+  .container .cover,
+  .container-fluid .cover {
+    padding-left: 60px;
+    padding-right: 60px;
   }
-  
-@media (max-width: 790px) {
- 	.registry {
- 		max-width: 70%;
- 	}
+  .cover h1,
+  .cover .h1 {
+    font-size: 63px;
+  }
 }
-
-@media (max-width: 460px) {
- 	.registry {
- 		max-width: 100%;
- 	}
+.cover h1.text-primary {
+  color: #337cbb !important;
 }
+.cover h1.text-inverse {
+  color: #ffffff !important;
+}
+.cover h1.text-info {
+  color: #5bc0de !important;
+}
+.cover h1.text-success {
+  color: #5cb85c !important;
+}
+.cover h1.text-warning {
+  color: #f0ad4e !important;
+}
+.cover h1.text-danger {
+  color: #d9534f !important;
+}
+@media screen and (min-width: 768px) {
+  .cover {
+    padding: 0px;
+  }
+  .container .cover,
+  .container-fluid .cover {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.cover .navbar {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  border: none;
+  background-color: transparent !important;
+}
+.cover .navbar .navbar-nav li.active a {
+  background-color: transparent !important;
+}
+.cover .navbar .navbar-toggle {
+  border-color: transparent;
+}
+.cover .navbar .navbar-toggle:hover,
+.cover .navbar .navbar-toggle:focus {
+  background-color: transparent;
+}
+.cover .navbar .navbar-toggle .icon-bar {
+  background-color: #000000;
+}
+.cover .navbar.navbar-inverse .navbar-toggle {
+  border-color: transparent;
+}
+.cover .navbar.navbar-inverse .navbar-toggle:hover,
+.cover .navbar.navbar-inverse .navbar-toggle:focus {
+  background-color: transparent;
+}
+.cover .navbar.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+.cover .cover-image {
+  z-index: -1;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.cover .cover-image.background-image-fixed,
+.cover .cover-image.cover-image-fixed {
+  background-attachment: fixed;
+}
+/* PINGENDO COMMENT DO NOT REMOVE */
 
