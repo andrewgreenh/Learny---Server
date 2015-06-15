@@ -10,11 +10,15 @@
 	<ul>
 		<li ng-repeat="responsible in subject.accountsInCharge"><a
 			href="mailto:{{responsible.email}}">{{responsible.lastname}},
-				{{responsible.surname}}</a></li>
+				{{responsible.surname}}</a>
+			<button class="btn btn-default" ng-show="userIsAdmin"
+				ng-click="removeFromResponsibles(responsible)">Als
+				Verantwortlichen entfernen</button></li>
 		<li ng-show="userIsAdmin"><form ng-submit="addResponsible()">
-<input type="text" name="accountname" placeholder="Accountname" ng-model="accountName">
-<button class="btn btn-default" type="button">Hinzufügen</button></form>
-		</li>
+				<input type="text" name="accountname" placeholder="Accountname"
+					ng-model="accountName">
+				<button class="btn btn-default" type="submit">Hinzufügen</button>
+			</form></li>
 	</ul>
 </div>
 
@@ -26,6 +30,9 @@
 <ul>
 	<li ng-repeat="test in tests"><a ng-hide="userIsNew"
 		href="#{{test.id}}">{{test.name}}</a>
-		<p ng-show="userIsNew">{{test.name}}</p> <a ng-show="userIsAdmin"
-		href="#{{test.id}}">bearbeiten</a></li>
+		<p ng-show="userIsNew">{{test.name}}</p>
+		<button class="btn btn-default" ng-show="userIsAdmin">Test
+			bearbeiten</button>
+		<button class="btn btn-default" ng-show="userIsAdmin"
+			ng-click="deleteTest(test)">Test löschen</button></li>
 </ul>

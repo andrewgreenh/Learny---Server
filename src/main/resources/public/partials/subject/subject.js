@@ -41,8 +41,8 @@ angular.module('learny').controller(
                     }
 
                     $scope.addResponsible = function() {
-                        serverCommunicator.addUserAsAdministratorToSubjectAsync(
-                                $scope.accountName, $scope.subject.id).then(function(data) {
+                        serverCommunicator.addUserAsAdministratorToSubjectAsync($scope.accountName,
+                                $scope.subject.id).then(function(data) {
                             $state.go($state.current, {}, {
                                 reload : true
                             });
@@ -51,6 +51,24 @@ angular.module('learny').controller(
                                 reload : true
                             });
                         })
+                    }
+
+                    $scope.removeFromResponsibles = function(person) {
+                        serverCommunicator.removeAdministratorFromSubjectAsync(person.id,
+                                $scope.subject.id).then(function(data) {
+                            $state.go($state.current, {}, {
+                                reload : true
+                            });
+                        }, function(data) {
+                        });
+                    }
+
+                    $scope.deleteTest = function(test) {
+                        serverCommunicator.deleteTestAsync(test.id).then(function(data) {
+                            $state.go($state.current, {}, {
+                                reload : true
+                            });
+                        });
                     }
 
                 } ]);

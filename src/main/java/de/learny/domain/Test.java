@@ -35,7 +35,7 @@ public class Test {
 	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Question> questions = new HashSet<Question>();
 
-	@OneToMany(mappedBy = "test")
+	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<TestScore> testScores = new HashSet<TestScore>();
 
 	public Test(String name, Subject subject) {
