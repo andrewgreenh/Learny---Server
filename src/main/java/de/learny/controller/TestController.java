@@ -80,6 +80,9 @@ public class TestController {
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.GET)
 	void getResultsFromTest(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		//TODO: Muss noch implemtiert werden
 	}
 	
@@ -90,13 +93,14 @@ public class TestController {
 	
 	@RequestMapping(value = "/{id}/highscore", method = RequestMethod.GET)
 	void getHighscoreFromTest(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		//TODO: Muss noch implemtiert werden
 	}
 	
 	private boolean permitted(long id){
-		// Übeprüft ob Subject vorhaden
 		Test test = testRepository.findById(id);
-		// Überprüft ob Account Admin oder verantwortlich für Subject
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
 		Subject subject = test.getSubject();
