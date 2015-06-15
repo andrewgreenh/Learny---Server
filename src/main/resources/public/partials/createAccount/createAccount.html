@@ -11,20 +11,20 @@
 	</div>
 	<form role="form" ng-submit="create()">
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="username">Accountname:</label>
+		<label class="control-label col-sm-6" for="username">Accountname:</label>
 		<input class="form-control" type="text" name="username" ng-model="user.accountName" required></input>
 		
-		<label class="control-label col-sm-2" for="vorname">Vorname:</label>
+		<label class="control-label col-sm-6" for="vorname">Vorname:</label>
 		<input class="form-control" type="text" name="vorname" ng-model="user.surname" required></input>
 		
-		<label class="control-label col-sm-2" for="nachname">Nachname:</label>
+		<label class="control-label col-sm-6" for="nachname">Nachname:</label>
 		<input class="form-control" type="text" name="nachname" ng-model="user.lastname" required></input>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="email">E-Mail:</label>
+		<label class="control-label col-sm-6" for="email">E-Mail:</label>
 		<input class="form-control" type="email" name="email" ng-model="user.email" required></input>
 		
-		<label class="control-label col-sm-2" for="password">Passwort:</label>
+		<label class="control-label col-sm-6" for="password">Passwort:</label>
 		<input class="form-control" type="password" name="password" ng-model="user.password" required></input>
 	</div>
 		<button class="form-control" type="submit" value="Senden">Registrieren.</button>
