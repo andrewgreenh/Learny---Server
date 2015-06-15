@@ -24,6 +24,12 @@ angular.module('learny').directive(
                                         });
 
                             };
+                            $scope.goToRegister = function() {
+                                $("#loginModal").one('hidden.bs.modal', function(e) {
+                                    $state.go('createAccount');
+                                }).modal("hide");
+
+                            };
                         } ],
 
             }
