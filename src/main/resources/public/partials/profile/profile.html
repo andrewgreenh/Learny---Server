@@ -1,6 +1,97 @@
-<div class="page-header">
-  <h1>Dein Profil <small><a ui-sref="app.editProfile">Bearbeiten</a></small></h1>
+<div class="section section-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Welcome! {{currentUser.accountName}} <small><a ui-sref="app.editProfile">Bearbeiten</a></small></h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="https://unsplash.imgix.net/uploads/1411724908903377d4696/2e9b0cb2?q=25&amp;fm=jpg&amp;s=2016c4932a7b7a1b629cb6890bff9977"
+                        class="img-responsive img-thumbnail">
+                    </div>
+                    <div class="col-md-4">
+                        <p class="lead">{{currentUser.surname}} {{currentUser.lastname}}</p>
+                        <p>E-mail: {{currentUser.email}}&nbsp;</p>
+                        <p>&nbsp;&nbsp;</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>My achievements:</p>
+                        <div class="col-md-12">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Ach_1</h4>
+                                        <p>Bes.</p>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Ach_2</h4>
+                                        <p>Bes.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </div>
-<p>Username: {{currentUser.accountName}}</p>
-<p>Vorname: {{currentUser.surname}}</p>
-<p>id: {{currentUser.id}}</p>
+<div class="section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-md-6">
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <ul class="nav nav-justified nav-pills">
+                            <li>
+                                <a href="#">Meine F?che</a>
+                            </li>
+                            <li>
+                                <a href="#">Alle F?che</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">Filter<i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#">sortieren_1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">sortieren_2</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">sortieren_3</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">sortieren_4</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <a href="#"><i class="fa fa-5x fa-fw fa-bank"></i></a>
+                        <p>fach1</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="#"><i class="fa fa-5x fa-cog fa-fw"></i></a>
+                        <p>fach2</p>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+</div>
