@@ -54,13 +54,21 @@ angular.module('learny').controller(
                     }
 
                     $scope.removeFromResponsibles = function(person) {
-                        serverCommunicator.removeAdministratorFromSubject(person.id, $scope.subject.id).then(
-                                function(data) {
-                                    $state.go($state.current, {}, {
-                                        reload : true
-                                    });
-                                }, function(data) {
-                                });
+                        serverCommunicator.removeAdministratorFromSubjectAsync(person.id,
+                                $scope.subject.id).then(function(data) {
+                            $state.go($state.current, {}, {
+                                reload : true
+                            });
+                        }, function(data) {
+                        });
+                    }
+
+                    $scope.deleteTest = function(test) {
+                        serverCommunicator.deleteTestAsync(test.id).then(function(data) {
+                            $state.go($state.current, {}, {
+                                reload : true
+                            });
+                        });
                     }
 
                 } ]);

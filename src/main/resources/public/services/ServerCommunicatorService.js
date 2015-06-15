@@ -52,7 +52,7 @@ angular.module('learny').factory(
                         });
                     }
                     
-                    service.removeAdministratorFromSubject = function(userId, subjectId) {
+                    service.removeAdministratorFromSubjectAsync = function(userId, subjectId) {
                         return $http.delete('/api/subjects/' + subjectId + '/responsibles/' + userId);
                     }
 
@@ -62,6 +62,10 @@ angular.module('learny').factory(
 
                     service.joinSubjectAsync = function(subject) {
                         return $http.post('/api/accounts/me/enroled-subjects', subject);
+                    }
+                    
+                    service.deleteTestAsync = function(testId) {
+                        return $http.delete('/api/tests/'+ testId);
                     }
 
                     return service;
