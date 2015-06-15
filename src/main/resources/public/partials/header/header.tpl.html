@@ -11,15 +11,15 @@
 			<a ui-sref="app.home" ng-show="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
 			<a ui-sref="welcome" ng-hide="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
 		</div>
-		 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav pull-right">
-			<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
-			<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
-			<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
-			<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
-			<li ng-show="welcomepage"><a ng-click="toggleLogin();">Login.</a></li>
-			<li ng-show="welcomepage"><a ui-sref="createAccount">Register.</a></li>
-		</ul>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav pull-right">
+				<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
+				<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
+				<li ng-show="welcomepage"><a ng-click="toggleLogin();">Login.</a></li>
+				<li ng-show="welcomepage"><a ui-sref="createAccount">Register.</a></li>
+			</ul>
 		</div>
 	</div>
 </nav>
