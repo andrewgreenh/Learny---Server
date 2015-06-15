@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default"">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -17,7 +17,7 @@
 			<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
 			<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
 			<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
-			<li ng-show="welcomepage"><a ng-click="toggleLogin($event)" href="#">Login.</a></li>
+			<li ng-show="welcomepage"><a ng-click="toggleLogin();">Login.</a></li>
 			<li ng-show="welcomepage"><a ui-sref="createAccount">Register.</a></li>
 		</ul>
 		</div>
