@@ -1,8 +1,21 @@
 /*******************************
 GLOBAL
 *******************************/
+
+.app-ui, .app {
+	height:100%;
+}
+
+.app-ui {
+	padding-top: 50px;
+}
+
 a[ng-click]{
     cursor: pointer;
+}
+
+form, form button, form label {
+	margin-top: 2%;
 }
 
 .cover .section {
@@ -50,10 +63,6 @@ PINGENDO BOOTSTRAP
 
 html, body {
   height: 100%;
-}
-
-.app-ui, .app {
-	height:100%;
 }
 
 .text-inverse {
