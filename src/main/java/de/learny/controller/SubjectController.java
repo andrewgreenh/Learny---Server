@@ -135,8 +135,7 @@ public class SubjectController {
 	
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
 	boolean removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
-		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.hasRole("admin")) {
+		if (!permitted(subjectId)) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		

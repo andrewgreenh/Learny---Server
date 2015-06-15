@@ -51,6 +51,10 @@ angular.module('learny').factory(
                             accountName : accountName
                         });
                     }
+                    
+                    service.removeAdministratorFromSubject = function(userId, subjectId) {
+                        return $http.delete('/api/subjects/' + subjectId + '/responsibles/' + userId);
+                    }
 
                     service.getEnroledSubjectsAsync = function() {
                         return $http.get('/api/accounts/me/enroled-subjects');
