@@ -1,7 +1,5 @@
 package de.learny;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +8,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.AnswerRepository;
@@ -25,8 +25,6 @@ import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.PasswordGeneratorService;
 
-
-
 /**
  * Acts as a servlet initializer and start class.
  * 
@@ -35,29 +33,29 @@ import de.learny.security.service.PasswordGeneratorService;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class Application extends SpringBootServletInitializer implements CommandLineRunner{
-	
+public class Application extends SpringBootServletInitializer implements CommandLineRunner {
+
 	@Autowired
 	AccountRepository accountRepo;
-	
+
 	@Autowired
 	RoleRepository roleRepo;
-	
+
 	@Autowired
 	TestRepository testRepo;
-	
+
 	@Autowired
 	SubjectRepository subjectRepo;
-	
-	@Autowired 
+
+	@Autowired
 	QuestionRepository questionRepo;
-	
+
 	@Autowired
 	PasswordGeneratorService passwordGenerator;
-	
+
 	@Autowired
 	AnswerRepository answerRepo;
-	
+
 	@Autowired
 	private Environment environment;
 
@@ -90,8 +88,8 @@ public class Application extends SpringBootServletInitializer implements Command
 
 			Question quest1 = new Question("frage1", test1);
 			questionRepo.save(quest1);
-			Answer answer1 = new Answer("antwort1", quest1, true);
-	    	Answer answer2 = new Answer("antwort2", quest1, false);
+			Answer answer1 = new Answer("antwort1", quest1);
+			Answer answer2 = new Answer("antwort2", quest1);
 			answerRepo.save(answer1);
 			answerRepo.save(answer2);
 
