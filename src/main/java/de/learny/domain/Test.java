@@ -70,6 +70,7 @@ public class Test {
 	public Set<Test> getRequiredTests() {
 		return requiredTests;
 	}
+	
 	@JsonIgnore
 	public Set<Test> getRequiredForTests() {
 		return requiredForTests;
@@ -97,6 +98,22 @@ public class Test {
 		this.getQuestions().remove(quest);
 		if(quest.getTest() == this) {
 			quest.setTest(null);
+		}
+		return true;
+	}
+	
+	public boolean addTestScore(TestScore testScore) {
+		this.testScores.add(testScore);
+		if(!testScore.getTest().equals(this)) {
+			testScore.setTest(this);;
+		}
+		return true;
+	}
+	
+	public boolean removeTestScore(TestScore testScore) {
+		this.testScores.remove(testScore);
+		if(testScore.getTest().equals(this)) {
+			testScore.setTest(null);
 		}
 		return true;
 	}

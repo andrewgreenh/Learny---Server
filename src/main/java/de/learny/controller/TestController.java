@@ -99,7 +99,7 @@ public class TestController {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		TestScore score = new TestScore(test, loggedInAccount, turnTest);
 		testScoreRepo.save(score);
-		test.getTestScores().add(score);
+		test.addTestScore(score);
 		testRepository.save(test);
 		//TODO: Muss noch implemntiert werden
 	}
