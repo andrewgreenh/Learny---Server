@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class TestScore {
@@ -31,7 +33,6 @@ public class TestScore {
 	public TestScore(Test test, Account account, Test turnTest) {
 		this.test = test;
 		this.account = account;
-		this.answers = answers;
 	}
 	
 	public TestScore() {
@@ -55,6 +56,7 @@ public class TestScore {
 		this.account = account;
 	}
 
+	@JsonIgnore
 	public Test getTest() {
 		return test;
 	}
