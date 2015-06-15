@@ -27,7 +27,17 @@ public class TestScore {
 	
 	@ManyToOne
 	private Test test;
-
+	
+	public TestScore(Test test, Account account, Test turnTest) {
+		this.test = test;
+		this.account = account;
+		this.answers = answers;
+	}
+	
+	public TestScore() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@JsonIgnore
 	public Set<Answer> getAnswers() {
 		return answers;
