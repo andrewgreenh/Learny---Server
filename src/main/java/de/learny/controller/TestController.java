@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.TestRepository;
+import de.learny.dataaccess.TestScoreRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Question;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
+import de.learny.domain.TestScore;
 import de.learny.security.service.LoggedInAccountService;
 
 @RestController
@@ -26,6 +28,9 @@ public class TestController {
 	
 	@Autowired
 	private LoggedInAccountService userToAccountService;
+	
+	@Autowired
+	private TestScoreRepository testScoreRepo;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Test> getAllTests(){
@@ -79,15 +84,23 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.GET)
-	void getResultsFromTest(@PathVariable("id") long id){
+	Iterable<TestScore> getResultsFromTest(@PathVariable("id") long id){
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		//TODO: Muss noch implemtiert werden
+		return test.getTestScores();
 	}
 	
 	@RequestMapping(value = "/{id}/results", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void turnTest(@PathVariable("id") long id, @RequestBody Test test){
+	void turnTest(@PathVariable("id") long id, @RequestBody Test turnTest){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		TestScore score = new TestScore(test, loggedInAccount, turnTest);
+		testScoreRepo.save(score);
+		test.getTestScores().add(score);
+		testRepository.save(test);
 		//TODO: Muss noch implemntiert werden
 	}
 	
