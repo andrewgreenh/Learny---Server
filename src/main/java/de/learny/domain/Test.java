@@ -1,5 +1,6 @@
 package de.learny.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,7 +84,7 @@ public class Test {
 
 	@JsonIgnore
 	public Set<TestScore> getTestScores() {
-		return testScores;
+		return Collections.unmodifiableSet(testScores);
 	}
 	
 	public boolean addQuestion(Question quest) {
