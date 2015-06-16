@@ -62,7 +62,7 @@ public class TestScore {
 	public void setTest(Test test) {
 		this.test = test;
 		if(!this.test.getTestScores().contains(this)){
-			test.getTestScores().add(this);
+			test.addTestScore(this);
 		}
 	}
 
