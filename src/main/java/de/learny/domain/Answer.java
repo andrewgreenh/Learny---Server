@@ -18,7 +18,6 @@ public class Answer {
 
 	private String answer;
 	
-	@JsonIgnore
 	private boolean correct;
 	
 	@ManyToOne
@@ -55,11 +54,12 @@ public class Answer {
 		return id;
 	}
 
-	@JsonProperty
+	@JsonIgnore
 	public boolean isCorrect() {
 		return correct;
 	}
 
+	@JsonProperty
 	public void setCorrect(boolean correct) {
 		this.correct = correct;
 	}

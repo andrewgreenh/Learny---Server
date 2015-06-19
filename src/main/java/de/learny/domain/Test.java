@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Test {
@@ -80,6 +81,11 @@ public class Test {
 	@JsonIgnore
 	public Set<Question> getQuestions() {
 		return questions;
+	}
+	
+	@JsonProperty
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 
 	@JsonIgnore

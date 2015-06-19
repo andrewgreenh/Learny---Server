@@ -118,21 +118,33 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     test : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getTestAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
-                                    return {
-                                        value : data
-                                    };
+                                    return data;
                                 });
                     },
-                    questions: function($stateParams, serverCommunicator) {
+                    questions : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
-                                    return {
-                                        value : data
-                                    };
+                                    return data;
                                 });
                     }
                 },
                 templateUrl : 'partials/test/test.html'
+            })
+
+    .state(
+            'app.createTest',
+            {
+                url : '/subject/:id/createTest',
+                controller : 'createTestController',
+                resolve : {
+                    subject : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getSubjectAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/createTest.html'
             })
 
     .state('createAccount', {
