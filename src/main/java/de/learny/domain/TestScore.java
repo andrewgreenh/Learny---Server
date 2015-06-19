@@ -27,7 +27,16 @@ public class TestScore {
 	
 	@ManyToOne
 	private Test test;
-
+	
+	public TestScore(Test test, Account account, Test turnTest) {
+		this.test = test;
+		this.account = account;
+	}
+	
+	public TestScore() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@JsonIgnore
 	public Set<Answer> getAnswers() {
 		return answers;
@@ -45,12 +54,16 @@ public class TestScore {
 		this.account = account;
 	}
 
+	@JsonIgnore
 	public Test getTest() {
 		return test;
 	}
 
 	public void setTest(Test test) {
 		this.test = test;
+		if(!this.test.getTestScores().contains(this)){
+			test.addTestScore(this);
+		}
 	}
 
 	public long getId() {

@@ -88,8 +88,8 @@ public class Application extends SpringBootServletInitializer implements Command
 
 			Question quest1 = new Question("frage1", test1);
 			questionRepo.save(quest1);
-			Answer answer1 = new Answer("antwort1", quest1);
-			Answer answer2 = new Answer("antwort2", quest1);
+			Answer answer1 = new Answer("antwort1", quest1, true);
+			Answer answer2 = new Answer("antwort2", quest1, false);
 			answerRepo.save(answer1);
 			answerRepo.save(answer2);
 
