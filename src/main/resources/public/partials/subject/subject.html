@@ -10,7 +10,7 @@
 	<ul>
 		<li ng-repeat="responsible in subject.accountsInCharge"><a
 			href="mailto:{{responsible.email}}">{{responsible.lastname}},
-				{{responsible.surname}}</a>
+				{{responsible.firstname}}</a>
 			<button class="btn btn-default" ng-show="userIsAdmin"
 				ng-click="removeFromResponsibles(responsible)">Als
 				Verantwortlichen entfernen</button></li>
