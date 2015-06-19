@@ -67,6 +67,14 @@ angular.module('learny').factory(
                     service.deleteTestAsync = function(testId) {
                         return $http.delete('/api/tests/'+ testId);
                     }
+                    
+                    service.getTestAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId);
+                    }
+                    
+                    service.getQuestionsToTestAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId + '/questions');
+                    }
 
                     return service;
                 } ]);
