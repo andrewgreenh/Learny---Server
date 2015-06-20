@@ -1,4 +1,117 @@
 <div class="page-header text-center">
+  <h1><span class="glyphicon glyphicon-user"></span> Dein Profil <small><a ui-sref="app.editProfile"><span class="glyphicon glyphicon-edit"></span> </a></small></h1>
+</div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        <img src="https://unsplash.imgix.net/uploads/1411724908903377d4696/2e9b0cb2?q=25&amp;fm=jpg&amp;s=2016c4932a7b7a1b629cb6890bff9977"
+                        class="img-responsive img-thumbnail">
+                        <button class="btn btn-primary" type="none">Foto select</button>
+                    </div>
+                     <div class="col-md-4 col-sm-6 col-xs-6">
+                        <p class="lead">{{currentUser.accountName}}</p>
+                        <p><b>Name:</b> {{currentUser.firstname}} {{currentUser.lastname}}</p>
+                        <p><b>E-mail:</b> {{currentUser.email}}</p>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <form ng-submit="save()">
+                            <p>Prename:&nbsp;
+                                <input type="text" name="firstname" ng-model="newUser.firstname"
+                                required="" placeholder="firstname">
+                            </p>
+                            <p>Lastname:
+                                <input type="text" name="lastname" ng-model="newUser.lastname"
+                                required="" placeholder="Lastname">
+                            </p>
+                            <p>E-Mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" name="email"
+                                ng-model="newUser.email" required="" placeholder="Email">
+                            </p>
+                            <p>
+                                <label>Neu Password</label>
+                            </p>
+                            <p>Password:
+                                <input type="password" name="password" ng-model="password" required=""
+                                placeholder="Password">
+                            </p>
+                            <p>Password:
+                                <input type="password" name="password_2" ng-model="password"
+                                required="" placeholder="confirm Password">
+                            </p>
+                            <input class="btn btn-primary" type="submit" value="save">
+                            <button class="btn btn-danger" type="none" ng-click="cancel()">cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <div class="section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Satistic</h2>
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <div class="col-md-10">
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <ul class="nav nav-justified nav-pills">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false">Statistic<i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#">sortieren_1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">sortieren_2</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">sortieren_3</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">sortieren_4</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Statistic chart</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Achievements</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+=======
+<div class="page-header text-center">
   <h1>Passe dein Profil an</h1>
 </div>
 <form ng-submit="save()">
@@ -10,3 +123,4 @@
 </form>
 <button type="none" ng-click="cancel()">Abbrechen</button>
 
+>>>>>>> refs/remotes/andreasgruenh/learny---server/master
