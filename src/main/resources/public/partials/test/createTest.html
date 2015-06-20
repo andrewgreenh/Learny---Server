@@ -1,22 +1,37 @@
-<div class="page-header">
-  <h1>Neuer Test</h1>
-  Fach: {{subject.name}}
+<div class="page-header text-center">
+	<h1><span class="glyphicon glyphicon-asterisk">Create Test</h1>
 </div>
-<form ng-submit="saveTest()">
-<label>Name des Tests: <input type="text" ng-model="test.name" required></label>
-<ul>
-<li ng-repeat="question in test.questions">
-	<label>Frage: <input type="text" ng-model="question.question" required></label>
-	<ul>
-		<li ng-repeat="answer in question.answers">
-		<label>Antwort: <input type="text" ng-model="answer.answer" required></label>
-		<label>Richtig? <input type="checkbox" ng-model="answer.correct"></label>
-		</li>
-		<button ng-click="addAnswer(question)" class="btn btn-defalut">Neue Antwort hinzufügen</button>
-	</ul>
-</li>
-<button ng-click="addQuestion()" class="btn btn-defalut">Neue Frage hinzufügen</button>
+<p align="right">
+  <button class="btn btn-danger" ui-sref="app.subject({id: test.subject.id})">
+      <span class="glyphicon glyphicon-chevron-left">Back to {{subject.name}}
+  </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 
-<button type="submit" class="btn btn-defalut">Test speichern</button>
-</form>
-</ul>
+<div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form ng-submit="saveTest()">
+                          <div class="text-center">
+                            <label>Test Name: <input type="text" ng-model="test.name" required></label>
+                          </div>
+                          <hr>
+                        <li ng-repeat="question in test.questions">
+                        	<label>Question: <input type="text" ng-model="question.question" required></label>
+                        	<ul>
+                        		<li ng-repeat="answer in question.answers">
+	                        	<label>Option: <input type="text" ng-model="answer.answer" required></label>
+	                        	<label>Right? <input type="checkbox" ng-model="answer.correct"></label>
+	                        	</li>
+	                        	<button ng-click="addAnswer(question)" class="btn btn-info">Create new option</button>
+                        	</ul>
+                        </li>
+                        <button ng-click="addQuestion()" class="btn btn-success">Create new question</button>
+                        <br>
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Save Test</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+</div>

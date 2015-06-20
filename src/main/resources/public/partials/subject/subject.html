@@ -15,6 +15,7 @@
 
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -31,14 +32,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div ng-show="userIsAdmin">
+                        <div ng-show="userIsAdmin"> 
                           <form ng-submit="addResponsible()">
                             <p><b>Neu Verantwortliche:</b><input type="text" name="accountname" placeholder="Accountname"
 				                ng-model="accountName">
 				            </p>
 					        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Add</button>
 				          </form>
-                        </div>                        
+                        </div>
+                    </div>                        
                 </div>
             </div>
 </div>
