@@ -2,25 +2,29 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Welcome! {{currentUser.accountName}}</h1>
+                        <h1 class="text-center">Profil &nbsp;
+                            <small>
+                                <a ui-sref="app.editProfile">edit</a>
+                            </small>
+                        </h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-6 col-xs-6">
                         <img src="https://unsplash.imgix.net/uploads/1411724908903377d4696/2e9b0cb2?q=25&amp;fm=jpg&amp;s=2016c4932a7b7a1b629cb6890bff9977"
                         class="img-responsive img-thumbnail">
                         <button class="btn btn-primary" type="none">Foto select</button>
                     </div>
-                    <div class="col-md-4">
-                        <p class="lead">{{currentUser.surname}} {{currentUser.lastname}}</p>
-                        <p>E-mail:{{currentUser.email}}</p>
-                        <p>&nbsp;&nbsp;</p>
+                     <div class="col-md-4 col-sm-6 col-xs-6">
+                        <p class="lead">{{currentUser.accountName}}</p>
+                        <p><b>Name:</b> {{currentUser.prename}} {{currentUser.lastname}}</p>
+                        <p><b>E-mail:</b> {{currentUser.email}}</p>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
                         <form ng-submit="save()">
-                            <p>Surname:&nbsp;
-                                <input type="text" name="surname" ng-model="newUser.surname"
-                                required="" placeholder="Surname">
+                            <p>Prename:&nbsp;
+                                <input type="text" name="prename" ng-model="newUser.prename"
+                                required="" placeholder="Prename">
                             </p>
                             <p>Lastname:
                                 <input type="text" name="lastname" ng-model="newUser.lastname"
@@ -55,21 +59,20 @@
                         <hr>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Satistic</h2>
+                    </div>
+                </div>
                 <div class="row text-right">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <p>&nbsp;</p>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-2 text-right">
                         <ul class="nav nav-justified nav-pills">
-                            <li>
-                                <a href="#">Meine F?che</a>
-                            </li>
-                            <li>
-                                <a href="#">Alle F?che</a>
-                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false">Filter<i class="fa fa-caret-down"></i></a>
+                                aria-expanded="false">Statistic<i class="fa fa-caret-down"></i></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="#">sortieren_1</a>
@@ -91,16 +94,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 text-center">
-                        <a href="#"><i class="fa fa-5x fa-fw fa-bank"></i></a>
-                        <p>fach1</p>
+                    <div class="col-md-12">
+                        <p>Statistic chart</p>
                     </div>
-                    <div class="col-md-3 text-center">
-                        <a href="#"><i class="fa fa-5x fa-cog fa-fw"></i></a>
-                        <p>fach2</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Achievements</h2>
+                    </div>
                 </div>
             </div>
         </div>
