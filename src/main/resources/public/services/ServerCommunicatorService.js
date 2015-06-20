@@ -51,6 +51,10 @@ angular.module('learny').factory(
                             accountName : accountName
                         });
                     }
+                    
+                    service.removeAdministratorFromSubjectAsync = function(userId, subjectId) {
+                        return $http.delete('/api/subjects/' + subjectId + '/responsibles/' + userId);
+                    }
 
                     service.getEnroledSubjectsAsync = function() {
                         return $http.get('/api/accounts/me/enroled-subjects');
@@ -59,6 +63,21 @@ angular.module('learny').factory(
                     service.joinSubjectAsync = function(subject) {
                         return $http.post('/api/accounts/me/enroled-subjects', subject);
                     }
-
+                    
+                    service.deleteTestAsync = function(testId) {
+                        return $http.delete('/api/tests/'+ testId);
+                    }
+                    
+                    service.getTestAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId);
+                    }
+                    
+                    service.getQuestionsToTestAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId + '/questions');
+                    }
+                    
+                    service.addTestToSubject = function(test, subjectId) {
+                        return $http.post('/api/subjects/'+ subjectId + '/tests', test);
+                    }
                     return service;
                 } ]);

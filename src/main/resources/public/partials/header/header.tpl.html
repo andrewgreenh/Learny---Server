@@ -1,9 +1,9 @@
-<nav class="navbar navbar-default"">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				data-toggle="collapse" data-target="#navbar-one">
 				<span class="sr-only">Toggle navigation</span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
@@ -11,15 +11,17 @@
 			<a ui-sref="app.home" ng-show="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
 			<a ui-sref="welcome" ng-hide="loggedin"><img alt="Brand" src="/images/logo.jpg" height="50px"></a>
 		</div>
-		 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav pull-right">
-			<li ng-show="loggedin"><a ui-sref="app.home">Home</a></li>
-			<li ng-show="loggedin"><a ui-sref="app.subjects">Alle Fächer</a></li>
-			<li ng-show="loggedin"><a ui-sref="app.profile">{{user.surname}}</a></li>
-			<li ng-show="loggedin"><a href="#logout" ng-click="logout()">Logout</a></li>
-			<li ng-show="welcomepage"><a ng-click="toggleLogin($event)" href="#">Login.</a></li>
-			<li ng-show="welcomepage"><a ui-sref="createAccount">Register.</a></li>
-		</ul>
+		<div class="collapse navbar-collapse text-center" id="navbar-one">
+			<ul class="nav navbar-nav">
+				<li ng-show="loggedin"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.subjects"><span class="glyphicon glyphicon-list"></span> Alle Fächer</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.profile"><span class="glyphicon glyphicon-user"></span> {{user.firstname}}</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-show="loggedin"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				<li ng-show="welcomepage"><a ng-click="toggleLogin();"><span class="glyphicon glyphicon-log-in"></span> Login.</a></li>
+				<li ng-show="welcomepage"><a ui-sref="createAccount"><span class="glyphicon glyphicon-plus"></span> Register.</a></li>
+			</ul>
 		</div>
 	</div>
 </nav>

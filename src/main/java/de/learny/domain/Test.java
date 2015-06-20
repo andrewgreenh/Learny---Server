@@ -1,5 +1,6 @@
 package de.learny.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Test {
@@ -35,7 +37,7 @@ public class Test {
 	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Question> questions = new HashSet<Question>();
 
-	@OneToMany(mappedBy = "test")
+	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<TestScore> testScores = new HashSet<TestScore>();
 
 	public Test(String name, Subject subject) {
@@ -70,6 +72,7 @@ public class Test {
 	public Set<Test> getRequiredTests() {
 		return requiredTests;
 	}
+	
 	@JsonIgnore
 	public Set<Test> getRequiredForTests() {
 		return requiredForTests;
@@ -79,10 +82,15 @@ public class Test {
 	public Set<Question> getQuestions() {
 		return questions;
 	}
+	
+	@JsonProperty
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
 
 	@JsonIgnore
 	public Set<TestScore> getTestScores() {
-		return testScores;
+		return Collections.unmodifiableSet(testScores);
 	}
 	
 	public boolean addQuestion(Question quest) {
@@ -97,6 +105,22 @@ public class Test {
 		this.getQuestions().remove(quest);
 		if(quest.getTest() == this) {
 			quest.setTest(null);
+		}
+		return true;
+	}
+	
+	public boolean addTestScore(TestScore testScore) {
+		this.testScores.add(testScore);
+		if(!testScore.getTest().equals(this)) {
+			testScore.setTest(this);;
+		}
+		return true;
+	}
+	
+	public boolean removeTestScore(TestScore testScore) {
+		this.testScores.remove(testScore);
+		if(testScore.getTest().equals(this)) {
+			testScore.setTest(null);
 		}
 		return true;
 	}

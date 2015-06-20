@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Answer {
@@ -17,12 +18,15 @@ public class Answer {
 
 	private String answer;
 	
+	private boolean correct;
+	
 	@ManyToOne
 	private Question question;
 	
-	public Answer(String answer, Question question){
+	public Answer(String answer, Question question, boolean correct){
 		this.answer = answer;
 		this.question = question;
+		this.correct = correct;
 	}
 	
 	public Answer(){
@@ -48,6 +52,16 @@ public class Answer {
 
 	public long getId() {
 		return id;
+	}
+
+	@JsonIgnore
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	@JsonProperty
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
 	}
 
 	

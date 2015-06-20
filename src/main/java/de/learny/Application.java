@@ -88,23 +88,23 @@ public class Application extends SpringBootServletInitializer implements Command
 
 			Question quest1 = new Question("frage1", test1);
 			questionRepo.save(quest1);
-			Answer answer1 = new Answer("antwort1", quest1);
-			Answer answer2 = new Answer("antwort2", quest1);
+			Answer answer1 = new Answer("antwort1", quest1, true);
+			Answer answer2 = new Answer("antwort2", quest1, false);
 			answerRepo.save(answer1);
 			answerRepo.save(answer2);
 
 			Account student = new Account("student", passwordGenerator.hashPassword("student"));
-			student.setSurname("Conrad");
+			student.setFirstname("Conrad");
 			student.setLastname("Reuter");
 			student.setEmail("a@bd.de");
 
 			Account admin = new Account("admin", passwordGenerator.hashPassword("admin"));
-			admin.setSurname("Andreas");
+			admin.setFirstname("Andreas");
 			admin.setLastname("Roth");
 			admin.setEmail("a@bd.de");
 
 			Account dozent = new Account("dozent", passwordGenerator.hashPassword("dozent"));
-			dozent.setSurname("Martin");
+			dozent.setFirstname("Martin");
 			dozent.setLastname("Burwitz");
 			dozent.setEmail("a@bd.de");
 

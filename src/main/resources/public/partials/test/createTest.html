@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>Neuer Test</h1>
+  Fach: {{subject.name}}
+</div>
+<form ng-submit="saveTest()">
+<label>Name des Tests: <input type="text" ng-model="test.name" required></label>
+<ul>
+<li ng-repeat="question in test.questions">
+	<label>Frage: <input type="text" ng-model="question.question" required></label>
+	<ul>
+		<li ng-repeat="answer in question.answers">
+		<label>Antwort: <input type="text" ng-model="answer.answer" required></label>
+		<label>Richtig? <input type="checkbox" ng-model="answer.correct"></label>
+		</li>
+		<button ng-click="addAnswer(question)" class="btn btn-defalut">Neue Antwort hinzufügen</button>
+	</ul>
+</li>
+<button ng-click="addQuestion()" class="btn btn-defalut">Neue Frage hinzufügen</button>
+
+<button type="submit" class="btn btn-defalut">Test speichern</button>
+</form>
+</ul>

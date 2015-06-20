@@ -27,7 +27,7 @@ public class Account {
 	@Column(unique=true, nullable=false)
 	private String accountName;
 	
-	private String password, surname, lastname, email, avatarUri;
+	private String password, firstname, lastname, email, avatarUri;
 	
 	@ManyToMany
 	private Set<Role> roles = new HashSet<Role>();;
@@ -64,12 +64,12 @@ public class Account {
 		this.password = password;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastname() {
@@ -175,7 +175,7 @@ public class Account {
 	public String toString() {
 		String result = "";
 		result += "\nAccountName: " + accountName;
-		result += "\nVorname: " + surname;
+		result += "\nVorname: " + firstname;
 		result += "\nNachname: " + lastname;
 		result += "\nE-Mail: " + email;
 		result += "\nPasswort: " + password;

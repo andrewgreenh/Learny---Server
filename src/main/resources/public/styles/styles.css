@@ -1,14 +1,28 @@
+/*******************************
+GLOBAL
+*******************************/
+
+.app-ui, .app {
+	height:100%;
+}
+
+.app-ui {
+	padding-top: 50px;
+}
+
+a[ng-click]{
+    cursor: pointer;
+}
+
+form, form button, form label {
+	margin-top: 2%;
+}
+
 .cover .section {
 	margin: 0 auto;
 	display: block;
 }
 
-#arrow {
-	position: fixed;
-	bottom: 0px;
-	left: 15%;
-	margin: 5% auto 0% auto; 	
-}
 
 .glyphicon-chevron-down {
 	border-bottom: medium solid #ffffff;
@@ -49,10 +63,6 @@ PINGENDO BOOTSTRAP
 
 html, body {
   height: 100%;
-}
-
-.app-ui, .app {
-	height:100%;
 }
 
 .text-inverse {
@@ -134,7 +144,6 @@ html, body {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
-  align-items: center;
   overflow: hidden;
   position: relative;
   min-height: 100%;
@@ -230,7 +239,7 @@ html, body {
   background-color: #ffffff;
 }
 .cover .cover-image {
-  z-index: -1;
+  z-index: -2;
   position: absolute;
   top: 0px;
   width: 100%;

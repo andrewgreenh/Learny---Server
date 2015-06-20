@@ -1,3 +1,39 @@
 <div class="page-header">
-  <h1>Test</h1>
+  <h1>{{test.name}} <small><a ui-sref="app.subject({id: test.subject.id})">Zurück zu {{test.subject.name}}</a></small></h1>
+  Fach: {{test.subject.name}}
+</div>
+
+<ul>
+<li ng-repeat="question in test.questions">
+	Frage: {{question.question}}
+	<ul>
+	<li ng-repeat="answer in question.answers">
+	<div class="checkbox"><label><input type="checkbox" ng-model="answer.correct">{{answer.answer}}</label></div>
+		
+	</li>
+	
+	</ul>
+</li>
+
+<button ng-click="submit()" class="btn btn-default">Abschicken</button>
+<p>{{question.question}}</p>
+</ul>
+
+<div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary"  ng-repeat="question in test.questions">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Frage: {{question.question}}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <li ng-repeat="answer in question.answers">
+	                            <div class="checkbox"><label><input type="checkbox" ng-model="answer.correct">{{answer.answer}}</label></div>
+	                            </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </div>

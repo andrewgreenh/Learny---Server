@@ -1,5 +1,7 @@
 package de.learny.controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,10 @@ import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.SubjectRepository;
+import de.learny.dataaccess.TestRepository;
 import de.learny.domain.Account;
+import de.learny.domain.Answer;
+import de.learny.domain.Question;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.LoggedInAccountService;
@@ -26,6 +31,9 @@ public class SubjectController {
 	
 	@Autowired
 	private AccountRepository accountRepo;
+	
+	@Autowired
+	private TestRepository testRepo;
 	
 	@Autowired
 	private LoggedInAccountService userToAccountService;
@@ -56,9 +64,16 @@ public class SubjectController {
 		Subject subject = subjectRepo.findById(id);
 		if (subject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		//TODO: Soll hier auch ein neuer Test erstellt werden?
 		boolean var = false;
 		if(permitted(id)){
+			Set<Question> questions = test.getQuestions();
+			for(Question question: questions) {
+				question.setTest(test);
+				Set<Answer> answers = question.getAnswers();
+				for(Answer answer: answers) {
+					answer.setQuestion(question);
+				}
+			}
 			var = subject.addTest(test);
 			subjectRepo.save(subject);
 		}
@@ -135,8 +150,7 @@ public class SubjectController {
 	
 	@RequestMapping(value = "{subjectId}/responsibles/{userId}", method = RequestMethod.DELETE)
 	boolean removeResponsible(@PathVariable("subjectId") long subjectId, @PathVariable("userId") long userId){
-		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		if (!loggedInAccount.hasRole("admin")) {
+		if (!permitted(subjectId)) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 		
