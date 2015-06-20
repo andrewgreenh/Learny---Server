@@ -59,7 +59,7 @@ public class AccountController {
 			throw new IllegalArgumentException("Accountname darf nicht leer sein");
 		}
 		
-		newAcc.setSurname(account.getSurname());
+		newAcc.setFirstname(account.getFirstname());
 		newAcc.setLastname(account.getLastname());
 		newAcc.setEmail(account.getEmail());
 		newAcc.addRole(roleRepo.findFirstByName("user"));
@@ -100,7 +100,7 @@ public class AccountController {
 		if (oldAccount == null) {
 			throw new ResourceNotFoundException("Ein Account mit dieser id existiert nicht");
 		}
-		oldAccount.setSurname(postedAccount.getSurname());
+		oldAccount.setFirstname(postedAccount.getFirstname());
 		oldAccount.setLastname(postedAccount.getLastname());
 		oldAccount.setEmail(postedAccount.getEmail());
 		oldAccount.setAvatarUri(postedAccount.getAvatarUri());

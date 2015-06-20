@@ -94,17 +94,17 @@ public class Application extends SpringBootServletInitializer implements Command
 			answerRepo.save(answer2);
 
 			Account student = new Account("student", passwordGenerator.hashPassword("student"));
-			student.setSurname("Conrad");
+			student.setFirstname("Conrad");
 			student.setLastname("Reuter");
 			student.setEmail("a@bd.de");
 
 			Account admin = new Account("admin", passwordGenerator.hashPassword("admin"));
-			admin.setSurname("Andreas");
+			admin.setFirstname("Andreas");
 			admin.setLastname("Roth");
 			admin.setEmail("a@bd.de");
 
 			Account dozent = new Account("dozent", passwordGenerator.hashPassword("dozent"));
-			dozent.setSurname("Martin");
+			dozent.setFirstname("Martin");
 			dozent.setLastname("Burwitz");
 			dozent.setEmail("a@bd.de");
 

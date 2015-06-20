@@ -10,7 +10,7 @@
 	<ul>
 		<li ng-repeat="responsible in subject.accountsInCharge"><a
 			href="mailto:{{responsible.email}}">{{responsible.lastname}},
-				{{responsible.surname}}</a>
+				{{responsible.firstname}}</a>
 			<button class="btn btn-default" ng-show="userIsAdmin"
 				ng-click="removeFromResponsibles(responsible)">Als
 				Verantwortlichen entfernen</button></li>
@@ -29,10 +29,11 @@
 <h2 ng-hide="userIsEnroled">Tests:</h2>
 <ul>
 	<li ng-repeat="test in tests"><a ng-hide="userIsNew"
-		href="#{{test.id}}">{{test.name}}</a>
+		ui-sref="app.test({id:test.id})">{{test.name}}</a>
 		<p ng-show="userIsNew">{{test.name}}</p>
 		<button class="btn btn-default" ng-show="userIsAdmin">Test
 			bearbeiten</button>
 		<button class="btn btn-default" ng-show="userIsAdmin"
 			ng-click="deleteTest(test)">Test löschen</button></li>
+	<a ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">Neuer Test...</a>
 </ul>

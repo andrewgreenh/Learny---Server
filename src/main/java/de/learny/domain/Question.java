@@ -52,6 +52,10 @@ public class Question {
 	public Set<Answer> getAnswers() {
 		return answers;
 	}
+	
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
 
 	public Test getTest() {
 		return test;

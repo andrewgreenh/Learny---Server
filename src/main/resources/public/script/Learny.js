@@ -26,20 +26,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     currentUser : function(serverCommunicator) {
                         var user = {};
                         return serverCommunicator.getCurrentUserAsync().then(
-                            function(data, status, headers, config) {
-                                return data.data;
-                            });
+                                function(data, status, headers, config) {
+                                    return data.data;
+                                });
                     },
                     subjectsAdministratedByUser : function(serverCommunicator) {
                         return serverCommunicator.getAdministratedSubjectsAsync().then(
                                 function(data, status, headers, config) {
-                                    return data.data.map(function(item) {return item.id;});
+                                    return data.data.map(function(item) {
+                                        return item.id;
+                                    });
                                 });
                     },
                     subjectsUserIsEnroledIn : function(serverCommunicator) {
                         return serverCommunicator.getEnroledSubjectsAsync().then(
                                 function(data, status, headers, config) {
-                                    return data.data.map(function(item) {return item.id;});
+                                    return data.data.map(function(item) {
+                                        return item.id;
+                                    });
                                 });
                     }
                 },
@@ -105,6 +109,44 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl : 'partials/subject/subject.html'
             })
 
+    .state(
+            'app.test',
+            {
+                url : '/test/:id',
+                controller : 'testController',
+                resolve : {
+                    test : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
+                    questions : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/test.html'
+            })
+
+    .state(
+            'app.createTest',
+            {
+                url : '/subject/:id/createTest',
+                controller : 'createTestController',
+                resolve : {
+                    subject : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getSubjectAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/createTest.html'
+            })
+
     .state('createAccount', {
         url : '/register',
         resolve : {},
@@ -140,7 +182,7 @@ app.run(function($rootScope, $state, serverCommunicator) {
 });
 
 function stateShouldBeBehindLogin(state) {
-    if (['welcome', 'createAccount' ].indexOf(state) > -1) {
+    if ([ 'welcome', 'createAccount' ].indexOf(state) > -1) {
         return false
     }
     return true;

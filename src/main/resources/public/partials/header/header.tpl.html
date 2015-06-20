@@ -15,7 +15,7 @@
 			<ul class="nav navbar-nav">
 				<li ng-show="loggedin"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 				<li ng-show="loggedin"><a ui-sref="app.subjects"><span class="glyphicon glyphicon-list"></span> Alle Fächer</a></li>
-				<li ng-show="loggedin"><a ui-sref="app.profile"><span class="glyphicon glyphicon-user"></span> {{user.surname}}</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.profile"><span class="glyphicon glyphicon-user"></span> {{user.firstname}}</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li ng-show="loggedin"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
