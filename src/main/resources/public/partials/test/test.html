@@ -1,38 +1,28 @@
-<div class="page-header">
-  <h1>{{test.name}} <small><a ui-sref="app.subject({id: test.subject.id})">Zurück zu {{test.subject.name}}</a></small></h1>
-  Fach: {{test.subject.name}}
+<div class="page-header text-center">
+	<h1><span class="glyphicon glyphicon-pencil"> {{test.name}}</h1>
 </div>
-
-<ul>
-<li ng-repeat="question in test.questions">
-	Frage: {{question.question}}
-	<ul>
-	<li ng-repeat="answer in question.answers">
-	<div class="checkbox"><label><input type="checkbox" ng-model="answer.correct">{{answer.answer}}</label></div>
-		
-	</li>
-	
-	</ul>
-</li>
-
-<button ng-click="submit()" class="btn btn-default">Abschicken</button>
-<p>{{question.question}}</p>
-</ul>
+<p align="right">
+  <button class="btn btn-danger" ui-sref="app.subject({id: test.subject.id})">
+      <span class="glyphicon glyphicon-chevron-left">Back to {{test.subject.name}}
+  </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 
 <div class="section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="panel panel-primary"  ng-repeat="question in test.questions">
+                        <div class="panel panel-default" ng-repeat="question in test.questions">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Frage: {{question.question}}</h3>
+                                <h3 class="panel-title">{{question.question}}</h3>
                             </div>
                             <div class="panel-body">
                                 <li ng-repeat="answer in question.answers">
 	                            <div class="checkbox"><label><input type="checkbox" ng-model="answer.correct">{{answer.answer}}</label></div>
-	                            </li>
                             </div>
                         </div>
+                    </div>
+                    <div align="right">
+                    <button ng-click="submit()" class="btn btn-primary">Send</button>                    
                     </div>
                 </div>
             </div>
