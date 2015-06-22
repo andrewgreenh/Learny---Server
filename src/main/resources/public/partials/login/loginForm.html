@@ -1,17 +1,17 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	<h4 class="modal-title"><span class="glyphicon glyphicon-log-in"></span> Log in now.</h4>
+	<h4 class="modal-title"><span class="glyphicon glyphicon-log-in"></span> Login.</h4>
 </div>
 <div class="modal-body">
 	<form ng-submit="login()">
 		<label for="username"><span class="glyphicon glyphicon-user"></span> Username:</label>
 		<input class="form-control" placeholder="Enter username" type="text" name="username" ng-model="username" required></input>
-		<label for="password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+		<label for="password"><span class="glyphicon glyphicon-lock"></span> Passwort:</label>
 		<input class="form-control" placeholder="Enter password" type="password" name="password" ng-model="password" required></input>
 		<button type="submit" value="Login" class="btn btn-default btn-success btn-block" data-toggle="modal" id="loginButton"><span class="glyphicon glyphicon-check"></span> Login.</button>
 	</form>
 </div>
 <div class="modal-footer">
-	<p>Not a member, yet?</p>
-	<button ng-click="goToRegister()" type="submit" class="btn btn-default btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span> Sign up.</button>
+	<p>Noch nicht registriert?</p>
+	<button ng-click="goToRegister()" type="submit" class="btn btn-default btn-block" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span> Registriere dich!</button>
 </div>
