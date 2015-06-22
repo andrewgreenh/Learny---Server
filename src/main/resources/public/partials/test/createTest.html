@@ -3,7 +3,7 @@
 </div>
 <p align="right">
   <button class="btn btn-danger" ui-sref="app.subject({id: test.subject.id})">
-      <span class="glyphicon glyphicon-chevron-left"></span>Back to {{subject.name}}
+      <span class="glyphicon glyphicon-chevron-left"></span>Zurück zu {{subject.name}}
   </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
@@ -17,19 +17,19 @@
                           </div>
                           <hr>
                         <li ng-repeat="question in test.questions">
-                        	<label>Question: <input type="text" ng-model="question.question" required></label>
+                        	<label>Frage: <input type="text" ng-model="question.question" required></label>
                         	<ul>
                         		<li ng-repeat="answer in question.answers">
 	                        	<label>Option: <input type="text" ng-model="answer.answer" required></label>
-	                        	<label>Right? <input type="checkbox" ng-model="answer.correct"></label>
+	                        	<label>Richtig? <input type="checkbox" ng-model="answer.correct"></label>
 	                        	</li>
-	                        	<button ng-click="addAnswer(question)" class="btn btn-info">Create new option</button>
+	                        	<button ng-click="addAnswer(question)" class="btn btn-info">Neue Antwort.</button>
                         	</ul>
                         </li>
-                        <button ng-click="addQuestion()" class="btn btn-success">Create new question</button>
+                        <button ng-click="addQuestion()" class="btn btn-success">Neue Frage.</button>
                         <br>
                         <hr>
-                        <button type="submit" class="btn btn-primary">Save Test</button>
+                        <button type="submit" class="btn btn-primary">Test speichern.</button>
                         </form>
                     </div>
                 </div>
