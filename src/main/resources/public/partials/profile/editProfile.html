@@ -11,7 +11,7 @@
 			<img
 				src="https://unsplash.imgix.net/uploads/1411724908903377d4696/2e9b0cb2?q=25&amp;fm=jpg&amp;s=2016c4932a7b7a1b629cb6890bff9977"
 				class="img-responsive img-thumbnail">
-			<button class="btn btn-primary" type="none">Foto select</button>
+			<button class="btn btn-primary" type="none">Foto hochladen</button>
 		</div>
 		<div class="col-md-4 col-sm-6 col-xs-6">
 			<p class="lead">{{currentUser.accountName}}</p>
@@ -25,11 +25,11 @@
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<form ng-submit="save()">
 				<p>
-					Firstname:&nbsp; <input type="text" name="firstname"
+					Vorname:&nbsp; <input type="text" name="firstname"
 						ng-model="newUser.firstname" required="" placeholder="firstname">
 				</p>
 				<p>
-					Lastname: <input type="text" name="lastname"
+					Nachname: <input type="text" name="lastname"
 						ng-model="newUser.lastname" required="" placeholder="Lastname">
 				</p>
 				<p>
@@ -37,22 +37,22 @@
 						name="email" ng-model="newUser.email" required=""
 						placeholder="Email">
 				</p>
-				<input class="btn btn-primary" type="submit" value="save">
+				<input class="btn btn-primary" type="submit" value="Speichern">
 			</form>
 			<p>
-				<label>Neu Password</label>
+				<label>Neues Passwort:</label>
 			</p>
 			<form ng-submit="save()">
 				<p>
-					Password: <input type="password" name="password"
-						ng-model="password" required="" placeholder="Password">
+					Passwort: <input type="password" name="password"
+						ng-model="password" required="" placeholder="Neues Passwort">
 				</p>
 				<p>
-					Password: <input type="password" name="password_2"
-						ng-model="password" required="" placeholder="confirm Password">
+					Passwort: <input type="password" name="password_2"
+						ng-model="password" required="" placeholder="Passwort bestätigen">
 				</p>
-				<input class="btn btn-primary" type="submit" value="save"> <a
-					class="btn btn-danger" type="none" ng-click="cancel()">cancel</a>
+				<input class="btn btn-primary" type="submit" value="Speichern"> <a
+					class="btn btn-danger" type="none" ng-click="cancel()">Abbrechen</a>
 			</form>
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Satistic</h2>
+				<h2>Statistiken</h2>
 			</div>
 		</div>
 		<div class="row text-right">
@@ -76,7 +76,7 @@
 			<div class="col-md-2 text-right">
 				<ul class="nav nav-justified nav-pills">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false">Statistic<i
+						data-toggle="dropdown" role="button" aria-expanded="false">Statistiken<i
 							class="fa fa-caret-down"></i></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">sortieren_1</a></li>
@@ -91,7 +91,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<p>Statistic chart</p>
+				<p>Grafik</p>
 			</div>
 		</div>
 	</div>
@@ -109,7 +109,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-center">Achievements</h2>
+				<h2 class="text-center">Errungenschaften</h2>
 			</div>
 		</div>
 	</div>
