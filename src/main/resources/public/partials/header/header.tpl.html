@@ -13,14 +13,14 @@
 		</div>
 		<div class="collapse navbar-collapse text-center" id="navbar-one">
 			<ul class="nav navbar-nav">
-				<li ng-show="loggedin"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+				<li ng-show="loggedin"><a ui-sref="app.home"><span class="glyphicon glyphicon-home"></span> Start</a></li>
 				<li ng-show="loggedin"><a ui-sref="app.subjects"><span class="glyphicon glyphicon-list"></span> Alle Fächer</a></li>
 				<li ng-show="loggedin"><a ui-sref="app.profile"><span class="glyphicon glyphicon-user"></span> {{user.firstname}}</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li ng-show="loggedin"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				<li ng-show="loggedin"><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout.</a></li>
 				<li ng-show="welcomepage"><a ng-click="toggleLogin();"><span class="glyphicon glyphicon-log-in"></span> Login.</a></li>
-				<li ng-show="welcomepage"><a ui-sref="createAccount"><span class="glyphicon glyphicon-plus"></span> Register.</a></li>
+				<li ng-show="welcomepage"><a ui-sref="createAccount"><span class="glyphicon glyphicon-plus"></span> Registrierung.</a></li>
 			</ul>
 		</div>
 	</div>
