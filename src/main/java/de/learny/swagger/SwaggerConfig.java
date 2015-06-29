@@ -1,5 +1,7 @@
 package de.learny.swagger;
 
+import io.swagger.annotations.Api;
+
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -19,8 +21,6 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-
 import static com.google.common.collect.Lists.*;
 
 @SpringBootApplication
@@ -32,7 +32,7 @@ public class SwaggerConfig {
 	    return new Docket(DocumentationType.SWAGGER_2)
 	    	.apiInfo(apiInfo())
 	        .select()
-	          .apis(RequestHandlerSelectors.any())
+	          .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
 	          .paths(PathSelectors.any())
 	          .build()
 	        .pathMapping("/")
