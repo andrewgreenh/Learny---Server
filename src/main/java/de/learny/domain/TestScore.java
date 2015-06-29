@@ -1,5 +1,6 @@
 package de.learny.domain;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,10 +29,14 @@ public class TestScore {
 	@ManyToOne
 	private Test test;
 	
+	private Timestamp timestamp;
+	
 	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
 		this.test = test;
 		this.account = account;
 		this.checkedAnswers = checkedAnswers;
+		java.util.Date currentDate = new java.util.Date();
+		this.timestamp = new Timestamp(currentDate.getTime());
 	}
 	
 	public TestScore() {
@@ -70,6 +74,14 @@ public class TestScore {
 
 	public long getId() {
 		return id;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	
