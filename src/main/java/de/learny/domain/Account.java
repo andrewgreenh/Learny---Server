@@ -30,7 +30,7 @@ public class Account {
 	private String password, firstname, lastname, email, avatarUri;
 	
 	@ManyToMany
-	private Set<Role> roles = new HashSet<Role>();;
+	private Set<Role> roles = new HashSet<Role>();
 
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<TestScore> testScores = new HashSet<TestScore>();

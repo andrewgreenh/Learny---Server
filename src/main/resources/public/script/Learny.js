@@ -82,6 +82,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 },
                 templateUrl : 'partials/subjects/subjects.html'
             })
+    .state(
+            'app.mySubjects',
+            {
+                url : '/mysubjects',
+                controller : 'subjectsController',
+                resolve : {
+                    subjects : function(serverCommunicator) {
+                        return serverCommunicator.getEnroledSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    return {
+                                        value : data
+                                    };
+                                });
+                    }
+                },
+                templateUrl : 'partials/subjects/mySubjects.html'
+            })
 
     .state(
             'app.subject',
