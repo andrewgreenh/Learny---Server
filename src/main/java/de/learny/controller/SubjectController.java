@@ -1,5 +1,7 @@
 package de.learny.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.LoggedInAccountService;
 
+@Api(value = "Subjects", description = "Fächer verwalten. Ein- und austragen aus Fächern. Tests von einem Fach einsehen", produces = "application/json")
 @RestController
 @RequestMapping("/api/subjects")
 public class SubjectController {

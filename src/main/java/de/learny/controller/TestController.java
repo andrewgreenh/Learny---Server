@@ -1,5 +1,7 @@
 package de.learny.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -24,6 +26,7 @@ import de.learny.domain.TestScore;
 import de.learny.security.service.LoggedInAccountService;
 import de.learny.service.TestScoreCalculator;
 
+@Api(value = "Tests", description = "Tests verwalten. Test ausfüllen. Testergebnisse einsehen", produces = "application/json")
 @RestController
 @RequestMapping("/api/tests")
 public class TestController {

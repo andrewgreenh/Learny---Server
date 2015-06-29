@@ -1,5 +1,7 @@
 package de.learny.controller;
 
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AchievementRepository;
 import de.learny.domain.Achievement;
 
+@Api(value = "Achievements", description = "Zugriff auf alle und eigene Achievements", produces = "application/json")
 @RestController
 @RequestMapping("/api/achievements")
 public class AchievementController {
