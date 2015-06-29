@@ -27,17 +27,17 @@
                                 <tr ng-repeat="responsible in subject.accountsInCharge">
                                     <td><a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.firstname}}</a></td>
                                     <td><button class="btn btn-default" ng-show="userIsAdmin"
-				                            ng-click="removeFromResponsibles(responsible)">Als Verantwortlichen entfernen</button>
+				                            ng-click="removeFromResponsibles(responsible)">Als Verantwortlichen entfernen.</button>
 				                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div ng-show="userIsAdmin"> 
                           <form ng-submit="addResponsible()">
-                            <p><b>Neu Verantwortliche:</b><input type="text" name="accountname" placeholder="Accountname"
+                            <p><b>Name neue(r) Verantwortliche(r): </b><input type="text" name="accountname" placeholder=" Accountname"
 				                ng-model="accountName">
 				            </p>
-					        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Add</button>
+					        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Hinzufügen.</button>
 				          </form>
                         </div>
                     </div>                        
@@ -45,7 +45,7 @@
             </div>
 </div>
 <hr>
-<p ng-show="userIsEnroled">Löse doch einen der folgenden Tests</p>
+<p ng-show="userIsEnroled">Löse doch einen der folgenden Tests:</p>
 <div class="section">
             <div class="container">
                 <div class="row">
@@ -72,7 +72,7 @@
                         </table>
                         <div ng-show="userIsAdmin">
                            <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
-                               <span class="glyphicon glyphicon-plus"></span> Neuer Test</button>
+                               <span class="glyphicon glyphicon-plus"></span> Neuer Test.</button>
                         </div>
                     </div>
                 </div>
