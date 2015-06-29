@@ -54,7 +54,7 @@ public class Answer {
 		return id;
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	public boolean isCorrect() {
 		return correct;
 	}
