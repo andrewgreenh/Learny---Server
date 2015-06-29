@@ -1,5 +1,8 @@
 package de.learny.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -85,9 +88,10 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/{role}", method = RequestMethod.GET)
-	Iterable<Account> getAllAccountsToRole(@PathVariable("role") Role role) {
-		// TODO: Noch keine Funktionalität implementiert
-		return accountRepository.findAll();
+	Iterable<Account> getAllAccountsToRole(@PathVariable("role") String role) {
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(roleRepo.findFirstByName(role));
+		return accountRepository.findByRoles(roles);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
