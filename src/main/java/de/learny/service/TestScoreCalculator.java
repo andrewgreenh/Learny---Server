@@ -3,10 +3,8 @@ package de.learny.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.learny.dataaccess.AnswerRepository;
 import de.learny.domain.Answer;
 import de.learny.domain.TestScore;
 
