@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,8 +20,8 @@ public class TestScore {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToMany
-	private Set<Answer> answers = new HashSet<Answer>();
+	@ManyToMany
+	private Set<Answer> checkedAnswers = new HashSet<Answer>();
 	
 	@ManyToOne
 	private Account account;
@@ -28,22 +29,23 @@ public class TestScore {
 	@ManyToOne
 	private Test test;
 	
-	public TestScore(Test test, Account account, Test turnTest) {
+	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
 		this.test = test;
 		this.account = account;
+		this.checkedAnswers = checkedAnswers;
 	}
 	
 	public TestScore() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@JsonIgnore
-	public Set<Answer> getAnswers() {
-		return answers;
+	//@JsonIgnore
+	public Set<Answer> getCheckedAnswers() {
+		return checkedAnswers;
 	}
 
-	public void setAnswers(Set<Answer> answers) {
-		this.answers = answers;
+	public void setCheckedAnswers(Set<Answer> answers) {
+		this.checkedAnswers = answers;
 	}
 
 	public Account getAccount() {
