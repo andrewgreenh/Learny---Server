@@ -1,0 +1,16 @@
+<div class="page-header text-center">
+  <h1><span class="glyphicon glyphicon-list"></span> Meine Fächer</h1>
+</div>
+<div class="section">
+	<div class="container">
+                <button class="btn btn-default btn-block" ng-repeat="subject in subjects" ui-sref="app.subject({id : subject.id})">
+                    <div class="col-md-2 col-sm-2 col-xs-2 text-center">
+                        <i class="fa fa-5x fa-fw fa-flask"></i>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <p align="left"><b>{{subject.name}}</b></p>
+                        <p align="left">Info:{{subject.description}}</p>
+                    </div>
+                </button>
+    </div>
+</div>
