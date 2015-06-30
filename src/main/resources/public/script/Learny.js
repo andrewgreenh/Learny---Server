@@ -81,8 +81,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/subjects/subjects.html'
-            })
-    .state(
+            }).state(
             'app.mySubjects',
             {
                 url : '/mysubjects',
@@ -146,6 +145,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/test/test.html'
+            })
+
+    .state(
+            'app.lastResult',
+            {
+                url : '/test/:id/lastresult',
+                controller : 'lastResultController',
+                resolve : {
+                    test : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
+                    questions : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/lastResult.html'
             })
 
     .state(
