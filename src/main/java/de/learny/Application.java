@@ -24,6 +24,7 @@ import de.learny.domain.Role;
 import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.security.service.PasswordGeneratorService;
+import de.learny.swagger.SwaggerConfig;
 
 /**
  * Acts as a servlet initializer and start class.
@@ -58,6 +59,9 @@ public class Application extends SpringBootServletInitializer implements Command
 
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private SwaggerConfig swaggerConfig;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

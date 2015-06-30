@@ -1,5 +1,7 @@
 package de.learny.controller;
 
+import io.swagger.annotations.Api;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +27,7 @@ import de.learny.domain.Subject;
 import de.learny.security.service.LoggedInAccountService;
 import de.learny.security.service.PasswordGeneratorService;
 
+@Api(value = "Accounts", description = "Zugriff auf Accounts", produces = "application/json")
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
