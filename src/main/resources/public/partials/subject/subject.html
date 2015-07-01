@@ -66,6 +66,7 @@
                                 <tr ng-repeat="test in tests">
                                     <td><a ui-sref="app.test({id:test.id})">{{test.name}}</a></td>
                                     <td><button class="btn btn-default" ng-show="userIsAdmin">Test bearbeiten</button></td>
+                                    <td><button class="btn btn-default" ng-hide="userIsAdmin" ui-sref="app.lastResult({id : test.id})">Dein letztes Ergebnis</button></td>
                                     <td><button class="btn btn-default" ng-show="userIsAdmin" ng-click="deleteTest(test)">Test löschen</button></td>
                                 </tr>
                             </tbody>

@@ -79,5 +79,9 @@ angular.module('learny').factory(
                     service.addTestToSubject = function(test, subjectId) {
                         return $http.post('/api/subjects/'+ subjectId + '/tests', test);
                     }
+                    
+                    service.turnInAnswersToTestAsync = function(answers, testId) {
+                        return $http.post('/api/tests/' + testId + '/results', answers);
+                    }
                     return service;
                 } ]);
