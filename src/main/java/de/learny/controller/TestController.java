@@ -124,6 +124,15 @@ public class TestController {
 		//TODO: Muss noch implemtiert werden
 	}
 	
+	@RequestMapping(value = "/{id}/myLatestResult", method = RequestMethod.GET)
+	TestScore myLatestResult(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.myLatestResultForTest(test);
+	}
+	
 	private boolean permitted(long id){
 		Test test = testRepository.findById(id);
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
