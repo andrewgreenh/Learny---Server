@@ -1,5 +1,6 @@
 package de.learny.domain;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -189,6 +190,17 @@ public class Account {
 			}
 		}
 		return false;
+	}
+	
+	public TestScore myLatestResultForTest(Test test){
+		TestScore latestResult = null;
+		Timestamp x = new Timestamp(0);
+		for(TestScore iterator : this.getTestScores()){
+			if(iterator.getTimestamp().after(x) && iterator.getTest().equals(test))
+				x = iterator.getTimestamp();
+				latestResult = iterator;
+		}
+		return latestResult;
 	}
 
 }
