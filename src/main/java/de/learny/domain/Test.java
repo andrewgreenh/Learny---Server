@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import de.learny.JsonView.View;
 
 @Entity
 public class Test {
@@ -34,6 +37,7 @@ public class Test {
 	@ManyToMany
 	private Set<Test> requiredForTests = new HashSet<Test>();
 
+	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Question> questions = new HashSet<Question>();
 

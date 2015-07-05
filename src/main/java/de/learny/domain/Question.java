@@ -11,16 +11,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import de.learny.JsonView.View;
 
 @Entity
 public class Question {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private long id;
 	
+	@JsonView(View.Summary.class)
 	private String question;
 
+	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Answer> answers;
 

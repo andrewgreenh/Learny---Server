@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import de.learny.JsonView.View;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.TestRepository;
@@ -86,6 +89,7 @@ public class TestController {
 		return this.testRepository.save(oldTest);
 	}
 	
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
 	Iterable<Question> getAllQuestionsToTest(@PathVariable("id") long id){
 		Test test = testRepository.findById(id);
@@ -122,6 +126,15 @@ public class TestController {
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		//TODO: Muss noch implemtiert werden
+	}
+	
+	@RequestMapping(value = "/{id}/myLatestResult", method = RequestMethod.GET)
+	TestScore myLatestResult(@PathVariable("id") long id){
+		Test test = testRepository.findById(id);
+		if (test == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		return loggedInAccount.myLatestResultForTest(test);
 	}
 	
 	private boolean permitted(long id){
