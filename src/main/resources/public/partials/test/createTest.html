@@ -3,7 +3,7 @@
 </div>
 <p align="right">
   <button class="btn btn-danger" ui-sref="app.subject({id: test.subject.id})">
-      <span class="glyphicon glyphicon-chevron-left"></span>Zur√ºck zu {{subject.name}}
+      <span class="glyphicon glyphicon-chevron-left"></span>Zur®πck zu {{subject.name}}
   </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
@@ -13,15 +13,16 @@
                     <div class="col-md-12">
                         <form ng-submit="saveTest()">
                           <div class="text-center">
-                            <label>Test Name: <input type="text" ng-model="test.name" required></label>
+                            <label for="inputlg">Test Name: <input class="form-control input-lg" type="text" ng-model="test.name" required></label>
                           </div>
                           <hr>
                         <li ng-repeat="question in test.questions">
-                        	<label>Frage: <input type="text" ng-model="question.question" required></label>
+                        	<label>Frage: </label>
+<textarea class="form-control" rows="5" type="text" ng-model="question.question" required></textarea>
                         	<ul>
                         		<li ng-repeat="answer in question.answers">
-	                        	<label>Option: <input type="text" ng-model="answer.answer" required></label>
-	                        	<label>Richtig? <input type="checkbox" ng-model="answer.correct"></label>
+	                        	<label>Option:</label> <input type="text" ng-model="answer.answer" required>
+	                        	<label>Richtig?</label> <input type="checkbox" ng-model="answer.correct">
 	                        	</li>
 	                        	<button ng-click="addAnswer(question)" class="btn btn-info">Neue Antwort.</button>
                         	</ul>

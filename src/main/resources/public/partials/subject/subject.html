@@ -4,12 +4,12 @@
 <div class="section section-primary">
             <button class="btn btn-block btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
             href="#">
-                <h3><span class="glyphicon glyphicon-user"></span>Eintragen</h3>
+                <h3><span class="glyphicon glyphicon-ok"></span>Eintragen</h3>
             </button>
             <div class="container">
                 <div class="col-md-8">
                     <h2>
-                        <span class="glyphicon glyphicon-ok"></span>Verantwortliche:</h2>
+                        <span class="glyphicon glyphicon-user"></span>Verantwortliche:</h2>
                     <div>
                         <table class="table table-striped">
                             <thead>
@@ -80,26 +80,14 @@
                         <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
                             <span class="glyphicon glyphicon-plus"></span>Neuer Test.</button>
                     </div>
-                    <table ng-hide="userIsAdmin" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th width="800">Test Name</th>
-                                <th>Letztes Ergebnis</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="test in tests">
-                                <td class="info">
-                                    <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-primary">
-                                        <h4>{{test.name}}</h4>
-                                    </button>
-                                </td>
-                                <td class="info">
-                                    <button ui-sref="app.lastResult({id : test.id})" class="btn btn-block btn-warning"><h4>Dein letztes Ergebnis</h4></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div ng-hide="userIsAdmin" ng-repeat="test in tests">
+                            <div class="col-md-8">
+                                <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-primary"><h4>{{test.name}}</h4></button>
+                            </div>
+                            <div class="col-md-4">
+                                <button ui-sref="app.lastResult({id : test.id})" class="btn btn-block btn-warning"><h4>Dein letztes Ergebnis</h4></button>
+                            </div>
+                    </div>
                 </div>
             </div>
 </div>
