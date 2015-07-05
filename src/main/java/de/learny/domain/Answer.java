@@ -8,14 +8,18 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import de.learny.JsonView.View;
 
 @Entity
 public class Answer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private long id;
 
+	@JsonView(View.Summary.class)
 	private String answer;
 	
 	private boolean correct;
