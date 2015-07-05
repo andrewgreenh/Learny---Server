@@ -159,6 +159,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                     return data;
                                 });
                     },
+                    result : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getLatestTestresultAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
                     questions : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
