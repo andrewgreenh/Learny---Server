@@ -24,6 +24,9 @@ public class Answer {
 	
 	private boolean correct;
 	
+	private int answerCount;
+	private int errorCount;
+	
 	@ManyToOne
 	private Question question;
 	
@@ -68,5 +71,20 @@ public class Answer {
 		this.correct = correct;
 	}
 
+	public int getAnswerCount() {
+		return answerCount;
+	}
+	
+	public int getErrorCount() {
+		return errorCount;
+	}
+	
+	public void addToAnswerCount() {
+		answerCount++;
+	}
+	
+	public void addToErrorCount() {
+		errorCount++;
+	}
 	
 }

@@ -22,30 +22,40 @@ public class TestScore {
 
 	@ManyToMany
 	private Set<Answer> checkedAnswers = new HashSet<Answer>();
-	
+
+	@ManyToMany
+	private Set<Answer> uncheckedAnswers = new HashSet<Answer>();
+
 	@ManyToOne
 	private Account account;
-	
+
 	@ManyToOne
 	private Test test;
-	
+
 	private Timestamp timestamp;
 	
+	private int score;
+
 	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
-		this.test = test;
+		setTest(test);
 		this.account = account;
 		this.checkedAnswers = checkedAnswers;
+		uncheckedAnswers = calculateUncheckedAnswers(checkedAnswers, test);
 		java.util.Date currentDate = new java.util.Date();
 		this.timestamp = new Timestamp(currentDate.getTime());
 	}
-	
+
 	public TestScore() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	//@JsonIgnore
+
+	// @JsonIgnore
 	public Set<Answer> getCheckedAnswers() {
 		return checkedAnswers;
+	}
+
+	public Set<Answer> getUncheckedAnswers() {
+		return uncheckedAnswers;
 	}
 
 	public void setCheckedAnswers(Set<Answer> answers) {
@@ -67,7 +77,7 @@ public class TestScore {
 
 	public void setTest(Test test) {
 		this.test = test;
-		if(!this.test.getTestScores().contains(this)){
+		if (!this.test.getTestScores().contains(this)) {
 			test.addTestScore(this);
 		}
 	}
@@ -84,5 +94,34 @@ public class TestScore {
 		this.timestamp = timestamp;
 	}
 
-	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	private Set<Answer> calculateUncheckedAnswers(Set<Answer> checkedAnswers, Test test) {
+		Set<Answer> resultSet = new HashSet<>();
+		test.getQuestions().forEach(question -> {
+			question.getAnswers().forEach(answer -> {
+				if (!isInCheckedAnswers(answer)) {
+					resultSet.add(answer);
+				}
+			});
+		});
+		return resultSet;
+	}
+
+	private boolean isInCheckedAnswers(Answer answer) {
+		boolean result = false;
+		for (Answer checkedAnswer : checkedAnswers) {
+			if (answer.getId() == checkedAnswer.getId()) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
 }

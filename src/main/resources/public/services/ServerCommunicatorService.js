@@ -76,6 +76,10 @@ angular.module('learny').factory(
                         return $http.get('/api/tests/'+ testId + '/questions');
                     }
                     
+                    service.getLatestTestresultAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId + '/myLatestResult');
+                    }
+                    
                     service.addTestToSubject = function(test, subjectId) {
                         return $http.post('/api/subjects/'+ subjectId + '/tests', test);
                     }

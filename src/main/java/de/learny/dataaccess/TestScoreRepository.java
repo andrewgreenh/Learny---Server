@@ -3,6 +3,7 @@ package de.learny.dataaccess;
 import org.springframework.data.repository.CrudRepository;
 
 import de.learny.domain.Account;
+import de.learny.domain.Test;
 import de.learny.domain.TestScore;
 
 public interface TestScoreRepository extends CrudRepository<TestScore, Long> {
@@ -12,5 +13,7 @@ public interface TestScoreRepository extends CrudRepository<TestScore, Long> {
 	Iterable<TestScore> findAll();
 	
 	TestScore findById(long id);
+	
+	TestScore findFirstByAccountAndTestOrderByTimestampDesc(Account account, Test test);
 
 }
