@@ -1,0 +1,4 @@
+<input placeholder="Suche nach einem Accountname" ng-model="searchString" ng-keydown="handleKeyDownOnInput($event);" type="text" class="form-control col-xs-12">
+<ul class="col-xs-12">
+<li class="list-group-item" ng-class="isActive($index) ? 'active' : ''" ng-mousedown="submit(user)" ng-repeat="user in users">{{user.firstname}} {{user.lastname}} - {{user.accountName}}</li>
+</ul>

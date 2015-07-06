@@ -5,6 +5,9 @@
 	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
 		dich ein</a>, um Tests zulösen!
 </h2>
+<h2 ng-show="userIsEnroled">
+	<a ng-click="leaveSubject(); $event.preventDefault();" href="#">Trage dich aus</a>
+</h2>
 
 <div class="section">
             <div class="container">
@@ -34,10 +37,8 @@
                         </table>
                         <div ng-show="userIsAdmin"> 
                           <form ng-submit="addResponsible()">
-                            <p><b>Name neue(r) Verantwortliche(r): </b><input type="text" name="accountname" placeholder=" Accountname"
-				                ng-model="accountName">
+                            <p><b>Neue verantwortliche Person: </b><accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
 				            </p>
-					        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Hinzufügen.</button>
 				          </form>
                         </div>
                     </div>                        
