@@ -136,7 +136,7 @@ public class TestController {
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		return loggedInAccount.myLatestResultForTest(test);
+		return testScoreRepo.findFirstByAccountAndTestOrderByTimestampDesc(loggedInAccount, test);
 	}
 
 	private boolean permitted(long id) {
