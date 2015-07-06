@@ -119,6 +119,9 @@ public class TestController {
 		test.addTestScore(score);
 		testRepository.save(test);
 		scoreCalculator.setTestScore(score);
+		Map<String, Integer> result = scoreCalculator.calculateRightAnswers();
+		score.setScore(result.get("score"));
+		testScoreRepo.save(score);
 		return scoreCalculator.calculateRightAnswers();
 	}
 

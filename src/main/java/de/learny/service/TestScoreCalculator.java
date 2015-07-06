@@ -11,7 +11,7 @@ import de.learny.domain.TestScore;
 @Service
 public class TestScoreCalculator {
 
-	private TestScore testScore;	
+	private TestScore testScore;
 	
 	public Map<String, Integer> calculateRightAnswers() {
 		Map<String,Integer> result = new HashMap<String,Integer>();
@@ -23,8 +23,18 @@ public class TestScoreCalculator {
 			} 
 			answerCount++;
 		}
+		
+		for(Answer uncheckedAnswer: testScore.getUncheckedAnswers()){
+			if(uncheckedAnswer.isCorrect()) {
+				errorCount++;
+			} 
+			answerCount++;
+		}
+		
+		int score = calculateScore(answerCount, errorCount);
 		result.put("Fehler", errorCount);
 		result.put("Antworten abgegeben", answerCount);
+		result.put("score", score);
 		return result;
 		
 	}
@@ -37,4 +47,9 @@ public class TestScoreCalculator {
 		this.testScore = testScore;
 	}
 
+	private int calculateScore(int answers, int errors) {
+		int result = (answers - errors) * 100 / answers ;
+		return result;
+	}
+	
 }

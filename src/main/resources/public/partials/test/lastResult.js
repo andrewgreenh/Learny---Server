@@ -6,10 +6,9 @@ angular.module('learny').controller(
                     $scope.uncheckedAnswers = result.data.uncheckedAnswers;
                     $scope.test = test.data;
                     $scope.test.questions = questions.data;
-                    $scope.errorCounter = 0;
+                    $scope.score = result.data.score;
                     calculateErrors();
-                    console.log($scope.checkedAnswers);
-                    console.log(result.data);
+
                     
                     function calculateErrors() {
                         $scope.test.questions.forEach(function(question) {
@@ -19,7 +18,6 @@ angular.module('learny').controller(
                                     question.answers[i].answeredCorrectly = true;
                                 } else {
                                     question.answers[i].answeredCorrectly = false;
-                                    $scope.errorCounter++;
                                 }
                             }
                         });

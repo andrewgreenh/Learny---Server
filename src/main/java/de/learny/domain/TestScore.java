@@ -33,6 +33,8 @@ public class TestScore {
 	private Test test;
 
 	private Timestamp timestamp;
+	
+	private int score;
 
 	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
 		this.test = test;
@@ -90,6 +92,14 @@ public class TestScore {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	private Set<Answer> calculateUncheckedAnswers(Set<Answer> checkedAnswers, Test test) {
