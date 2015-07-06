@@ -122,7 +122,7 @@ public class TestController {
 		Map<String, Integer> result = scoreCalculator.calculateRightAnswers();
 		score.setScore(result.get("score"));
 		testScoreRepo.save(score);
-		return scoreCalculator.calculateRightAnswers();
+		return result;
 	}
 
 	@RequestMapping(value = "/{id}/highscore", method = RequestMethod.GET)
