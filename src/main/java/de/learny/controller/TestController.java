@@ -2,6 +2,7 @@ package de.learny.controller;
 
 import io.swagger.annotations.Api;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,28 +34,28 @@ import de.learny.service.TestScoreCalculator;
 @RestController
 @RequestMapping("/api/tests")
 public class TestController {
-	
+
 	@Autowired
 	private TestRepository testRepository;
-	
+
 	@Autowired
 	private LoggedInAccountService userToAccountService;
-	
+
 	@Autowired
 	private TestScoreRepository testScoreRepo;
-	
+
 	@Autowired
 	private TestScoreCalculator scoreCalculator;
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	Iterable<Test> getAllTests(){
+	Iterable<Test> getAllTests() {
 		return testRepository.findAll();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	Test getTest(@PathVariable("id") long id){
+	Test getTest(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
-		if(test == null)
+		if (test == null)
 			throw new ResourceNotFoundException("Ein Test mit diese id existiert nicht");
 		return test;
 	}
@@ -66,20 +67,20 @@ public class TestController {
 	public void setTestRepository(TestRepository testRepository) {
 		this.testRepository = testRepository;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	void delete(@PathVariable("id") long id){
+	void delete(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
-		if(test == null)
+		if (test == null)
 			throw new ResourceNotFoundException("Ein Test mit diese id existiert nicht");
-		if(permitted(id)){
+		if (permitted(id)) {
 			this.testRepository.delete(id);
 		}
 	}
-	
-	@RequestMapping(value = "/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
-	Test update(@PathVariable("id") long id, @RequestBody Test updateTest){
-		//TODO: Was muss noch geupdatet werden?
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	Test update(@PathVariable("id") long id, @RequestBody Test updateTest) {
+		// TODO: Was muss noch geupdatet werden?
 		Test oldTest = testRepository.findById(id);
 		if (oldTest == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
@@ -88,26 +89,27 @@ public class TestController {
 		}
 		return this.testRepository.save(oldTest);
 	}
-	
+
 	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/{id}/questions", method = RequestMethod.GET)
-	Iterable<Question> getAllQuestionsToTest(@PathVariable("id") long id){
+	Iterable<Question> getAllQuestionsToTest(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return test.getQuestions();
 	}
-	
+
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.GET)
-	Iterable<TestScore> getResultsFromTest(@PathVariable("id") long id){
+	Iterable<TestScore> getResultsFromTest(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		return test.getTestScores();
 	}
-	
-	@RequestMapping(value = "/{id}/results", method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	Map<String,Integer> turnTest(@PathVariable("id") long id, @RequestBody Set<Answer> checkedAnswers){
+
+	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	Map<String, Integer> turnTest(@PathVariable("id") long id,
+	        @RequestBody Set<Answer> checkedAnswers) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
@@ -119,25 +121,25 @@ public class TestController {
 		scoreCalculator.setTestScore(score);
 		return scoreCalculator.calculateRightAnswers();
 	}
-	
+
 	@RequestMapping(value = "/{id}/highscore", method = RequestMethod.GET)
-	void getHighscoreFromTest(@PathVariable("id") long id){
+	void getHighscoreFromTest(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		//TODO: Muss noch implemtiert werden
+		// TODO: Muss noch implemtiert werden
 	}
-	
+
 	@RequestMapping(value = "/{id}/myLatestResult", method = RequestMethod.GET)
-	TestScore myLatestResult(@PathVariable("id") long id){
+	TestScore myLatestResult(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		return loggedInAccount.myLatestResultForTest(test);
 	}
-	
-	private boolean permitted(long id){
+
+	private boolean permitted(long id) {
 		Test test = testRepository.findById(id);
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		boolean inCharge = false;
