@@ -37,7 +37,7 @@ public class TestScore {
 	private int score;
 
 	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
-		this.test = test;
+		setTest(test);
 		this.account = account;
 		this.checkedAnswers = checkedAnswers;
 		uncheckedAnswers = calculateUncheckedAnswers(checkedAnswers, test);

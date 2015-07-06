@@ -2,8 +2,6 @@ package de.learny.controller;
 
 import io.swagger.annotations.Api;
 
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ import de.learny.domain.Subject;
 import de.learny.domain.Test;
 import de.learny.domain.TestScore;
 import de.learny.security.service.LoggedInAccountService;
-import de.learny.service.TestScoreCalculator;
+import de.learny.service.NewTestScoreHandler;
 
 @Api(value = "Tests", description = "Tests verwalten. Test ausfüllen. Testergebnisse einsehen", produces = "application/json")
 @RestController
@@ -45,7 +43,7 @@ public class TestController {
 	private TestScoreRepository testScoreRepo;
 
 	@Autowired
-	private TestScoreCalculator scoreCalculator;
+	private NewTestScoreHandler newTestScoreHandler;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Test> getAllTests() {
@@ -108,21 +106,14 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	Map<String, Integer> turnTest(@PathVariable("id") long id,
+	void turnTest(@PathVariable("id") long id,
 	        @RequestBody Set<Answer> checkedAnswers) {
 		Test test = testRepository.findById(id);
 		if (test == null)
-			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+			throw new ResourceNotFoundException("Ein Test mit dieser id existiert nicht");
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
-		TestScore score = new TestScore(test, loggedInAccount, checkedAnswers);
-		testScoreRepo.save(score);
-		test.addTestScore(score);
-		testRepository.save(test);
-		scoreCalculator.setTestScore(score);
-		Map<String, Integer> result = scoreCalculator.calculateRightAnswers();
-		score.setScore(result.get("score"));
-		testScoreRepo.save(score);
-		return result;
+		TestScore testScore = new TestScore(test, loggedInAccount, checkedAnswers);
+		newTestScoreHandler.addNew(testScore);
 	}
 
 	@RequestMapping(value = "/{id}/highscore", method = RequestMethod.GET)
