@@ -13,7 +13,7 @@
                     <div class="col-md-12">
                         <form ng-submit="saveTest()">
                           <div class="text-center">
-                            <label for="inputlg">Test Name: <input class="form-control input-lg" type="text" ng-model="test.name" required></label>
+                            <label for="inputlg"><h3>Test Name:</h3> <input class="form-control input-lg" type="text" ng-model="test.name" required></label>
                           </div>
                           <hr>
                         <li ng-repeat="question in test.questions">
@@ -24,10 +24,12 @@
 	                        	<label>Option:</label> <input type="text" ng-model="answer.answer" required>
 	                        	<label>Richtig?</label> <input type="checkbox" ng-model="answer.correct">
 	                        	</li>
-	                        	<button ng-click="addAnswer(question)" class="btn btn-info">Neue Antwort.</button>
+	                        	<button ng-click="addAnswer(question)" class="btn btn-default">Neue Antwort.</button><br>
+	                        	<label>Erklaerung:</label><textarea class="form-control" rows="3" type="text" required></textarea>
                         	</ul>
+                        	<hr>
                         </li>
-                        <button ng-click="addQuestion()" class="btn btn-success">Neue Frage.</button>
+                        <button ng-click="addQuestion()" class="btn btn-default">Neue Frage.</button>
                         <br>
                         <hr>
                         <button type="submit" class="btn btn-primary">Test speichern.</button>

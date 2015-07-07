@@ -1,7 +1,7 @@
 <div class="page-header text-center">
             <h1>{{subject.name}}</h1>
 </div>
-<div class="section section-primary">
+<div class="section">
             <button class="btn btn-block btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
             href="#">
                 <h3><span class="glyphicon glyphicon-ok"></span>Eintragen</h3>
@@ -20,10 +20,10 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="responsible in subject.accountsInCharge">
-                                    <td class="info">
+                                    <td>
                                         <a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.firstname}}</a>
                                     </td>
-                                    <td class="info">
+                                    <td>
                                         <button class="btn btn-danger" ng-show="userIsAdmin" ng-click="removeFromResponsibles(responsible)">Als Verantwortlichen entfernen.</button>
                                     </td>
                                 </tr>
@@ -36,7 +36,7 @@
                                     <input type="text" name="accountname"
                                     placeholder=" Accountname" ng-model="accountName">
                                 </p>
-                                <button class="btn btn-info" type="submit">
+                                <button class="btn btn-primary" type="submit">
                                     <span class="glyphicon glyphicon-plus"></span>Hinzufügen.</button>
                             </form>
                         </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 </div>
-<div class="section section-info">
+<div class="section">
             <p ng-show="userIsEnroled">Löse doch einen der folgenden Tests:</p>
             <div class="container">
                 <div class="col-md-12">
@@ -64,13 +64,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="test in tests">
-                                <td class="info">
+                                <td>
                                     <a ui-sref="app.test({id:test.id})">{{test.name}}</a>
                                 </td>
-                                <td class="info">
-                                    <button class="btn btn-success">Test bearbeiten</button>
+                                <td>
+                                    <button class="btn">Test bearbeiten</button>
                                 </td>
-                                <td class="info">
+                                <td>
                                     <button class="btn btn-danger" ng-click="deleteTest(test)">Test löschen</button>
                                 </td>
                             </tr>
