@@ -26,6 +26,7 @@ import de.learny.domain.Role;
 import de.learny.domain.Subject;
 import de.learny.security.service.LoggedInAccountService;
 import de.learny.security.service.PasswordGeneratorService;
+import de.learny.service.UserFinder;
 
 @Api(value = "Accounts", description = "Zugriff auf Accounts", produces = "application/json")
 @RestController
@@ -43,9 +44,12 @@ public class AccountController {
 
 	@Autowired
 	private SubjectRepository subjectRepo;
-	
+
 	@Autowired
 	private RoleRepository roleRepo;
+
+	@Autowired
+	private UserFinder userFinder;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -64,12 +68,12 @@ public class AccountController {
 		if (newAcc.getAccountName() == null) {
 			throw new IllegalArgumentException("Accountname darf nicht leer sein");
 		}
-		
+
 		newAcc.setFirstname(account.getFirstname());
 		newAcc.setLastname(account.getLastname());
 		newAcc.setEmail(account.getEmail());
 		newAcc.addRole(roleRepo.findFirstByName("user"));
-		
+
 		boolean accountNameAlreadyExists = accountRepository.findFirstByAccountName(newAcc
 		        .getAccountName()) != null;
 		if (accountNameAlreadyExists) {
@@ -95,6 +99,17 @@ public class AccountController {
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(roleRepo.findFirstByName(role));
 		return accountRepository.findByRoles(roles);
+	}
+
+	@RequestMapping(value = "/find/{string}", method = RequestMethod.GET)
+	Set<Account> findAccountByString(@PathVariable("string") String string) {
+		return userFinder.findUserBy(string);
+	}
+
+	@RequestMapping(value = "/findwithrole/{string}&{role}", method = RequestMethod.GET)
+	Set<Account> findAccountWithRoleByString(@PathVariable("string") String string,
+	        @PathVariable("role") String role) {
+		return userFinder.findUserBy(string, role);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
@@ -139,7 +154,7 @@ public class AccountController {
 		accountRepository.save(loggedInAccount);
 		return var;
 	}
-	
+
 	@RequestMapping(value = "/me/enroled-subjects/{subjectId}", method = RequestMethod.DELETE)
 	boolean dischargeFromSubject(@PathVariable("subjectId") long subjectId) {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();

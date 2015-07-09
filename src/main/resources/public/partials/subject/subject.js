@@ -39,9 +39,19 @@ angular.module('learny').controller(
                             console.log("Eintragen fehlgeschlagen");
                         });
                     }
+                    
+                    $scope.leaveSubject = function() {
+                        serverCommunicator.leaveSubjectAsync($scope.subject).then(function(data) {
+                            $state.go($state.current, {}, {
+                                reload : true
+                            });
+                        }, function() {
+                            console.log("Eintragen fehlgeschlagen");
+                        });
+                    }
 
-                    $scope.addResponsible = function() {
-                        serverCommunicator.addUserAsAdministratorToSubjectAsync($scope.accountName,
+                    $scope.addResponsible = function(user) {
+                        serverCommunicator.addUserAsAdministratorToSubjectAsync(user.accountName,
                                 $scope.subject.id).then(function(data) {
                             $state.go($state.current, {}, {
                                 reload : true
@@ -69,6 +79,10 @@ angular.module('learny').controller(
                                 reload : true
                             });
                         });
+                    }
+                    
+                    $scope.close = function() {
+                        console.log("here");
                     }
 
                 } ]);

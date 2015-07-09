@@ -12,23 +12,28 @@
 	</button>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
-<p>Du hast {{score}} Punkte erreicht!</p>
 <div class="section">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+			    <div class="progress">
+                    <div class="progress-bar progress-bar-striped active"
+                      aria-valuemin="0" aria-valuemax="100" style="width:{{score}}%">
+                      {{score}} Punkte erreicht!
+                    </div>
+                </div>
 				<div class="panel panel-default"
 					ng-repeat="question in test.questions">
 					<div class="panel-heading">
 						<h3 class="panel-title">{{question.question}}</h3>
 					</div>
 					<div class="panel-body">
-						<li ng-repeat="answer in question.answers">
-							<div class="checkbox">
+							<div ng-repeat="answer in question.answers" class="checkbox">
 								<label><input type="checkbox" ng-model="answer.checked">{{answer.answer}}</label>
-								<p ng-show="answer.answeredCorrectly">Hier hast du richtig geantwortet!</p>
-								<p ng-hide="answer.answeredCorrectly">Hier hast du falsch geantwortet!</p>
+								<p class="bg-danger" ng-hide="answer.answeredCorrectly"><span class="glyphicon glyphicon-arrow-up"></span>Hier hast du falsch geantwortet!</p>
 							</div>
+							<hr>
+							<p>Erklaerung blablabla...warum...</p>
 					</div>
 				</div>
 			</div>

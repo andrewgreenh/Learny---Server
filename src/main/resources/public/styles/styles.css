@@ -32,6 +32,19 @@ form, form button, form label {
 	max-width: 30%;
 	margin: 0 auto;
 }
+
+accountfinder {
+	position:absolute !important;
+}
+accountfinder ul {
+	padding:0px !important;
+	top:0px;
+	list-style-type: none;
+}
+accountfinder li:hover {
+	cursor:pointer;
+}
+
 /*******************************
 MEDIA QUERIES
 *******************************/
