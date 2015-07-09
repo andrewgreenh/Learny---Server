@@ -116,12 +116,13 @@ public class TestController {
 		newTestScoreHandler.addNew(testScore);
 	}
 
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/{id}/highscore", method = RequestMethod.GET)
-	void getHighscoreFromTest(@PathVariable("id") long id) {
+	Iterable<TestScore> getHighscoreFromTest(@PathVariable("id") long id) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		// TODO: Muss noch implemtiert werden
+		return testScoreRepo.findTop10ByTestOrderByScoreDesc(test);
 	}
 
 	@RequestMapping(value = "/{id}/myLatestResult", method = RequestMethod.GET)
