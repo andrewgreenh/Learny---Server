@@ -33,8 +33,7 @@
                             <form ng-submit="addResponsible()">
                                 <p>
                                     <b>Name neue(r) Verantwortliche(r):</b>
-                                    <input type="text" name="accountname"
-                                    placeholder=" Accountname" ng-model="accountName">
+                                    <accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
                                 </p>
                                 <button class="btn btn-primary" type="submit">
                                     <span class="glyphicon glyphicon-plus"></span>Hinzufügen.</button>
