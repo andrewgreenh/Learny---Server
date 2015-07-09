@@ -30,10 +30,19 @@ public class Answer {
 	@ManyToOne
 	private Question question;
 	
+	private String explanation;
+	
 	public Answer(String answer, Question question, boolean correct){
 		this.answer = answer;
 		this.question = question;
 		this.correct = correct;
+	}
+	
+	public Answer(String answer, Question question, boolean correct, String explanation){
+		this.answer = answer;
+		this.question = question;
+		this.correct = correct;
+		this.explanation = explanation;
 	}
 	
 	public Answer(){
@@ -85,6 +94,14 @@ public class Answer {
 	
 	public void addToErrorCount() {
 		errorCount++;
+	}
+
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 	
 }
