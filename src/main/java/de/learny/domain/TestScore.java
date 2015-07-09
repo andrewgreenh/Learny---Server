@@ -12,12 +12,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import de.learny.JsonView.View;
 
 @Entity
 public class TestScore {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private long id;
 
 	@ManyToMany
@@ -27,13 +31,16 @@ public class TestScore {
 	private Set<Answer> uncheckedAnswers = new HashSet<Answer>();
 
 	@ManyToOne
+	@JsonView(View.Summary.class)
 	private Account account;
 
 	@ManyToOne
 	private Test test;
 
+	@JsonView(View.Summary.class)
 	private Timestamp timestamp;
 	
+	@JsonView(View.Summary.class)
 	private int score;
 
 	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {

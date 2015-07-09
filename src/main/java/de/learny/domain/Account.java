@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import de.learny.JsonView.View;
 
 
 @Entity
@@ -22,9 +25,11 @@ public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private long id;
 
 	@Column(unique=true, nullable=false)
+	@JsonView(View.Summary.class)
 	private String accountName;
 	
 	private String password, firstname, lastname, email, avatarUri;
