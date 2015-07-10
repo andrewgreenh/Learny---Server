@@ -1,21 +1,16 @@
 <div class="page-header text-center">
-	<h1>{{subject.name}}</h1>
+            <h1>{{subject.name}}</h1>
 </div>
-<h2 ng-show="userIsNew">
-	<a ng-click="joinSubject(); $event.preventDefault();" href="#">Trage
-		dich ein</a>, um Tests zulösen!
-</h2>
-
 <div class="section">
+            <button class="btn btn-block btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
+            href="#">
+                <h3><span class="glyphicon glyphicon-ok"></span>Eintragen</h3>
+            </button>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2><span class="glyphicon glyphicon-user"></span> Verantwortliche:</h2>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="col-md-8">
+                    <h2>
+                        <span class="glyphicon glyphicon-user"></span>Verantwortliche:</h2>
+                    <div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -25,56 +20,72 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="responsible in subject.accountsInCharge">
-                                    <td><a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.firstname}}</a></td>
-                                    <td><button class="btn btn-default" ng-show="userIsAdmin"
-				                            ng-click="removeFromResponsibles(responsible)">Als Verantwortlichen entfernen.</button>
-				                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div ng-show="userIsAdmin"> 
-                          <form ng-submit="addResponsible()">
-                            <p><b>Name neue(r) Verantwortliche(r): </b><input type="text" name="accountname" placeholder=" Accountname"
-				                ng-model="accountName">
-				            </p>
-					        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Hinzufügen.</button>
-				          </form>
-                        </div>
-                    </div>                        
-                </div>
-            </div>
-</div>
-<hr>
-<p ng-show="userIsEnroled">Löse doch einen der folgenden Tests:</p>
-<div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2><span class="glyphicon glyphicon-list-alt"></span> Tests:</h2>
-                    </div>    
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Test Name</th>
-                                    <th colspan="2">&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="test in tests">
-                                    <td><a ui-sref="app.test({id:test.id})">{{test.name}}</a></td>
-                                    <td><button class="btn btn-default" ng-show="userIsAdmin">Test bearbeiten</button></td>
-                                    <td><button class="btn btn-default" ng-hide="userIsAdmin" ui-sref="app.lastResult({id : test.id})">Dein letztes Ergebnis</button></td>
-                                    <td><button class="btn btn-default" ng-show="userIsAdmin" ng-click="deleteTest(test)">Test löschen</button></td>
+                                    <td>
+                                        <a href="mailto:{{responsible.email}}">{{responsible.lastname}}, {{responsible.firstname}}</a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" ng-show="userIsAdmin" ng-click="removeFromResponsibles(responsible)">Als Verantwortlichen entfernen.</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div ng-show="userIsAdmin">
-                           <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
-                               <span class="glyphicon glyphicon-plus"></span> Neuer Test.</button>
+                            <form ng-submit="addResponsible()">
+                                <p>
+                                    <b>Name neue(r) Verantwortliche(r):</b>
+                                    <accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
+                                </p>
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-plus"></span>Hinzufügen.</button>
+                            </form>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h2>Rang:</h2>
+                </div>
+            </div>
+</div>
+<div class="section">
+            <p ng-show="userIsEnroled">Löse doch einen der folgenden Tests:</p>
+            <div class="container">
+                <div class="col-md-12">
+                    <h2>
+                        <span class="glyphicon glyphicon-list-alt"></span>Tests:</h2>
+                </div>
+                <div class="col-md-12">
+                    <table ng-show="userIsAdmin" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Test Name</th>
+                                <th colspan="2">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="test in tests">
+                                <td>
+                                    <a ui-sref="app.test({id:test.id})">{{test.name}}</a>
+                                </td>
+                                <td>
+                                    <button class="btn">Test bearbeiten</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" ng-click="deleteTest(test)">Test löschen</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="userIsAdmin">
+                        <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
+                            <span class="glyphicon glyphicon-plus"></span>Neuer Test.</button>
+                    </div>
+                    <div ng-hide="userIsAdmin" ng-repeat="test in tests">
+                            <div class="col-md-8">
+                                <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-primary"><h4>{{test.name}}</h4></button>
+                            </div>
+                            <div class="col-md-4">
+                                <button ui-sref="app.lastResult({id : test.id})" class="btn btn-block btn-warning"><h4>Dein letztes Ergebnis</h4></button>
+                            </div>
                     </div>
                 </div>
             </div>

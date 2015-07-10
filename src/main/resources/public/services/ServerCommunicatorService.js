@@ -21,6 +21,10 @@ angular.module('learny').factory(
                     service.getCurrentUserAsync = function() {
                         return $http.get('/api/accounts/me');
                     };
+                    
+                    service.findDozentenAsync = function(string) {
+                        return $http.get('/api/accounts/findwithrole/' + string + '&dozent');
+                    };
 
                     service.getSubjectsAsync = function() {
                         return $http.get('/api/subjects');
@@ -62,6 +66,10 @@ angular.module('learny').factory(
 
                     service.joinSubjectAsync = function(subject) {
                         return $http.post('/api/accounts/me/enroled-subjects', subject);
+                    }
+                    
+                    service.leaveSubjectAsync = function(subject) {
+                        return $http.delete('/api/accounts/me/enroled-subjects/' + subject.id);
                     }
                     
                     service.deleteTestAsync = function(testId) {
