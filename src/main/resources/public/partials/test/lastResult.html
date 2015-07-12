@@ -29,11 +29,9 @@
 					</div>
 					<div class="panel-body">
 							<div ng-repeat="answer in question.answers" class="checkbox">
-								<label><input type="checkbox" ng-model="answer.checked">{{answer.answer}}</label>
-								<p class="bg-danger" ng-hide="answer.answeredCorrectly"><span class="glyphicon glyphicon-arrow-up"></span>Hier hast du falsch geantwortet!</p>
+								<span ng-hide="answer.answeredCorrectly" class="glyphicon glyphicon-remove"></span><label><input type="checkbox" ng-model="answer.checked">{{answer.answer}}</label>
+								<p class="bg-danger" ng-hide="answer.answeredCorrectly">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span>{Erklaerung...}</p>
 							</div>
-							<hr>
-							<p>Erklaerung blablabla...warum...</p>
 					</div>
 				</div>
 			</div>
