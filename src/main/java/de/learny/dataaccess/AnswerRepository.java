@@ -16,7 +16,4 @@ public interface AnswerRepository extends CrudRepository<Answer, Long> {
 	
 	Answer findById(long id);
 	
-	//Falls man alle Antworten zu mehreren Questions haben will
-	Iterable<Answer> findByQuestionIn(Collection<Question> questions);
-	
 }

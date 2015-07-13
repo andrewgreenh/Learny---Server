@@ -151,17 +151,4 @@ public class TestController {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
 	}
-	
-	@RequestMapping(value = "/{id}/statistics", method = RequestMethod.GET)
-	Iterable<Question> getStatisticsForTest(@PathVariable("id") long id) {
-		Test test = testRepository.findById(id);
-		if (test == null)
-			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
-		if (permitted(id)) {
-			return test.getQuestions();
-		}
-		else{
-			return null;
-		}
-	}
 }
