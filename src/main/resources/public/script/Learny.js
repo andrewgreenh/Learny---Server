@@ -237,6 +237,7 @@ app.run(function($rootScope, $state, serverCommunicator) {
                 $state.go('welcome');
             });
         }
+        $('.navbar-collapse').collapse('hide');
     })
 });
 
