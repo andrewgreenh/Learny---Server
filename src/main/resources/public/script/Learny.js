@@ -146,6 +146,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 },
                 templateUrl : 'partials/test/test.html'
             })
+      .state(
+            'app.highscore',
+            {
+                url : '/test/:id/highscore',
+                controller : 'highscoreController',
+                resolve : {
+                    top10 : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getHighscoreFromTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/highscore.html'
+            })
 
     .state(
             'app.lastResult',
