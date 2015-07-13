@@ -4,13 +4,13 @@
 <div class="section">
             <div align="center">
               <button align="center" class="btn btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
-              href="#"><h4><span class="glyphicon glyphicon-ok"></span>Eintragen</h4>
+              href="#"><h4><span class="glyphicon glyphicon-ok"></span> Eintragen.</h4>
               </button>
             </div>
             <div class="container">
                 <div class="col-md-12">
                     <h2>
-                        <span class="glyphicon glyphicon-user"></span>Verantwortliche:</h2>
+                        <span class="glyphicon glyphicon-user"></span> Verantwortliche:</h2>
                     <div>
                         <table class="table table-striped">
                             <thead>
@@ -37,7 +37,7 @@
                                     <accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
                                 </p>
                                 <button class="btn btn-primary" type="submit">
-                                    <span class="glyphicon glyphicon-plus"></span>Hinzufügen.</button>
+                                    <span class="glyphicon glyphicon-plus"></span> Hinzufügen.</button>
                             </form>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
             
             <div class="container">
                 <div class="col-md-12">
-                    <h2><span class="glyphicon glyphicon-list-alt"></span>Tests:</h2>
+                    <h2><span class="glyphicon glyphicon-list-alt"></span> Tests:</h2>
                 </div>
                 <div class="col-md-12">
                 <div class="alert alert-info" ng-show="userIsEnroled" align="center">
@@ -69,7 +69,7 @@
                                     <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-default">{{test.name}}</button>
                                 </td>
                                 <td>
-                                    <button class="btn">Test bearbeiten</button>
+                                    <button class="btn">Test bearbeiten.</button>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger" ng-click="deleteTest(test)">Test löschen</button>
@@ -79,7 +79,7 @@
                     </table>
                     <div ng-show="userIsAdmin">
                         <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
-                            <span class="glyphicon glyphicon-plus"></span>Neuer Test.</button>
+                            <span class="glyphicon glyphicon-plus"></span> Neuer Test.</button>
                     </div>
                     <div>
                     <div ng-hide="userIsAdmin">
