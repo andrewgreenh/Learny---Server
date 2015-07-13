@@ -82,24 +82,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 },
                 templateUrl : 'partials/subjects/subjects.html'
             }).state(
-            'app.mySubjects',
-            {
-                url : '/mysubjects',
-                controller : 'subjectsController',
-                resolve : {
-                    subjects : function(serverCommunicator) {
-                        return serverCommunicator.getEnroledSubjectsAsync().then(
-                                function(data, status, headers, config) {
-                                    return {
-                                        value : data
-                                    };
-                                });
-                    }
-                },
-                templateUrl : 'partials/subjects/mySubjects.html'
-            })
-
-    .state(
             'app.subject',
             {
                 url : '/subject/:id',
@@ -145,6 +127,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/test/test.html'
+            })
+      .state(
+            'app.highscore',
+            {
+                url : '/test/:id/highscore',
+                controller : 'highscoreController',
+                resolve : {
+                    top10 : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getHighscoreFromTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/highscore.html'
             })
 
     .state(
@@ -206,7 +203,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
     .state('app.home', {
         url : '/',
-        resolve : {},
+        resolve : {
+            subjects : function(serverCommunicator) {
+                return serverCommunicator.getEnroledSubjectsAsync().then(
+                        function(data, status, headers, config) {
+                            return data;
+                        });
+            }
+        },
         controller : 'homeController',
         templateUrl : 'partials/home/home.html'
     });
@@ -222,6 +226,7 @@ app.run(function($rootScope, $state, serverCommunicator) {
                 $state.go('welcome');
             });
         }
+        $('.navbar-collapse').collapse('hide');
     })
 });
 
