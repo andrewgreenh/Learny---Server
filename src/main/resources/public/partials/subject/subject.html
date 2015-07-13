@@ -2,12 +2,13 @@
             <h1>{{subject.name}}</h1>
 </div>
 <div class="section">
-            <button class="btn btn-block btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
-            href="#">
-                <h3><span class="glyphicon glyphicon-ok"></span>Eintragen</h3>
-            </button>
+            <div align="center">
+              <button align="center" class="btn btn-warning" ng-show="userIsNew" ng-click="joinSubject(); $event.preventDefault();"
+              href="#"><h4><span class="glyphicon glyphicon-ok"></span>Eintragen</h4>
+              </button>
+            </div>
             <div class="container">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <h2>
                         <span class="glyphicon glyphicon-user"></span>Verantwortliche:</h2>
                     <div>
@@ -41,19 +42,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <h2>Rang:</h2>
-                </div>
             </div>
 </div>
+<hr>
 <div class="section">
-            <p ng-show="userIsEnroled">Löse doch einen der folgenden Tests:</p>
+            
             <div class="container">
                 <div class="col-md-12">
-                    <h2>
-                        <span class="glyphicon glyphicon-list-alt"></span>Tests:</h2>
+                    <h2><span class="glyphicon glyphicon-list-alt"></span>Tests:</h2>
                 </div>
                 <div class="col-md-12">
+                <div class="alert alert-info" ng-show="userIsEnroled" align="center">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong><font size="+1" face="cursive">Löse doch einen der folgenden Tests!</font></strong>
+                </div>
                     <table ng-show="userIsAdmin" class="table table-striped">
                         <thead>
                             <tr>
@@ -64,7 +66,7 @@
                         <tbody>
                             <tr ng-repeat="test in tests">
                                 <td>
-                                    <a ui-sref="app.test({id:test.id})">{{test.name}}</a>
+                                    <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-default">{{test.name}}</button>
                                 </td>
                                 <td>
                                     <button class="btn">Test bearbeiten</button>
@@ -79,13 +81,21 @@
                         <button class="btn btn-primary" ng-show="userIsAdmin" ui-sref="app.createTest({id: subject.id})">
                             <span class="glyphicon glyphicon-plus"></span>Neuer Test.</button>
                     </div>
-                    <div ng-hide="userIsAdmin" ng-repeat="test in tests">
-                            <div class="col-md-8">
-                                <button ui-sref="app.test({id:test.id})" class="btn btn-block btn-primary"><h4>{{test.name}}</h4></button>
+                    <div>
+                    <div ng-hide="userIsAdmin">
+                            <div ng-repeat="test in tests">
+                                <div class="col-md-10 col-sm-8 col-xs-7"><button ui-sref="app.test({id:test.id})" class="btn btn-block btn-default">
+                                  <font size="+1"><b>{{test.name}}</b></font></button>
+                                </div>
+                                <div class="col-md-2 col-sm-4 col-xs-5" valign="middle">
+                                  <a data-toggle="tooltip" title="Letztes Ergebnis" ui-sref="app.lastResult({id : test.id})">
+                                  <font size="6"><span class="glyphicon glyphicon-list-alt"></span></font><font size="3"><span class="glyphicon glyphicon-ok"></span></font></a>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;
+                                  <a data-toggle="tooltip" title="Rangliste" ui-sref="app.lastResult({id : test.id})">
+                                  <font size="6"><span class="glyphicon glyphicon-star"></span></font></a>
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                                <button ui-sref="app.lastResult({id : test.id})" class="btn btn-block btn-warning"><h4>Dein letztes Ergebnis</h4></button>
-                            </div>
+                    </div>
                     </div>
                 </div>
             </div>
