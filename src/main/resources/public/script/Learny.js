@@ -81,7 +81,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/subjects/subjects.html'
-            }).state(
+            })
+
+    .state(
             'app.subject',
             {
                 url : '/subject/:id',
@@ -127,8 +129,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/test/test.html'
-            })
-      .state(
+            }).state(
             'app.highscore',
             {
                 url : '/test/:id/highscore',
@@ -201,19 +202,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl : 'partials/welcome/welcome.html'
     })
 
-    .state('app.home', {
-        url : '/',
-        resolve : {
-            subjects : function(serverCommunicator) {
-                return serverCommunicator.getEnroledSubjectsAsync().then(
-                        function(data, status, headers, config) {
-                            return data;
-                        });
-            }
-        },
-        controller : 'homeController',
-        templateUrl : 'partials/home/home.html'
-    });
+    .state(
+            'app.home',
+            {
+                url : '/',
+                resolve : {
+                    subjects : function(serverCommunicator) {
+                        return serverCommunicator.getEnroledSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
+                    adminSubjects : function(serverCommunicator) {
+                        return serverCommunicator.getAdministratedSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                controller : 'homeController',
+                templateUrl : 'partials/home/home.html'
+            });
 
     $urlRouterProvider.otherwise("/");
 
