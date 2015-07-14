@@ -119,14 +119,14 @@ public class SubjectController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
 	Subject update(@PathVariable("id") long id, @RequestBody Subject updateSubject){
-		Subject oldSubjcet = subjectRepo.findById(id);
-		if (oldSubjcet == null)
+		Subject oldSubject = subjectRepo.findById(id);
+		if (oldSubject == null)
 			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
 		if (permitted(id)) {
-			oldSubjcet.setName(updateSubject.getName());
-			oldSubjcet.setDescription(oldSubjcet.getDescription());
+			oldSubject.setName(updateSubject.getName());
+			oldSubject.setDescription(updateSubject.getDescription());
 		}
-		return this.subjectRepo.save(oldSubjcet);
+		return this.subjectRepo.save(oldSubject);
 	}
 	
 	@RequestMapping(value = "/{id}/responsibles", method = RequestMethod.GET)

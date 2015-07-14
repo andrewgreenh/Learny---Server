@@ -37,6 +37,10 @@ angular.module('learny').factory(
                     service.getSubjectAsync = function(subjectId) {
                         return $http.get('/api/subjects/' + subjectId);
                     };
+                    
+                    service.updateSubjectAsync = function(subject) {
+                        return $http.put('/api/subjects/' + subject.id, subject);
+                    };
 
                     service.isLoggedInAsync = function() {
                         return $http.get('/api/accounts/loggedin');
