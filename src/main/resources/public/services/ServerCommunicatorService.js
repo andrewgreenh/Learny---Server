@@ -10,8 +10,8 @@ angular.module('learny').factory(
                     }
 
                     service.loginAsync = function(username, password) {
-                        return $http.post('/login?username=' + encodeURI(username) + '&password='
-                                + encodeURI(password));
+                        return $http.post('/login?username=' + encodeURIComponent(username) + '&password='
+                                + encodeURIComponent(password));
                     };
 
                     service.logoutAsync = function() {
@@ -36,6 +36,14 @@ angular.module('learny').factory(
 
                     service.getSubjectAsync = function(subjectId) {
                         return $http.get('/api/subjects/' + subjectId);
+                    };
+                    
+                    service.addSubjectAsync = function(subject) {
+                        return $http.post('/api/subjects/', subject);
+                    };
+                    
+                    service.updateSubjectAsync = function(subject) {
+                        return $http.put('/api/subjects/' + subject.id, subject);
                     };
 
                     service.isLoggedInAsync = function() {

@@ -74,6 +74,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     subjects : function(serverCommunicator) {
                         return serverCommunicator.getSubjectsAsync().then(
                                 function(data, status, headers, config) {
+                                    data.data.sort(function(subjectA, subjectB) {
+                                        if (subjectA.name < subjectB.name)
+                                            return -1;
+                                        if (subjectA.name > subjectB.name)
+                                            return 1;
+                                        return 0;
+                                    });
                                     return {
                                         value : data
                                     };
@@ -81,7 +88,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/subjects/subjects.html'
-            }).state(
+            })
+
+    .state(
             'app.subject',
             {
                 url : '/subject/:id',
@@ -90,6 +99,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     tests : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getTestsOfSubjectAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
+                                    data.data.sort(function(testA, testB) {
+                                        if (testA.name < testB.name)
+                                            return -1;
+                                        if (testA.name > testB.name)
+                                            return 1;
+                                        return 0;
+                                    });
                                     return {
                                         value : data
                                     };
@@ -122,13 +138,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     questions : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
+                                    data.data.sort(function(questionA, questionB) {
+                                        if (questionA.id < questionB.id)
+                                            return -1;
+                                        if (questionA.id > questionB.id)
+                                            return 1;
+                                        return 0;
+                                    });
+                                    data.data.forEach(function(item){
+                                        item.answers.sort(function(answerA,answerB) {
+                                           return answerA.id - answerB.id; 
+                                        });
+                                     });
                                     return data;
                                 });
                     }
                 },
                 templateUrl : 'partials/test/test.html'
-            })
-      .state(
+            }).state(
             'app.highscore',
             {
                 url : '/test/:id/highscore',
@@ -165,6 +192,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     questions : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
                                 function(data, status, headers, config) {
+                                    data.data.sort(function(questionA, questionB) {
+                                        if (questionA.id < questionB.id)
+                                            return -1;
+                                        if (questionA.id > questionB.id)
+                                            return 1;
+                                        return 0;
+                                    });
+                                    data.data.forEach(function(item){
+                                       item.answers.sort(function(answerA,answerB) {
+                                          return answerA.id - answerB.id; 
+                                       });
+                                    });
                                     return data;
                                 });
                     }
@@ -201,19 +240,41 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl : 'partials/welcome/welcome.html'
     })
 
-    .state('app.home', {
-        url : '/',
-        resolve : {
-            subjects : function(serverCommunicator) {
-                return serverCommunicator.getEnroledSubjectsAsync().then(
-                        function(data, status, headers, config) {
-                            return data;
-                        });
-            }
-        },
-        controller : 'homeController',
-        templateUrl : 'partials/home/home.html'
-    });
+    .state(
+            'app.home',
+            {
+                url : '/',
+                resolve : {
+                    subjects : function(serverCommunicator) {
+                        return serverCommunicator.getEnroledSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    data.data.sort(function(subjectA, subjectB) {
+                                        if (subjectA.name < subjectB.name)
+                                            return -1;
+                                        if (subjectA.name > subjectB.name)
+                                            return 1;
+                                        return 0;
+                                    });
+                                    return data;
+                                });
+                    },
+                    adminSubjects : function(serverCommunicator) {
+                        return serverCommunicator.getAdministratedSubjectsAsync().then(
+                                function(data, status, headers, config) {
+                                    data.data.sort(function(subjectA, subjectB) {
+                                        if (subjectA.name < subjectB.name)
+                                            return -1;
+                                        if (subjectA.name > subjectB.name)
+                                            return 1;
+                                        return 0;
+                                    });
+                                    return data;
+                                });
+                    }
+                },
+                controller : 'homeController',
+                templateUrl : 'partials/home/home.html'
+            });
 
     $urlRouterProvider.otherwise("/");
 

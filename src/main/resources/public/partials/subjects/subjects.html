@@ -1,16 +1,33 @@
 <div class="page-header text-center">
-  <h1><span class="glyphicon glyphicon-list"></span> Fächer</h1>
+	<h1>
+		<span class="glyphicon glyphicon-list"></span> Fächer
+	</h1>
 </div>
 <div class="section">
 	<div class="container">
-                <button class="btn btn-default btn-block" ng-repeat="subject in subjects" ui-sref="app.subject({id : subject.id})">
-                    <div class="col-md-2 col-sm-2 col-xs-4 text-center">
-                        <i class="fa fa-5x fa-fw fa-flask"></i>
-                    </div>
-                    <div class="col-md-10 col-sm-10 col-xs-6">
-                        <p align="left"><b>{{subject.name}}</b></p>
-                        <p align="left">Info:{{subject.description}}</p>
-                    </div>
-                </button>
-    </div>
+		<div class="">
+			<label class="control-label col-sm-6" for="subjectname"><span
+				class="glyphicon glyphicon-search"></span> Suche nach einem Fach:</label><br />
+			<input class="form-control" type="text" name="subjectname"
+				ng-model="filter" placeholder="Name des Faches"></input>
+		</div>
+		<button class="btn btn-default btn-block"
+			ng-repeat="subject in subjects | filter:filter as results"
+			" ui-sref="app.subject({id : subject.id})">
+			<div class="col-md-2 col-sm-2 col-xs-4 text-center">
+				<i class="fa fa-5x fa-fw fa-flask"></i>
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-6">
+				<p align="left">
+					<b>{{subject.name}}</b>
+				</p>
+				<p align="left">Info:{{subject.description}}</p>
+			</div>
+		</button>
+		<div class="section" ng-show="isAdmin">
+			<label>Neues Fach hinzufügen</label>
+			<form ng-submit="addSubject();"><input class="form-control" ng-model="subjectname"></form><br/>
+			<button ng-click="addSubject();" class="btn btn-primary">Neues Fach hinzufügen</button>
+		</div>
+	</div>
 </div>
