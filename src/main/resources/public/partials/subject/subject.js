@@ -81,10 +81,6 @@ angular.module('learny').controller(
                         });
                     }
 
-                    $scope.close = function() {
-                        console.log("here");
-                    }
-                    
                     $scope.updateSubject = function() {
                         serverCommunicator.updateSubjectAsync($scope.subject).then(function() {
                             $scope.editDescriptionBool = false;
@@ -92,7 +88,6 @@ angular.module('learny').controller(
                     }
                     
                     $scope.editDescription = function() {
-                        console.log('lol?');
                         $scope.editDescriptionBool = true;
                     }
 
