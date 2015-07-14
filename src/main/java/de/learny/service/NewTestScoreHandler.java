@@ -51,7 +51,6 @@ public class NewTestScoreHandler {
 	}
 
 	private int calculateScore(int answers, int errors) {
-		System.out.println(answers + " " + errors);
 		int result = (answers - errors) * 100 / answers;
 		return result;
 	}

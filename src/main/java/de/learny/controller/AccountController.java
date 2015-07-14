@@ -59,7 +59,6 @@ public class AccountController {
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseStatus(HttpStatus.CREATED)
 	void create(@RequestBody Account account) {
-		System.out.print(account.toString());
 		if (account.getPassword() == null) {
 			throw new IllegalArgumentException("Passwort darf nicht leer sein.");
 		}
