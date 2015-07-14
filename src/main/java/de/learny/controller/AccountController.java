@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.learny.controller.exception.InvalidPasswordException;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
@@ -176,6 +178,39 @@ public class AccountController {
 	Iterable<Achievement> getOwnAchievments() {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		return loggedInAccount.getAchievements();
+	}
+	
+	@RequestMapping(value = "/me/password", method = RequestMethod.PUT)
+    public void changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if(passwordGenerator.decodePassword(oldPassword, loggedInAccount.getPassword())){
+			loggedInAccount.setPassword(passwordGenerator.hashPassword(newPassword));
+			accountRepository.save(loggedInAccount);
+		}
+		else{
+			throw new InvalidPasswordException("Falsches Passwort");
+		}
+		
+	}
+	
+	@RequestMapping(value = "/{id}/updateRole", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	Account updateRole(@PathVariable("id") long id, @RequestBody Set<Role> postedRoles) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.hasRole("admin")) {
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
+		}
+		Account updateAccount = accountRepository.findById(id);
+		if (updateAccount == null)
+			throw new ResourceNotFoundException("Ein Account mit dieser Id existiert nicht");
+		Set<Role> roles = new HashSet<Role>();
+		for(Role postedRole : postedRoles){
+			Role role = roleRepo.findFirstByName(postedRole.getName());
+			if (role == null)
+				throw new ResourceNotFoundException("Eine Role mit dem Namen " + postedRole.getName() + " existiert nicht");
+			roles.add(role);
+		}
+		updateAccount.setRoles(roles);
+		return accountRepository.save(updateAccount);
 	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)

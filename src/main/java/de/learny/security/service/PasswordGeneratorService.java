@@ -12,4 +12,9 @@ public class PasswordGeneratorService {
 		return hashedPassword;
 	}
 	
+	public boolean decodePassword(String rawPassword, String encodedPassword){
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		return passwordEncoder.matches(rawPassword, encodedPassword);
+	}
+	
 }
