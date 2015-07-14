@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.learny.controller.exception.InvalidPasswordException;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
@@ -177,6 +179,19 @@ public class AccountController {
 	Iterable<Achievement> getOwnAchievments() {
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		return loggedInAccount.getAchievements();
+	}
+	
+	@RequestMapping(value = "/me/password", method = RequestMethod.PUT)
+    public void changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if(passwordGenerator.decodePassword(oldPassword, loggedInAccount.getPassword())){
+			loggedInAccount.setPassword(passwordGenerator.hashPassword(newPassword));
+			accountRepository.save(loggedInAccount);
+		}
+		else{
+			throw new InvalidPasswordException("Falsches Passwort");
+		}
+		
 	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
