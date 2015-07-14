@@ -17,10 +17,10 @@
                 </button>
     </div>
 </div>
-<div class="page-header text-center">
+<div ng-show="showSubjects" class="page-header text-center">
   <h1><span class="glyphicon glyphicon-list"></span> Meine Fächer</h1>
 </div>
-<div class="section">
+<div ng-show="showSubjects" class="section">
 	<div class="container">
                 <button class="btn btn-default btn-block" ng-repeat="subject in subjects" ui-sref="app.subject({id : subject.id})">
                     <div class="col-md-2 col-sm-2 col-xs-2 text-center">
