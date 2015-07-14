@@ -80,6 +80,10 @@ angular.module('learny').factory(
                         return $http.get('/api/tests/'+ testId);
                     }
                     
+                    service.getHighscoreFromTestAsync = function(testId) {
+                        return $http.get('/api/tests/'+ testId + '/highscore');
+                    }
+                    
                     service.getQuestionsToTestAsync = function(testId) {
                         return $http.get('/api/tests/'+ testId + '/questions');
                     }

@@ -17,5 +17,7 @@ public interface TestScoreRepository extends CrudRepository<TestScore, Long> {
 	TestScore findFirstByAccountAndTestOrderByTimestampDesc(Account account, Test test);
 	
 	Iterable<TestScore> findTop10ByTestOrderByScoreDesc(Test test);
+	
+	TestScore findByAccountAndTest(Account account, Test test);
 
 }
