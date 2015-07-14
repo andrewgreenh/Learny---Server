@@ -126,6 +126,7 @@ public class AccountController {
 		oldAccount.setLastname(postedAccount.getLastname());
 		oldAccount.setEmail(postedAccount.getEmail());
 		oldAccount.setAvatarUri(postedAccount.getAvatarUri());
+		oldAccount.setMyNote(postedAccount.getMyNote());
 		return accountRepository.save(oldAccount);
 	}
 
