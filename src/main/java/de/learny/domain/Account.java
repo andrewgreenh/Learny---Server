@@ -107,6 +107,10 @@ public class Account {
 	public Set<Role> getRoles() {
 		return roles;
 	}
+	
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public void addRole(Role role) {
 		roles.add(role);

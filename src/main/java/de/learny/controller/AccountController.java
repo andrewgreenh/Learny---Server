@@ -193,6 +193,26 @@ public class AccountController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/{id}/updateRole", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	Account updateRole(@PathVariable("id") long id, @RequestBody Set<Role> postedRoles) {
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if (!loggedInAccount.hasRole("admin")) {
+			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
+		}
+		Account updateAccount = accountRepository.findById(id);
+		if (updateAccount == null)
+			throw new ResourceNotFoundException("Ein Account mit dieser Id existiert nicht");
+		Set<Role> roles = new HashSet<Role>();
+		for(Role postedRole : postedRoles){
+			Role role = roleRepo.findFirstByName(postedRole.getName());
+			if (role == null)
+				throw new ResourceNotFoundException("Eine Role mit dem Namen " + postedRole.getName() + " existiert nicht");
+			roles.add(role);
+		}
+		updateAccount.setRoles(roles);
+		return accountRepository.save(updateAccount);
+	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
 	void getOwnStatistics() {
