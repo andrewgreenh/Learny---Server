@@ -112,6 +112,11 @@ public class TestController {
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Test mit dieser id existiert nicht");
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		TestScore oldTestScore =  testScoreRepo.findByAccountAndTest(loggedInAccount, test);
+		if(oldTestScore != null){
+			testScoreRepo.delete(oldTestScore);
+		}
+		
 		TestScore testScore = new TestScore(test, loggedInAccount, checkedAnswers);
 		newTestScoreHandler.addNew(testScore);
 	}

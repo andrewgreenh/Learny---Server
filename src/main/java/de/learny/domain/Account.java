@@ -32,7 +32,10 @@ public class Account {
 	@JsonView(View.Summary.class)
 	private String accountName;
 	
-	private String password, firstname, lastname, email, avatarUri;
+	@JsonView(View.Summary.class)
+	private String firstname, lastname;
+	
+	private String password, email, avatarUri, myNote;
 	
 	@ManyToMany
 	private Set<Role> roles = new HashSet<Role>();
@@ -194,5 +197,13 @@ public class Account {
 			}
 		}
 		return false;
+	}
+
+	public String getMyNote() {
+		return myNote;
+	}
+
+	public void setMyNote(String myNote) {
+		this.myNote = myNote;
 	}
 }
