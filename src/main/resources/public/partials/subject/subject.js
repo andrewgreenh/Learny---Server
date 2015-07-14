@@ -39,14 +39,14 @@ angular.module('learny').controller(
                             console.log("Eintragen fehlgeschlagen");
                         });
                     }
-                    
+
                     $scope.leaveSubject = function() {
                         serverCommunicator.leaveSubjectAsync($scope.subject).then(function(data) {
                             $state.go($state.current, {}, {
                                 reload : true
                             });
                         }, function() {
-                            console.log("Eintragen fehlgeschlagen");
+                            console.log("Austragen fehlgeschlagen");
                         });
                     }
 
@@ -80,9 +80,15 @@ angular.module('learny').controller(
                             });
                         });
                     }
+
+                    $scope.updateSubject = function() {
+                        serverCommunicator.updateSubjectAsync($scope.subject).then(function() {
+                            $scope.editDescriptionBool = false;
+                        });
+                    }
                     
-                    $scope.close = function() {
-                        console.log("here");
+                    $scope.editDescription = function() {
+                        $scope.editDescriptionBool = true;
                     }
 
                 } ]);

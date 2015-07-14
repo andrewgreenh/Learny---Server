@@ -62,6 +62,9 @@ angular.module('learny')
                                     }
 
                                     function startSearch() {
+                                        if ($scope.searchString == undefined) {
+                                            return false;
+                                        }
                                         if ($scope.searchString.length > 3) {
                                             $scope.find();
                                         } else {
