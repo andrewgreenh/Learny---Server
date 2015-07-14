@@ -145,11 +145,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                             return 1;
                                         return 0;
                                     });
-                                    data.data.forEach(function(item){
-                                        item.answers.sort(function(answerA,answerB) {
-                                           return answerA.id - answerB.id; 
+                                    data.data.forEach(function(item) {
+                                        item.answers.sort(function(answerA, answerB) {
+                                            return answerA.id - answerB.id;
                                         });
-                                     });
+                                    });
                                     return data;
                                 });
                     }
@@ -199,10 +199,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                             return 1;
                                         return 0;
                                     });
-                                    data.data.forEach(function(item){
-                                       item.answers.sort(function(answerA,answerB) {
-                                          return answerA.id - answerB.id; 
-                                       });
+                                    data.data.forEach(function(item) {
+                                        item.answers.sort(function(answerA, answerB) {
+                                            return answerA.id - answerB.id;
+                                        });
                                     });
                                     return data;
                                 });
@@ -225,6 +225,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/test/createTest.html'
+            })
+            
+    .state(
+            'app.personList',
+            {
+                url : '/admin/users',
+                params: {
+                    success: null,
+                  },
+                controller : 'personListController',
+                resolve : {
+                    users : function(serverCommunicator) {
+                        return serverCommunicator.getAllUsersAsync().then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/personAdministration/personList.html'
             })
 
     .state('createAccount', {
