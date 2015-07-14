@@ -38,6 +38,10 @@ angular.module('learny').factory(
                         return $http.get('/api/subjects/' + subjectId);
                     };
                     
+                    service.addSubjectAsync = function(subject) {
+                        return $http.post('/api/subjects/', subject);
+                    };
+                    
                     service.updateSubjectAsync = function(subject) {
                         return $http.put('/api/subjects/' + subject.id, subject);
                     };

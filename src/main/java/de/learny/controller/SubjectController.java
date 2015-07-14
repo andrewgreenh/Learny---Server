@@ -84,12 +84,13 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-	void create(@RequestBody Subject subject){
+	long create(@RequestBody Subject subject){
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
 		if (!loggedInAccount.hasRole("admin")) {
 			throw new NotEnoughPermissionsException("Nicht genug Rechte, um das auszuführen.");
 		}
-		this.subjectRepo.save(subject);
+		Subject saved = subjectRepo.save(subject);
+		return saved.getId();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

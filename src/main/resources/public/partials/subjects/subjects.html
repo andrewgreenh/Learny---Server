@@ -24,5 +24,10 @@
 				<p align="left">Info:{{subject.description}}</p>
 			</div>
 		</button>
+		<div class="section" ng-show="isAdmin">
+			<label>Neues Fach hinzufügen</label>
+			<form ng-submit="addSubject();"><input class="form-control" ng-model="subjectname"></form><br/>
+			<button ng-click="addSubject();" class="btn btn-primary">Neues Fach hinzufügen</button>
+		</div>
 	</div>
 </div>
