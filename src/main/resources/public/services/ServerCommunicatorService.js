@@ -10,8 +10,8 @@ angular.module('learny').factory(
                     }
 
                     service.loginAsync = function(username, password) {
-                        return $http.post('/login?username=' + encodeURI(username) + '&password='
-                                + encodeURI(password));
+                        return $http.post('/login?username=' + encodeURIComponent(username) + '&password='
+                                + encodeURIComponent(password));
                     };
 
                     service.logoutAsync = function() {
