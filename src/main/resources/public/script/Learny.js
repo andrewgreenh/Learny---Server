@@ -155,6 +155,40 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     }
                 },
                 templateUrl : 'partials/test/test.html'
+            })
+            
+            .state(
+            'app.testStats',
+            {
+                url : '/test/:id/stats',
+                controller : 'testStatsController',
+                resolve : {
+                    test : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
+                    questions : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getQuestionsToTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    data.data.sort(function(questionA, questionB) {
+                                        if (questionA.id < questionB.id)
+                                            return -1;
+                                        if (questionA.id > questionB.id)
+                                            return 1;
+                                        return 0;
+                                    });
+                                    data.data.forEach(function(item) {
+                                        item.answers.sort(function(answerA, answerB) {
+                                            return answerA.id - answerB.id;
+                                        });
+                                    });
+                                    return data;
+                                });
+                    }
+                },
+                templateUrl : 'partials/test/testStats.html'
             }).state(
             'app.highscore',
             {
