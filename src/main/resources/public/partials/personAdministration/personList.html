@@ -1,0 +1,41 @@
+
+
+
+<div class="page-header text-center">
+	<div class="alert alert-success" ng-show="showSuccess">
+		<strong>Geschafft!</strong> Rollen wurden aktualisiert!
+	</div>
+	<h1>
+		<span class="glyphicon glyphicon-list"></span> Personenliste
+	</h1>
+</div>
+<div class="section">
+	<div class="container">
+		<div class="">
+			<label class="control-label col-sm-6"><span
+				class="glyphicon glyphicon-search"></span> Suche nach einem Nutzer:</label><br />
+			<input class="form-control" type="text" name="accountName"
+				ng-model="filter" placeholder="Accountname"></input>
+		</div>
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in users | filter:filterFunction">
+						<td>{{user.lastname}}, {{user.firstname}} -
+							{{user.accountName}}</td>
+						<td><label><input type="checkbox" value=""
+								ng-model="user.isAdmin">Admin</label></td>
+						<td><label><input type="checkbox" value=""
+								ng-model="user.isDozent">Dozent</label></td>
+						<td><button class="btn" ng-click="updateRoles(user)">Speichern</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -24,7 +24,7 @@ angular.module('learny').directive(
                                 });
 
                             }
-
+                            
                             $scope.showlogin = false;
                             $scope.toggleLogin = function() {
                                 serverCommunicator.isLoggedInAsync().success(function() {
@@ -35,6 +35,10 @@ angular.module('learny').directive(
                                 	$("#loginModal").modal("show"); 
                                     
                                 });
+                            }
+                            
+                            if($scope.loggedin && $scope.user.isGlobalAdmin()) {
+                                $scope.userIsAdmin = true;
                             }
 
                         } ],

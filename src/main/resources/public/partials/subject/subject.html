@@ -101,7 +101,7 @@
 								class="btn btn-block btn-default">{{test.name}}</button>
 						</td>
 						<td>
-							<button class="btn">Test bearbeiten.</button>
+							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
 						</td>
 						<td>
 							<button class="btn btn-danger" ng-click="deleteTest(test)">Test
@@ -131,7 +131,7 @@
 									class="glyphicon glyphicon-list-alt"></span></font><font size="3"><span
 									class="glyphicon glyphicon-ok"></span></font></a> &nbsp;&nbsp;&nbsp;&nbsp;
 							<a data-toggle="tooltip" title="Rangliste"
-								ui-sref="app.lastResult({id : test.id})"> <font size="6"><span
+								ui-sref="app.highscore({id : test.id})"> <font size="6"><span
 									class="glyphicon glyphicon-star"></span></font></a>
 						</div>
 					</div>
