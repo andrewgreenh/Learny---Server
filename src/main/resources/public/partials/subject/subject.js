@@ -54,6 +54,19 @@ angular
                                         });
                             }
 
+                            $scope.addResponsibleModal = function(user) {
+                                $scope.global
+                                        .showGlobalModal(
+                                                'Sicher, dass du '
+                                                        + user.firstname
+                                                        + ' '
+                                                        + user.lastname
+                                                        + ' zum Verantwortlichen machen möchtest? Die Person kann dadurch Test hinzufügen und löschen, sowie die Verantwortlichen des Faches bearbeiten',
+                                                function() {
+                                                    $scope.addResponsible(user);
+                                                });
+                            }
+
                             $scope.addResponsible = function(user) {
                                 serverCommunicator.addUserAsAdministratorToSubjectAsync(
                                         user.accountName, $scope.subject.id).then(function(data) {

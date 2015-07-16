@@ -9,7 +9,9 @@ angular.module('learny').controller(
                 'users',
                 function($scope, $state, $stateParams, $timeout, serverCommunicator, users) {
                     $scope.showSuccess = $stateParams.success;
-                    $timeout(function(){$scope.showSuccess = false;}, 2000);
+                    $timeout(function() {
+                        $scope.showSuccess = false;
+                    }, 2000);
                     users.data.forEach(function(user) {
                         user.roles = flattenRoles(user.roles);
                         user.isDozent = false;
@@ -27,28 +29,44 @@ angular.module('learny').controller(
                         return user.accountName.indexOf($scope.filter.replace(/\s+/g, '')
                                 .toLowerCase()) > -1;
                     }
-                    
+
+                    $scope.updateRolesModal = function(user) {
+                        $scope.global.showGlobalModal(
+                                'Sicher, dass du die Rollen des Nutzers ändern möchtest?',
+                                function() {
+                                    $scope.updateRoles(user);
+                                });
+                    }
+
                     $scope.updateRoles = function(user) {
                         var newRoles = [];
-                        if(user.isAdmin) {
-                            newRoles.push({name: "admin"});
+                        if (user.isAdmin) {
+                            newRoles.push({
+                                name : "admin"
+                            });
                         }
-                        if(user.isDozent) {
-                            newRoles.push({name: "dozent"});
+                        if (user.isDozent) {
+                            newRoles.push({
+                                name : "dozent"
+                            });
                         }
-                        newRoles.push({name: "user"});
+                        newRoles.push({
+                            name : "user"
+                        });
                         user.newRoles = newRoles;
-                        serverCommunicator.updateRolesAsync(user).then(function(){
-                            $state.go($state.current, {success: true}, {
+                        serverCommunicator.updateRolesAsync(user).then(function() {
+                            $state.go($state.current, {
+                                success : true
+                            }, {
                                 reload : true
                             });
                         });
 
                     }
-                    
+
                     function flattenRoles(array) {
                         var result = [];
-                        for(var i = 0; i < array.length; i++) {
+                        for (var i = 0; i < array.length; i++) {
                             result = result.concat(array[i].name);
                         }
                         return result;
