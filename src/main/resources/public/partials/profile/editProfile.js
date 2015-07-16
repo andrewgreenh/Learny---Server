@@ -13,7 +13,9 @@ angular.module('learny').controller(
                                 .updateProfileAsync($scope.currentUser.id, $scope.newUser).then(
                                         function(data) {
                                             $scope.setUser(data.data);
-                                            $state.go('app.profile');
+                                            $state.go('app.profile', {}, {
+                                                reload : true
+                                            });
                                         }, function() {
                                             console.log('Request fehlgeschlagen');
                                         });
