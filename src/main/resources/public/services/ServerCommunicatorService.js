@@ -22,6 +22,14 @@ angular.module('learny').factory(
                         return $http.get('/api/accounts/me');
                     };
                     
+                    service.updateRolesAsync = function(user) {
+                        return $http.put('/api/accounts/' + user.id + '/updateRole', user.newRoles);
+                    };
+                    
+                    service.getAllUsersAsync = function() {
+                        return $http.get('/api/accounts');
+                    };
+                    
                     service.findDozentenAsync = function(string) {
                         return $http.get('/api/accounts/findwithrole/' + string + '&dozent');
                     };

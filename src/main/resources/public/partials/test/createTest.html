@@ -18,12 +18,13 @@
                           <hr>
                         <li ng-repeat="question in test.questions">
                         	<label>Frage: </label>
-<textarea class="form-control" rows="5" type="text" ng-model="question.question" required></textarea>
+                            <textarea class="form-control" rows="5" type="text" ng-model="question.question" required></textarea>
                         	<ul>
                         		<li ng-repeat="answer in question.answers">
 	                        	<label>Option:</label> <input type="text" ng-model="answer.answer" required>
-	                        	<label>Richtig?</label> <input type="checkbox" ng-model="answer.correct">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        	<label>Erklaerung:</label><input type="text" placeholder="Erklaerung" required>
+	                        	<label>Richtig?</label> <input type="checkbox" ng-model="answer.correct">
+	                        	<br>
+	                        	<label>Erklaerung:</label> <textarea class="form-control" rows="3" type="text" placeholder="Erklaerung" ng-model="answer.explanation" required></textarea>
 	                        	</li>
 	                        	<button ng-click="addAnswer(question)" class="btn btn-default">Neue Antwort.</button><br>
                         	</ul>

@@ -16,8 +16,9 @@
                                 <h3 class="panel-title">{{question.question}}</h3>
                             </div>
                             <div class="panel-body">
-                                <li ng-repeat="answer in question.answers">
+                                <div ng-repeat="answer in question.answers">
 	                            <div class="checkbox"><label><input type="checkbox" ng-model="answer.checked">{{answer.answer}}</label></div>
+	                            </div>
                             </div>
                         </div>
                     </div>

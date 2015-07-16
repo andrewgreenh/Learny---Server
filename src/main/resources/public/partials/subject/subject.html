@@ -52,7 +52,7 @@
 									{{responsible.firstname}}</a></td>
 							<td>
 								<button class="btn btn-danger" ng-show="userIsAdmin"
-									ng-click="removeFromResponsibles(responsible)">Als
+									ng-click="removeResponsibleModal(responsible)">Als
 									Verantwortlichen entfernen.</button>
 							</td>
 						</tr>
@@ -62,11 +62,8 @@
 					<form ng-submit="addResponsible()">
 						<p>
 							<b>Name neue(r) Verantwortliche(r):</b>
-							<accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
+							<accountFinder class="col-xs-3" callback="addResponsibleModal(user)"></accountFinder>
 						</p>
-						<button class="btn btn-primary" type="submit">
-							<span class="glyphicon glyphicon-plus"></span> Hinzufügen.
-						</button>
 					</form>
 				</div>
 			</div>
@@ -84,7 +81,7 @@
 		</div>
 		<div class="col-md-12">
 			<div class="alert alert-info" ng-show="userIsEnroled" align="center">
-				<strong><font size="+1" face="cursive">Löse doch
+				<strong><font size="+1">Löse doch
 						einen der folgenden Tests!</font></strong>
 			</div>
 			<table ng-show="userIsAdmin" class="table table-striped">
@@ -96,15 +93,14 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="test in tests">
-						<td>
-							<button ui-sref="app.test({id:test.id})"
-								class="btn btn-block btn-default">{{test.name}}</button>
+						<td align="center">
+							<b>{{test.name}}</b>
 						</td>
 						<td>
-							<button class="btn">Test bearbeiten.</button>
+							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
 						</td>
 						<td>
-							<button class="btn btn-danger" ng-click="deleteTest(test)">Test
+							<button class="btn btn-danger" ng-click="deleteTestModal(test)">Test
 								löschen</button>
 						</td>
 					</tr>
@@ -131,7 +127,7 @@
 									class="glyphicon glyphicon-list-alt"></span></font><font size="3"><span
 									class="glyphicon glyphicon-ok"></span></font></a> &nbsp;&nbsp;&nbsp;&nbsp;
 							<a data-toggle="tooltip" title="Rangliste"
-								ui-sref="app.lastResult({id : test.id})"> <font size="6"><span
+								ui-sref="app.highscore({id : test.id})"> <font size="6"><span
 									class="glyphicon glyphicon-star"></span></font></a>
 						</div>
 					</div>
