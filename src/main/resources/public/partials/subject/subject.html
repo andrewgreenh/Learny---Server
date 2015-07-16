@@ -52,7 +52,7 @@
 									{{responsible.firstname}}</a></td>
 							<td>
 								<button class="btn btn-danger" ng-show="userIsAdmin"
-									ng-click="removeFromResponsibles(responsible)">Als
+									ng-click="removeResponsibleModal(responsible)">Als
 									Verantwortlichen entfernen.</button>
 							</td>
 						</tr>
@@ -104,7 +104,7 @@
 							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
 						</td>
 						<td>
-							<button class="btn btn-danger" ng-click="deleteTest(test)">Test
+							<button class="btn btn-danger" ng-click="deleteTestModal(test)">Test
 								löschen</button>
 						</td>
 					</tr>
