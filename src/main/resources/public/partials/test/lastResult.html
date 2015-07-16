@@ -30,7 +30,7 @@
 					<div class="panel-body">
 							<div ng-repeat="answer in question.answers" class="checkbox">
 								<span ng-hide="answer.answeredCorrectly" class="glyphicon glyphicon-remove"></span><label><input type="checkbox" ng-model="answer.checked">{{answer.answer}}</label>
-								<p class="bg-danger" ng-hide="answer.answeredCorrectly">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span>{Erklaerung...}</p>
+								<p class="bg-danger" ng-hide="answer.answeredCorrectly">&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span>{{answer.explanation}}</p>
 							</div>
 					</div>
 				</div>

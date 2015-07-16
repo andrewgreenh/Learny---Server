@@ -64,9 +64,6 @@
 							<b>Name neue(r) Verantwortliche(r):</b>
 							<accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
 						</p>
-						<button class="btn btn-primary" type="submit">
-							<span class="glyphicon glyphicon-plus"></span> Hinzufügen.
-						</button>
 					</form>
 				</div>
 			</div>
@@ -84,7 +81,7 @@
 		</div>
 		<div class="col-md-12">
 			<div class="alert alert-info" ng-show="userIsEnroled" align="center">
-				<strong><font size="+1" face="cursive">Löse doch
+				<strong><font size="+1">Löse doch
 						einen der folgenden Tests!</font></strong>
 			</div>
 			<table ng-show="userIsAdmin" class="table table-striped">
@@ -96,12 +93,8 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="test in tests">
-						<td>
-							<button ui-sref="app.test({id:test.id})"
-								class="btn btn-block btn-default">{{test.name}}</button>
-						</td>
-						<td>
-							<button class="btn">Test bearbeiten.</button>
+						<td align="center">
+							<b>{{test.name}}</b>
 						</td>
 						<td>
 							<button class="btn btn-danger" ng-click="deleteTest(test)">Test
