@@ -24,7 +24,10 @@ public class Answer {
 	
 	private boolean correct;
 	
+	@JsonView(View.Summary.class)
 	private int answerCount;
+	
+	@JsonView(View.Summary.class)
 	private int errorCount;
 	
 	@ManyToOne

@@ -7,6 +7,7 @@ angular.module('learny').controller('subjectsController', [ '$scope', '$state', 
             $state.go('app.subject', {id: data.data});
         });
     }
+
     if($scope.currentUser.isGlobalAdmin()) {
         $scope.isAdmin = true;
     }

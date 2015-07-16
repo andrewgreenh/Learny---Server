@@ -52,7 +52,7 @@
 									{{responsible.firstname}}</a></td>
 							<td>
 								<button class="btn btn-danger" ng-show="userIsAdmin"
-									ng-click="removeFromResponsibles(responsible)">Als
+									ng-click="removeResponsibleModal(responsible)">Als
 									Verantwortlichen entfernen.</button>
 							</td>
 						</tr>
@@ -62,7 +62,7 @@
 					<form ng-submit="addResponsible()">
 						<p>
 							<b>Name neue(r) Verantwortliche(r):</b>
-							<accountFinder class="col-xs-3" callback="addResponsible(user)"></accountFinder>
+							<accountFinder class="col-xs-3" callback="addResponsibleModal(user)"></accountFinder>
 						</p>
 					</form>
 				</div>
@@ -97,7 +97,10 @@
 							<b>{{test.name}}</b>
 						</td>
 						<td>
-							<button class="btn btn-danger" ng-click="deleteTest(test)">Test
+							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
+						</td>
+						<td>
+							<button class="btn btn-danger" ng-click="deleteTestModal(test)">Test
 								löschen</button>
 						</td>
 					</tr>
@@ -124,7 +127,7 @@
 									class="glyphicon glyphicon-list-alt"></span></font><font size="3"><span
 									class="glyphicon glyphicon-ok"></span></font></a> &nbsp;&nbsp;&nbsp;&nbsp;
 							<a data-toggle="tooltip" title="Rangliste"
-								ui-sref="app.lastResult({id : test.id})"> <font size="6"><span
+								ui-sref="app.highscore({id : test.id})"> <font size="6"><span
 									class="glyphicon glyphicon-star"></span></font></a>
 						</div>
 					</div>

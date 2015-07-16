@@ -42,6 +42,16 @@ angular.module('learny').controller(
                         }
                     }
                     
+                    $scope.globalModalFunction = undefined;
+                    $scope.globalModalText = "";
+                    $scope.global = {};
+                    
+                    $scope.global.showGlobalModal = function(text, callback) {
+                        $scope.globalModalText = text;
+                        $scope.globalModalFunction = callback;
+                        $('#globalModal').modal();
+                    }
+                    
                     function flattenRoles(array) {
                         var result = [];
                         for(var i = 0; i < array.length; i++) {
