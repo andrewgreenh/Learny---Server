@@ -10,24 +10,34 @@ angular.module('learny').controller(
                     $scope.test = test.data;
                     $scope.test.questions = questions.data;
                     $scope.submit = function() {
-                        serverCommunicator.turnInAnswersToTestAsync(
-                                getAllCheckedAnswers($scope.test), $scope.test.id).then(
+                        serverCommunicator.turnInTestAsync(generatePushableTest($scope.test)).then(
                                 function(data) {
-                                    $state.go('app.lastResult', {id: $scope.test.id});
+                                    $state.go('app.lastResult', {
+                                        id : $scope.test.id
+                                    });
                                 }, function() {
                                     console.log('Test konnte nicht eingereicht werden.');
                                 });
                     }
 
-                    function getAllCheckedAnswers(test) {
-                        checkedAnswers = [];
-                        test.questions.forEach(function(question) {
-                            question.answers.forEach(function(answer) {
-                                if (answer.checked) {
-                                    checkedAnswers.push(answer);
-                                }
-                            });
-                        });
-                        return checkedAnswers;
+                    function generatePushableTest(test) {
+                        return {
+                            id : test.id,
+                            questions : test.questions.map(generatePushableQuestion),
+                        }
+                    }
+
+                    function generatePushableQuestion(question) {
+                        return {
+                            id : question.id,
+                            answers : question.answers.map(generatePushableAnswer)
+                        }
+                    }
+
+                    function generatePushableAnswer(answer) {
+                        return {
+                            id : answer.id,
+                            isCorrect : (answer.checked === undefined) ? false : answer.checked
+                        };
                     }
                 } ]);

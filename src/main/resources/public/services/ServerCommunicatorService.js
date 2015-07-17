@@ -112,8 +112,8 @@ angular.module('learny').factory(
                         return $http.post('/api/subjects/'+ subjectId + '/tests', test);
                     }
                     
-                    service.turnInAnswersToTestAsync = function(answers, testId) {
-                        return $http.post('/api/tests/' + testId + '/results', answers);
+                    service.turnInTestAsync = function(test) {
+                        return $http.post('/api/tests/' + test.id + '/results', test.questions);
                     }
                     return service;
                 } ]);
