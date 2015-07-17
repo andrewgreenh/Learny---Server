@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import de.learny.JsonView.View;
 import de.learny.controller.exception.NotEnoughPermissionsException;
+import de.learny.controller.exception.NotJoinedSubject;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.TestRepository;
 import de.learny.dataaccess.TestScoreRepository;
@@ -112,6 +113,9 @@ public class TestController {
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Test mit dieser id existiert nicht");
 		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		if(!loggedInAccount.getJoinedSubjects().contains(test.getSubject())){
+			throw new NotJoinedSubject("Sie sind nicht in dem Fach angemeldet");
+		}
 		TestScore oldTestScore =  testScoreRepo.findByAccountAndTest(loggedInAccount, test);
 		if(oldTestScore != null){
 			testScoreRepo.delete(oldTestScore);
