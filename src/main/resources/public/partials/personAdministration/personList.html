@@ -3,7 +3,7 @@
 
 <div class="page-header text-center">
 	<div class="alert alert-success" ng-show="showSuccess">
-		<strong>Geschafft!</strong> Rollen wurden aktualisiert!
+		<strong>Gespeichert</strong>
 	</div>
 	<h1>
 		<span class="glyphicon glyphicon-list"></span> Personenliste
@@ -32,7 +32,8 @@
 								ng-model="user.isAdmin">Admin</label></td>
 						<td><label><input type="checkbox" value=""
 								ng-model="user.isDozent">Dozent</label></td>
-						<td><button class="btn" ng-click="updateRolesModal(user)">Speichern</button></td>
+						<td><button class="btn" ng-click="updateRolesModal(user)"><span class="glyphicon glyphicon-floppy-disk"></span></button></td>
+						<td><button class="btn btn-danger" ng-click="deleteUserModal(user)"><span class="glyphicon glyphicon-trash"></span></button></td>
 					</tr>
 				</tbody>
 			</table>

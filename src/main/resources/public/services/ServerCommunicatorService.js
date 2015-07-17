@@ -22,6 +22,10 @@ angular.module('learny').factory(
                         return $http.get('/api/accounts/me');
                     };
                     
+                    service.deleteUserAsync = function(user) {
+                        return $http.delete('api/accounts/' + user.id);
+                    }
+                    
                     service.updateRolesAsync = function(user) {
                         return $http.put('/api/accounts/' + user.id + '/updateRole', user.newRoles);
                     };
