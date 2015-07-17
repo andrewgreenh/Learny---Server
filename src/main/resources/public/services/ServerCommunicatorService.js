@@ -26,6 +26,10 @@ angular.module('learny').factory(
                         return $http.delete('api/accounts/' + user.id);
                     }
                     
+                    service.updatePasswordAsync = function(oldPassword, newPassword) {
+                        return $http.put('api/accounts/me/password?oldPassword=' + encodeURIComponent(oldPassword) + '&newPassword=' + encodeURIComponent(newPassword));
+                    }
+                    
                     service.updateRolesAsync = function(user) {
                         return $http.put('/api/accounts/' + user.id + '/updateRole', user.newRoles);
                     };
