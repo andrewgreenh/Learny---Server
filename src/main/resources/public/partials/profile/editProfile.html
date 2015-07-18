@@ -1,4 +1,13 @@
 <div class="page-header text-center">
+	<div class="alert alert-danger" ng-show="showError">
+		<strong>{{errorMsg}}</strong>
+	</div>
+	<h1>
+		<span class="glyphicon glyphicon-list"></span> Personenliste
+	</h1>
+</div>
+
+<div class="page-header text-center">
 	<h1>
 		<span class="glyphicon glyphicon-user"></span> Dein Profil <small><a
 			ui-sref="app.editProfile"><span class="glyphicon glyphicon-edit"></span>
@@ -23,38 +32,75 @@
 			</p>
 		</div>
 		<div class="col-md-4 col-sm-12 col-xs-12">
-			  <form class="form-horizontal" role="form" ng-submit="save()">  
+			<form class="form-horizontal" role="form" ng-submit="save()">
 				<div class="form-group">
-				    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Vorname:</label>
-				    <div class="col-md-9 col-sm-9 col-xs-9"><input class="form-control" type="text" name="firstname" ng-model="newUser.firstname" required="" placeholder="firstname"></div>
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Vorname:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="text" name="firstname"
+							ng-model="newUser.firstname" required="" placeholder="firstname">
+					</div>
 				</div>
 				<div class="form-group">
-				    <label class="col-md-3 col-sm-3 col-xs-3 control-label">Nachname:</label>
-				    <div class="col-md-9 col-sm-9 col-xs-9"><input class="form-control" type="text" name="lastname" ng-model="newUser.lastname" required="" placeholder="Lastname"></div>
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Nachname:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="text" name="lastname"
+							ng-model="newUser.lastname" required="" placeholder="Lastname">
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 col-sm-3 col-xs-3 control-label">E-Mail:</label>
-					<div class="col-md-9 col-sm-9 col-xs-9"><input class="form-control" type="text" name="email" ng-model="newUser.email" required="" placeholder="Email"></div>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="text" name="email"
+							ng-model="newUser.email" required="" placeholder="Email">
+					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Notiz	:</label>
-					<div class="col-md-9 col-sm-9 col-xs-9"><textarea class="form-control" rows="3" type="text" name="notiz" ng-model="newUser.myNote" required="" placeholder="Notiz hinzufügen"></textarea></div>
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Notiz
+						:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<textarea class="form-control" rows="3" type="text" name="notiz"
+							ng-model="newUser.myNote" required=""
+							placeholder="Notiz hinzufügen"></textarea>
+					</div>
 				</div>
 				<div align="right">
-				    <input class="btn btn-primary" type="submit" value="Speichern">
+					<input class="btn btn-primary" type="submit" value="Speichern">
 				</div>
-			  </form>
-			  <form class="form-horizontal" role="form" ng-submit="save()">
+			</form>
+			<form class="form-horizontal" role="form" ng-submit="savePasswords()">
 				<div class="form-group">
-					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Passwort:</label>
-					<div class="col-md-9 col-sm-9 col-xs-9"><input class="form-control" type="password" name="password" 
-					ng-model="password" required="" placeholder="Neues Passwort"></div>
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Altes
+						Passwort:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="password" name="password"
+							ng-model="oldPassword" required="" placeholder="Altes Passwort">
+					</div>
+					<br />
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Neues
+						Passwort:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="password" name="password"
+							ng-model="newPassword" required="" placeholder="Neues Passwort">
+					</div>
+					<br />
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 col-sm-3 col-xs-3 control-label">Neues
+						Passwort wiederholen:</label>
+					<div class="col-md-9 col-sm-9 col-xs-9">
+						<input class="form-control" type="password" name="password"
+							ng-model="confirmPassword" required=""
+							placeholder="Neues Passwort wiederholen"><br/>
+							<p ng-show="passwordMismatch" class="alert alert-danger">Passwörter stimmen nicht überein!</p>
+					</div>
 				</div>
 				<div align="right">
-				    <input class="btn btn-primary" type="submit" value="Speichern"> <a
-					class="btn btn-danger" type="none" ng-click="cancel()">Abbrechen</a>
+					<input ng-disabled="passwordMismatch" class="btn btn-primary" type="submit" value="Speichern">
+					<a class="btn btn-danger" type="none" ng-click="cancel()">Abbrechen</a>
 				</div>
-			  </form>
+			</form>
 		</div>
 	</div>
 </div>

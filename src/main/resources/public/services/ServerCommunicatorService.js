@@ -22,6 +22,14 @@ angular.module('learny').factory(
                         return $http.get('/api/accounts/me');
                     };
                     
+                    service.deleteUserAsync = function(user) {
+                        return $http.delete('api/accounts/' + user.id);
+                    }
+                    
+                    service.updatePasswordAsync = function(oldPassword, newPassword) {
+                        return $http.put('api/accounts/me/password?oldPassword=' + encodeURIComponent(oldPassword) + '&newPassword=' + encodeURIComponent(newPassword));
+                    }
+                    
                     service.updateRolesAsync = function(user) {
                         return $http.put('/api/accounts/' + user.id + '/updateRole', user.newRoles);
                     };
@@ -112,8 +120,8 @@ angular.module('learny').factory(
                         return $http.post('/api/subjects/'+ subjectId + '/tests', test);
                     }
                     
-                    service.turnInAnswersToTestAsync = function(answers, testId) {
-                        return $http.post('/api/tests/' + testId + '/results', answers);
+                    service.turnInTestAsync = function(test) {
+                        return $http.post('/api/tests/' + test.id + '/results', test.questions);
                     }
                     return service;
                 } ]);

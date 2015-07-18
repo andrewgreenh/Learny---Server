@@ -63,6 +63,24 @@ angular.module('learny').controller(
                         });
 
                     }
+                    
+                    $scope.deleteUserModal = function(user) {
+                        $scope.global.showGlobalModal(
+                                'Sicher, dass du diese Person löschen möchtest? Alle ihre Testergebnisse werden damit gelöscht!',
+                                function() {
+                                    deleteUser(user);
+                                });
+                    }
+                    
+                    function deleteUser(user) {
+                        serverCommunicator.deleteUserAsync(user).then(function() {
+                            $state.go($state.current, {
+                                success : true
+                            }, {
+                                reload : true
+                            });
+                        });
+                    }
 
                     function flattenRoles(array) {
                         var result = [];
