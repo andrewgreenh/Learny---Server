@@ -37,7 +37,7 @@ angular.module('learny').controller(
                     function generatePushableAnswer(answer) {
                         return {
                             id : answer.id,
-                            isCorrect : (answer.checked === undefined) ? false : answer.checked
+                            correct : (answer.checked === undefined) ? false : answer.checked
                         };
                     }
                 } ]);
