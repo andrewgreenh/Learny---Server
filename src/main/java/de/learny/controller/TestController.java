@@ -108,7 +108,7 @@ public class TestController {
 
 	@RequestMapping(value = "/{id}/results", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	void turnTest(@PathVariable("id") long id,
-	        @RequestBody Set<Answer> checkedAnswers) {
+	        @RequestBody Set<Question> questions) {
 		Test test = testRepository.findById(id);
 		if (test == null)
 			throw new ResourceNotFoundException("Ein Test mit dieser id existiert nicht");
@@ -120,9 +120,8 @@ public class TestController {
 		if(oldTestScore != null){
 			testScoreRepo.delete(oldTestScore);
 		}
-		
-		TestScore testScore = new TestScore(test, loggedInAccount, checkedAnswers);
-		newTestScoreHandler.addNew(testScore);
+		TestScore testScore = new TestScore(test, loggedInAccount, questions);
+		newTestScoreHandler.addNew(testScore, questions);
 	}
 
 	@JsonView(View.Summary.class)
