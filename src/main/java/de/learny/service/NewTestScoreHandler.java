@@ -49,6 +49,11 @@ public class NewTestScoreHandler {
 						correctChecked++;
 					}
 				}
+				else{
+					answer.addToErrorCount();
+				}
+				answer.addToAnswerCount();
+				answerRepo.save(answer);
 			}
 			//Wenn nichts, alles oder keine einzige Antwort richtig angekreuzt
 			//--> dann gibt es 0 Punkte für diese eine Question
