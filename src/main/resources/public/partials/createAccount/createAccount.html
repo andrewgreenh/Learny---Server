@@ -11,7 +11,7 @@
 			fortzufahren.</a>
 	</div>
 	<div ng-show="error" class="alert alert-danger fade in">
-		<strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
+		<strong>Fehler!</strong> {{errorMsg}}
 	</div>
 	<form role="form" ng-submit="create()">
 		<div class="form-group">

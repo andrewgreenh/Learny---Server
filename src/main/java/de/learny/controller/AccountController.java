@@ -96,6 +96,10 @@ public class AccountController {
 		if (accountNameAlreadyExists) {
 			throw new IllegalArgumentException("Accountname schon vorhanden");
 		}
+		boolean emailAlreadyExists = accountRepository.findByEmail(account.getEmail()) != null;
+		if (emailAlreadyExists) {
+			throw new IllegalArgumentException("E-Mail schon vorhanden");
+		}
 		accountRepository.save(newAcc);
 
 	}
