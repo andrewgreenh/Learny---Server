@@ -44,11 +44,10 @@ public class TestScore {
 	@JsonView(View.Summary.class)
 	private int score;
 
-	public TestScore(Test test, Account account, Set<Answer> checkedAnswers) {
+	public TestScore(Test test, Account account, Set<Question> questions) {
 		setTest(test);
 		this.account = account;
-		this.checkedAnswers = checkedAnswers;
-		uncheckedAnswers = calculateUncheckedAnswers(checkedAnswers, test);
+		setUnAndCheckedAnswers(questions);
 		java.util.Date currentDate = new java.util.Date();
 		this.timestamp = new Timestamp(currentDate.getTime());
 	}
@@ -110,26 +109,21 @@ public class TestScore {
 		this.score = score;
 	}
 
-	private Set<Answer> calculateUncheckedAnswers(Set<Answer> checkedAnswers, Test test) {
-		Set<Answer> resultSet = new HashSet<>();
-		test.getQuestions().forEach(question -> {
-			question.getAnswers().forEach(answer -> {
-				if (!isInCheckedAnswers(answer)) {
-					resultSet.add(answer);
+	private void setUnAndCheckedAnswers(Set<Question> questions) {
+		Set<Answer> checkedAnswers = new HashSet<>();
+		Set<Answer> uncheckedAnswers = new HashSet<>();
+		for(Question question: questions){
+			for(Answer answer: question.getAnswers()){
+				if(answer.isCorrect()){
+					checkedAnswers.add(answer);
 				}
-			});
-		});
-		return resultSet;
-	}
-
-	private boolean isInCheckedAnswers(Answer answer) {
-		boolean result = false;
-		for (Answer checkedAnswer : checkedAnswers) {
-			if (answer.getId() == checkedAnswer.getId()) {
-				result = true;
+				else{
+					uncheckedAnswers.add(answer);
+				}
 			}
 		}
-		return result;
+		this.checkedAnswers = checkedAnswers;
+		this.uncheckedAnswers = uncheckedAnswers;
 	}
 
 }
