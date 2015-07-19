@@ -50,6 +50,10 @@ angular.module('learny').factory(
                         return $http.get('/api/subjects/' + subjectId + '/tests');
                     };
 
+                    service.getMyTestScoresOfSubjectAsync = function(subjectId) {
+                        return $http.get('/api/accounts/me/testResultsForSubject/' + subjectId);
+                    }
+                    
                     service.getSubjectAsync = function(subjectId) {
                         return $http.get('/api/subjects/' + subjectId);
                     };

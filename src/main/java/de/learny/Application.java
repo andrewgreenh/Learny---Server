@@ -96,6 +96,13 @@ public class Application extends SpringBootServletInitializer implements Command
 			Answer answer2 = new Answer("antwort2", quest1, false);
 			answerRepo.save(answer1);
 			answerRepo.save(answer2);
+			
+			Question quest2 = new Question("frage2", test3);
+			questionRepo.save(quest2);
+			Answer answer3 = new Answer("antwort3", quest2, true);
+			Answer answer4 = new Answer("antwort4", quest2, false);
+			answerRepo.save(answer3);
+			answerRepo.save(answer4);
 
 			Account student = new Account("student", passwordGenerator.hashPassword("student"));
 			student.setFirstname("Conrad");

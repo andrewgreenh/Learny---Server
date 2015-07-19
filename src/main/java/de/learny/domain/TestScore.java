@@ -35,6 +35,7 @@ public class TestScore {
 	private Account account;
 
 	@ManyToOne
+	@JsonView(View.Summary.class)
 	private Test test;
 
 	@JsonView(View.Summary.class)
