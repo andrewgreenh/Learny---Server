@@ -8,11 +8,27 @@ angular
                         'serverCommunicator',
                         'tests',
                         'subject',
-                        function($scope, $state, serverCommunicator, tests, subject) {
+                        'testScores',
+                        function($scope, $state, serverCommunicator, tests, subject, testScores) {
 
+                            $scope.testScores = testScores.data;
                             $scope.tests = tests.value.data;
                             $scope.subject = subject.value.data;
 
+                            $scope.tests.forEach(checkIfIsSolved);
+                            
+                            function checkIfIsSolved(test) {
+                                $scope.testScores.forEach(function(testScore) {
+                                    if (testScore.test.id == test.id) {
+                                        addIsSolvedAttribute(test);
+                                    }
+                                })
+                            }
+                            
+                            function addIsSolvedAttribute(test) {
+                                test.isSolved = true;
+                            }
+                            
                             if ($scope.currentUser.isGlobalAdmin()
                                     || $scope.currentUser.isAdminOf($scope.subject.id)) {
                                 $scope.userIsAdmin = true;
