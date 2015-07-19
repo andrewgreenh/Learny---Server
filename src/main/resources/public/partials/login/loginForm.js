@@ -30,6 +30,13 @@ angular.module('learny').directive(
                                 }).modal("hide");
 
                             };
+                            
+                            $scope.goToRequestPassword = function() {
+                                $("#loginModal").one('hidden.bs.modal', function(e) {
+                                    $state.go('requestPassword');
+                                }).modal("hide");
+
+                            };
                         } ],
 
             }

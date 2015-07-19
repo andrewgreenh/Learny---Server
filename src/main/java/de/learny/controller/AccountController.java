@@ -211,28 +211,34 @@ public class AccountController {
 	@RequestMapping(value = "/password/requestToken", method = RequestMethod.POST)
 	public void requestPasswordToken(@RequestParam("mail") String mail) {
 		Account account = accountRepository.findByEmail(mail);
+		if(account == null) {
+			throw new ResourceNotFoundException("Es existiert kein Account mit dieser Mail-Adresse");
+		}
 		if(account.getPasswordResetToken() != null) {
 			pwTokenRepo.delete(account.getPasswordResetToken());
 		}
 		PasswordResetToken resetToken = new PasswordResetToken();
 		account.setPasswordResetToken(resetToken);
 		accountRepository.save(account);
-		String message = "http://learny.xent-online.de/#resetPassword?mail=" + resetToken.getToken();
+		String message = "http://learny.xent-online.de/#/resetPassword?token=" + resetToken.getToken();
 		mailSender.sendMail(mail, "Reset your password", message);
 	}
 	
 	@RequestMapping(value = "/password/reset", method = RequestMethod.POST)
 	public void resetPassword(@RequestParam("password") String password, @RequestParam("token") String token) {
 		PasswordResetToken pwToken = pwTokenRepo.findByToken(token);
-		boolean wrongDate = false;
-		if(new Date().getTime() > pwToken.getExpiryDate()) {
-			wrongDate = true;
-		};
-		if(pwToken == null || wrongDate) {
+		if(pwToken == null) {
 			throw new InvalidTokenException("Ungültiger Token");
 		}
+		if(!pwToken.getToken().equals(token)) {
+			throw new InvalidTokenException("Ungültiger Token");
+		}
+		if(new Date().getTime() > pwToken.getExpiryDate()) {
+			throw new InvalidTokenException("Abgelaufener oder ungültiger Token - bitte beantrage einen neuen Token");
+		};
 		Account account = accountRepository.findByPasswordResetToken(pwToken);
 		account.setPassword(passwordGenerator.hashPassword(password));
+		account.setPasswordResetToken(null);
 		pwTokenRepo.delete(pwToken);
 		accountRepository.save(account);
 		

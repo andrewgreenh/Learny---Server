@@ -1,32 +1,42 @@
 <learnyheader loggedin="false" welcomepage="true"></learnyheader>
 <div class="registry well well-lg">
 	<div class="page-header">
-		 <h1><span class="glyphicon glyphicon-plus"></span> Registriere dich jetzt:</h1>
+		<h1>
+			<span class="glyphicon glyphicon-plus"></span> Registriere dich
+			jetzt:
+		</h1>
 	</div>
 	<div ng-show="created" class="alert alert-success fade in">
-	    <strong>Erfolg!</strong><a ui-sref="welcome"> Logge dich ein um fortzufahren.</a>
+		<strong>Erfolg!</strong><a ui-sref="welcome"> Logge dich ein um
+			fortzufahren.</a>
 	</div>
 	<div ng-show="error" class="alert alert-danger fade in">
-	    <strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
+		<strong>Fehler!</strong> Dein Account konnte nicht erstellt werden.
 	</div>
 	<form role="form" ng-submit="create()">
-	<div class="form-group">
-		<label class="control-label col-sm-6" for="username"><span class="glyphicon glyphicon-user"></span> Username:</label><br/>
-		<input class="form-control" type="text" name="username" ng-model="user.accountName" required></input>
-		
-		<label class="control-label col-sm-6" for="vorname">Vorname:</label><br/>
-		<input class="form-control" type="text" name="vorname" ng-model="user.firstname" required></input>
-		
-		<label class="control-label col-sm-6" for="nachname">Nachname:</label><br/>
-		<input class="form-control" type="text" name="nachname" ng-model="user.lastname" required></input>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-sm-6" for="email"><span class="glyphicon glyphicon-envelope"></span> E-Mail:</label><br/>
-		<input class="form-control" type="email" name="email" ng-model="user.email" required></input>
-		
-		<label class="control-label col-sm-6" for="password"><span class="glyphicon glyphicon-lock"></span> Passwort:</label><br/>
-		<input class="form-control" type="password" name="password" ng-model="user.password" required></input>
-	</div>
-		<button class="form-control" type="submit" value="Senden"><span class="glyphicon glyphicon-plus"></span> Registrieren.</button>
+		<div class="form-group">
+			<label class="control-label col-sm-6" for="username"><span
+				class="glyphicon glyphicon-user"></span> Username:</label><br /> <input
+				class="form-control" type="text" name="username"
+				ng-model="user.accountName" required></input> <label
+				class="control-label col-sm-6" for="vorname">Vorname:</label><br />
+			<input class="form-control" type="text" name="vorname"
+				ng-model="user.firstname" required></input> <label
+				class="control-label col-sm-6" for="nachname">Nachname:</label><br />
+			<input class="form-control" type="text" name="nachname"
+				ng-model="user.lastname" required></input>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-6" for="email"><span
+				class="glyphicon glyphicon-envelope"></span> E-Mail:</label><br /> <input
+				class="form-control" type="email" name="email" ng-model="user.email"
+				required></input> <label class="control-label col-sm-6"
+				for="password"><span class="glyphicon glyphicon-lock"></span>
+				Passwort:</label><br /> <input class="form-control" type="password"
+				name="password" ng-model="user.password" required></input>
+		</div>
+		<button class="form-control" type="submit" value="Senden">
+			<span class="glyphicon glyphicon-plus"></span> Registrieren.
+		</button>
 	</form>
 </div>

@@ -30,6 +30,14 @@ angular.module('learny').factory(
                         return $http.put('api/accounts/me/password?oldPassword=' + encodeURIComponent(oldPassword) + '&newPassword=' + encodeURIComponent(newPassword));
                     }
                     
+                    service.resetPasswordAsync = function(token, newPassword) {
+                        return $http.post('api/accounts/password/reset?password=' + encodeURIComponent(newPassword) + '&token=' + token);
+                    }
+                    
+                    service.requestPasswordAsync = function(email) {
+                        return $http.post('api/accounts/password/requestToken?mail=' + encodeURIComponent(email));
+                    }
+                    
                     service.updateRolesAsync = function(user) {
                         return $http.put('/api/accounts/' + user.id + '/updateRole', user.newRoles);
                     };
