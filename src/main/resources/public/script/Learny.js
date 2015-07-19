@@ -111,6 +111,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                     };
                                 });
                     },
+                    testScores : function($stateParams, serverCommunicator) {
+                      return serverCommunicator.getMyTestScoresOfSubjectAsync($stateParams.id).then(function(data) {
+                          return data;
+                      });  
+                    },
                     subject : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getSubjectAsync($stateParams.id).then(
                                 function(data, status, headers, config) {

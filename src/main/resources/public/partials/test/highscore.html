@@ -1,7 +1,36 @@
-HIGHSCORES
+<div class="page-header text-center">
+	<h1>
+		<span class="glyphicon glyphicon-star"></span>{{test.name}} <small>Highscore</small>
+	</h1>
+</div>
+<p align="right">
+	<button class="btn btn-danger"
+		ui-sref="app.subject({id: test.subject.id})">
+		<span class="glyphicon glyphicon-chevron-left"></span>Zurück zu
+		{{test.subject.name}}
+	</button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 
-<ul>
-<li ng-repeat="item in top">
-{{item.account.firstname}} {{item.account.lastname}} {{item.score}}
-</li>
-</ul>
+<div class="section">
+	<div class="container">
+	    <div class="col-md-2 col-sm-1 col-xs-0"></div>
+		<div class="col-md-8 col-sm-10 col-xs-12">
+			<table class="table table-hover">
+			    <thead>
+			        <tr>
+			            <th align="center" width="400">Name</th>
+			            <th>Ergebnis</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr ng-repeat="item in top">
+			            <td align="center">{{item.account.firstname}} {{item.account.lastname}}</td>
+			            <td>{{item.score}}</td>
+			        </tr>
+			    </tbody>
+			</table>
+	    </div>
+	    <div class="col-md-2 col-sm-1 col-xs-0"></div>
+	</div>
+</div>
