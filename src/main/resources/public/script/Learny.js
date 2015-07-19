@@ -206,7 +206,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                 function(data, status, headers, config) {
                                     return data;
                                 });
-                    }
+                    },
+                    test : function($stateParams, serverCommunicator) {
+                        return serverCommunicator.getTestAsync($stateParams.id).then(
+                                function(data, status, headers, config) {
+                                    return data;
+                                });
+                    },
                 },
                 templateUrl : 'partials/test/highscore.html'
             })
