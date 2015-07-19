@@ -9,7 +9,6 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.AnswerRepository;
@@ -107,17 +106,17 @@ public class Application extends SpringBootServletInitializer implements Command
 			Account student = new Account("student", passwordGenerator.hashPassword("student"));
 			student.setFirstname("Conrad");
 			student.setLastname("Reuter");
-			student.setEmail("a@bd.de");
+			student.setEmail("a@rtline.de");
 
 			Account admin = new Account("admin", passwordGenerator.hashPassword("admin"));
 			admin.setFirstname("Andreas");
 			admin.setLastname("Roth");
-			admin.setEmail("a@bd.de");
+			admin.setEmail("andreas.roth@rtline.de");
 
 			Account dozent = new Account("dozent", passwordGenerator.hashPassword("dozent"));
 			dozent.setFirstname("Martin");
 			dozent.setLastname("Burwitz");
-			dozent.setEmail("a@bd.de");
+			dozent.setEmail("art_martinburwitz@rtline.de");
 
 			student.addRole(userRole);
 			admin.addRole(adminRole);

@@ -112,9 +112,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
                                 });
                     },
                     testScores : function($stateParams, serverCommunicator) {
-                      return serverCommunicator.getMyTestScoresOfSubjectAsync($stateParams.id).then(function(data) {
-                          return data;
-                      });  
+                        return serverCommunicator.getMyTestScoresOfSubjectAsync($stateParams.id)
+                                .then(function(data) {
+                                    return data;
+                                });
                     },
                     subject : function($stateParams, serverCommunicator) {
                         return serverCommunicator.getSubjectAsync($stateParams.id).then(
@@ -161,8 +162,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 },
                 templateUrl : 'partials/test/test.html'
             })
-            
-            .state(
+
+    .state(
             'app.testStats',
             {
                 url : '/test/:id/stats',
@@ -265,14 +266,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 },
                 templateUrl : 'partials/test/createTest.html'
             })
-            
+
     .state(
             'app.personList',
             {
                 url : '/admin/users',
-                params: {
-                    success: null,
-                  },
+                params : {
+                    success : null,
+                },
                 controller : 'personListController',
                 resolve : {
                     users : function(serverCommunicator) {
@@ -290,6 +291,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
         resolve : {},
         controller : 'createAccountController',
         templateUrl : 'partials/createAccount/createAccount.html'
+    })
+
+    .state('requestPassword', {
+        url : '/requestPassword',
+        controller : 'requestPasswordController',
+        templateUrl : 'partials/resetPassword/requestPassword.html'
+    })
+
+    .state('resetPassword', {
+        url : '/resetPassword?token',
+        controller : 'resetPasswordController',
+        resolve : {
+            token : function($stateParams) {
+                return $stateParams.token;
+            }
+        },
+        templateUrl : 'partials/resetPassword/resetPassword.html'
     })
 
     .state('welcome', {
@@ -350,7 +368,7 @@ app.run(function($rootScope, $state, serverCommunicator) {
 });
 
 function stateShouldBeBehindLogin(state) {
-    if ([ 'welcome', 'createAccount' ].indexOf(state) > -1) {
+    if ([ 'welcome', 'createAccount', 'resetPassword', 'requestPassword' ].indexOf(state) > -1) {
         return false
     }
     return true;

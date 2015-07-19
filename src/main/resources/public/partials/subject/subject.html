@@ -117,7 +117,7 @@
 					<div ng-repeat="test in tests">
 						<div class="col-md-10 col-sm-8 col-xs-7">
 							<button ui-sref="app.test({id:test.id})"
-								class="btn btn-block btn-default">
+								class="btn btn-block btn-default" ng-disabled="userIsEnroled == false">
 								<font size="+1"><b>{{test.name}}</b></font>
 							</button>
 						</div>

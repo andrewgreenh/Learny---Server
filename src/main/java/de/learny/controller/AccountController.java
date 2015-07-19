@@ -2,6 +2,7 @@ package de.learny.controller;
 
 import io.swagger.annotations.Api;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,19 +18,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.learny.controller.exception.InvalidPasswordException;
+import de.learny.controller.exception.InvalidTokenException;
 import de.learny.controller.exception.NotEnoughPermissionsException;
 import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
+import de.learny.dataaccess.PasswordResetTokenRepository;
 import de.learny.dataaccess.RoleRepository;
 import de.learny.dataaccess.SubjectRepository;
 import de.learny.dataaccess.TestScoreRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Achievement;
+import de.learny.domain.PasswordResetToken;
 import de.learny.domain.Role;
 import de.learny.domain.Subject;
 import de.learny.domain.TestScore;
 import de.learny.security.service.LoggedInAccountService;
 import de.learny.security.service.PasswordGeneratorService;
+import de.learny.service.LearnyMailSender;
 import de.learny.service.UserFinder;
 
 @Api(value = "Accounts", description = "Zugriff auf Accounts", produces = "application/json")
@@ -57,6 +62,12 @@ public class AccountController {
 	
 	@Autowired
 	private TestScoreRepository testScoreRepo;
+	
+	@Autowired
+	private PasswordResetTokenRepository pwTokenRepo;
+	
+	@Autowired
+	private LearnyMailSender mailSender;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -84,6 +95,10 @@ public class AccountController {
 		        .getAccountName()) != null;
 		if (accountNameAlreadyExists) {
 			throw new IllegalArgumentException("Accountname schon vorhanden");
+		}
+		boolean emailAlreadyExists = accountRepository.findByEmail(account.getEmail()) != null;
+		if (emailAlreadyExists) {
+			throw new IllegalArgumentException("E-Mail schon vorhanden");
 		}
 		accountRepository.save(newAcc);
 
@@ -130,7 +145,6 @@ public class AccountController {
 		}
 		oldAccount.setFirstname(postedAccount.getFirstname());
 		oldAccount.setLastname(postedAccount.getLastname());
-		oldAccount.setEmail(postedAccount.getEmail());
 		oldAccount.setAvatarUri(postedAccount.getAvatarUri());
 		oldAccount.setMyNote(postedAccount.getMyNote());
 		return accountRepository.save(oldAccount);
@@ -195,6 +209,41 @@ public class AccountController {
 		else{
 			throw new InvalidPasswordException("Falsches Passwort");
 		}
+	}
+	
+	@RequestMapping(value = "/password/requestToken", method = RequestMethod.POST)
+	public void requestPasswordToken(@RequestParam("mail") String mail) {
+		Account account = accountRepository.findByEmail(mail);
+		if(account == null) {
+			throw new ResourceNotFoundException("Es existiert kein Account mit dieser Mail-Adresse");
+		}
+		if(account.getPasswordResetToken() != null) {
+			pwTokenRepo.delete(account.getPasswordResetToken());
+		}
+		PasswordResetToken resetToken = new PasswordResetToken();
+		account.setPasswordResetToken(resetToken);
+		accountRepository.save(account);
+		String message = "http://learny.xent-online.de/#/resetPassword?token=" + resetToken.getToken();
+		mailSender.sendMail(mail, "Reset your password", message);
+	}
+	
+	@RequestMapping(value = "/password/reset", method = RequestMethod.POST)
+	public void resetPassword(@RequestParam("password") String password, @RequestParam("token") String token) {
+		PasswordResetToken pwToken = pwTokenRepo.findByToken(token);
+		if(pwToken == null) {
+			throw new InvalidTokenException("Ungültiger Token");
+		}
+		if(!pwToken.getToken().equals(token)) {
+			throw new InvalidTokenException("Ungültiger Token");
+		}
+		if(new Date().getTime() > pwToken.getExpiryDate()) {
+			throw new InvalidTokenException("Abgelaufener oder ungültiger Token - bitte beantrage einen neuen Token");
+		};
+		Account account = accountRepository.findByPasswordResetToken(pwToken);
+		account.setPassword(passwordGenerator.hashPassword(password));
+		account.setPasswordResetToken(null);
+		pwTokenRepo.delete(pwToken);
+		accountRepository.save(account);
 		
 	}
 	

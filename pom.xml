@@ -18,8 +18,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>       
-    	<start-class>de.learny.Application</start-class>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>de.learny.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -38,14 +38,27 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+		</dependency>
+
 
 		<!-- Hibernate and database -->
 		<dependency>
@@ -68,17 +81,22 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!--  SWAGGER Springfox -->
+
+		<!-- SWAGGER Springfox -->
 		<dependency>
-    		<groupId>io.springfox</groupId>
-    		<artifactId>springfox-swagger2</artifactId>
-    		<version>2.0.2</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 		<dependency>
-  			<groupId>io.springfox</groupId>
-  			<artifactId>springfox-swagger-ui</artifactId>
-  			<version>2.0.0</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>2.10.4</version>
 		</dependency>
 	</dependencies>
 
@@ -102,10 +120,10 @@
 			<url>http://maven.xwiki.org/externals</url>
 		</repository>
 		<repository>
-      		<id>jcenter-snapshots</id>
-      		<name>jcenter</name>
-      		<url>https://jcenter.bintray.com/</url>
-    	</repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>https://jcenter.bintray.com/</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
