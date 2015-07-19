@@ -23,7 +23,7 @@
 		<p>{{subject.description}}</p>
 		<button ng-show="userIsAdmin" class="btn btn-secondary"
 			ng-click="editDescription()">
-			<span class="glyphicon glyphicon-edit"></span>Bearbeiten
+			<span class="glyphicon glyphicon-edit"></span> Bearbeiten.
 		</button>
 	</div>
 	<div ng-show="editDescriptionBool" align="center" class="container">
@@ -97,11 +97,11 @@
 							<b>{{test.name}}</b>
 						</td>
 						<td>
-							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
+							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einsehen.</button>
 						</td>
 						<td>
 							<button class="btn btn-danger" ng-click="deleteTestModal(test)">Test
-								löschen</button>
+								löschen.</button>
 						</td>
 					</tr>
 				</tbody>
