@@ -3,7 +3,7 @@
 </div>
 <div class="section">
 	<div align="center">
-		<button align="center" class="btn btn-warning" ng-show="userIsNew"
+		<button align="center" class="btn btn-success" ng-show="userIsNew"
 			ng-click="joinSubject(); $event.preventDefault();" href="#">
 			<h4>
 				<span class="glyphicon glyphicon-ok"></span> Eintragen.
@@ -11,10 +11,10 @@
 		</button>
 	</div>
 	<div align="center">
-		<button align="center" class="btn btn-warning" ng-show="userIsEnroled"
+		<button align="center" class="btn btn-danger" ng-show="userIsEnroled"
 			ng-click="leaveSubject(); $event.preventDefault();" href="#">
 			<h4>
-				<span class="glyphicon glyphicon-ok"></span> Austragen.
+				<span class="glyphicon glyphicon-remove"></span> Austragen.
 			</h4>
 		</button>
 	</div>
@@ -23,7 +23,7 @@
 		<p>{{subject.description}}</p>
 		<button ng-show="userIsAdmin" class="btn btn-secondary"
 			ng-click="editDescription()">
-			<span class="glyphicon glyphicon-edit"></span>Bearbeiten
+			<span class="glyphicon glyphicon-edit"></span> Bearbeiten.
 		</button>
 	</div>
 	<div ng-show="editDescriptionBool" align="center" class="container">
@@ -31,7 +31,7 @@
 				class="form-control col-md-6 col-xs-12"
 				ng-model="subject.description"></textarea></label><br />
 		<button align="center" class="btn btn-primary"
-			ng-click="updateSubject();">Speichern</button>
+			ng-click="updateSubject();"> Speichern.</button>
 	</div>
 	<div class="container">
 		<div class="col-md-12">
@@ -97,11 +97,11 @@
 							<b>{{test.name}}</b>
 						</td>
 						<td>
-							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einesehen.</button>
+							<button class="btn" ui-sref="app.testStats({id:test.id})">Teststatistik einsehen.</button>
 						</td>
 						<td>
-							<button class="btn btn-danger" ng-click="deleteTestModal(test)">Test
-								löschen</button>
+							<button class="btn btn-danger" ng-click="deleteTestModal(test)"> Test
+								löschen.</button>
 						</td>
 					</tr>
 				</tbody>
