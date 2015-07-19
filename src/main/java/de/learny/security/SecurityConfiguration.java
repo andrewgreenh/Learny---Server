@@ -53,6 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				UsernamePasswordAuthenticationFilter.class);
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/api/accounts").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/accounts/password/requestToken").permitAll()
+			.antMatchers(HttpMethod.POST, "/api/accounts/password/reset").permitAll()
 			.antMatchers("/api/**", "/login").fullyAuthenticated();
 		http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
 		http.formLogin().loginProcessingUrl("/login")

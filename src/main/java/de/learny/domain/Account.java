@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +36,10 @@ public class Account {
 	@JsonView(View.Summary.class)
 	private String firstname, lastname;
 	
-	private String password, email, avatarUri, myNote;
+	@Column(unique=true, nullable=false)
+	private String email;
+	
+	private String password, avatarUri, myNote;
 	
 	@ManyToMany
 	private Set<Role> roles = new HashSet<Role>();
@@ -52,6 +56,8 @@ public class Account {
 	@ManyToMany
 	private Set <Subject> joinedSubjects = new HashSet<Subject>();
 
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private PasswordResetToken passwordResetToken;
 	
 	public Account(String accountName, String password) {
 		this.accountName = accountName;
@@ -119,7 +125,16 @@ public class Account {
 	public long getId() {
 		return id;
 	}
+	
+	@JsonIgnore
+	public PasswordResetToken getPasswordResetToken() {
+		return passwordResetToken;
+	}
 
+	public void setPasswordResetToken(PasswordResetToken passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
+	}
+	
 	public String getAccountName() {
 		return accountName;
 	}
