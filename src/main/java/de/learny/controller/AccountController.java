@@ -22,10 +22,12 @@ import de.learny.controller.exception.ResourceNotFoundException;
 import de.learny.dataaccess.AccountRepository;
 import de.learny.dataaccess.RoleRepository;
 import de.learny.dataaccess.SubjectRepository;
+import de.learny.dataaccess.TestScoreRepository;
 import de.learny.domain.Account;
 import de.learny.domain.Achievement;
 import de.learny.domain.Role;
 import de.learny.domain.Subject;
+import de.learny.domain.TestScore;
 import de.learny.security.service.LoggedInAccountService;
 import de.learny.security.service.PasswordGeneratorService;
 import de.learny.service.UserFinder;
@@ -52,6 +54,9 @@ public class AccountController {
 
 	@Autowired
 	private UserFinder userFinder;
+	
+	@Autowired
+	private TestScoreRepository testScoreRepo;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	Iterable<Account> getAllAccounts() {
@@ -211,6 +216,16 @@ public class AccountController {
 		}
 		updateAccount.setRoles(roles);
 		return accountRepository.save(updateAccount);
+	}
+	
+	
+	@RequestMapping(value = "/me/testResultsForSubject/{subjectId}", method = RequestMethod.GET)
+	Iterable<TestScore> showMyResultsForSubject(@PathVariable("subjectId") long subjectId){
+		Account loggedInAccount = userToAccountService.getLoggedInAccount();
+		Subject subject = subjectRepo.findById(subjectId);
+		if (subject == null)
+			throw new ResourceNotFoundException("Ein Fach mit dieser id existiert nicht");
+		return testScoreRepo.findByAccountAndTestSubject(loggedInAccount, subject);
 	}
 
 	@RequestMapping(value = "/me/statistics", method = RequestMethod.GET)
