@@ -1,6 +1,6 @@
 <div class="page-header text-center">
 	<h1>
-		<span class="glyphicon glyphicon-list"></span> Alle Fächer.
+		<span class="glyphicon glyphicon-list"></span> Alle Fächer
 	</h1>
 </div>
 <div class="section">
@@ -27,10 +27,10 @@
 		</button>
 		<div class="section" ng-show="isAdmin">
 			<form ng-submit="addSubject();">
-		    	<label>Neues Fach hinzufügen</label>			
+		    	<label><span class="glyphicon glyphicon-plus"></span> Neues Fach hinzufügen:</label>			
 		    	<input class="form-control" ng-model="subjectname">
 			</form><br/>
-			<button ng-click="addSubject();" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Neues Fach hinzufügen</button>
+			<button ng-click="addSubject();" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Hinzufügen.</button>
 		</div>
 	</div>
 </div>
