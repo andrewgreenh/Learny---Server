@@ -4,11 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+
 import de.learny.JsonView.View;
 
 @Entity
@@ -33,6 +35,7 @@ public class Answer {
 	@ManyToOne
 	private Question question;
 	
+	@Lob
 	private String explanation;
 	
 	public Answer(String answer, Question question, boolean correct){
