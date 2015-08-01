@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -24,6 +25,7 @@ public class Question {
 	private long id;
 	
 	@JsonView(View.Summary.class)
+	@Lob
 	private String question;
 
 	@JsonView(View.Summary.class)
